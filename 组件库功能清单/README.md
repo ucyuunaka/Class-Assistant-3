@@ -13,7 +13,7 @@
 | Header          | 提供页面顶部标题和按钮，支持首页大型顶栏和普通页面小型顶栏 | 已完成 | 中等   | 高       | [顶栏组件文档](./header/header.md)   |
 | Modals          | 提供多种类型的模态弹窗，支持不同尺寸、样式和按钮布局       | 已完成 | 高     | 高       | [模态弹窗文档](./modals/modals.md)   |
 | Sidebar         | 提供响应式侧边导航栏，支持主题切换和用户头像             | 已完成 | 高     | 高       | [侧边栏组件文档](./sidebar/sidebar.md) |
-| Notifications   | -                                                          | 待分析 | -      | -        | -                                    |
+| Notifications   | 显示不同类型的临时通知，支持自动关闭和操作按钮             | 已完成 | 中等   | 高       | [通知组件文档](./notifications/notifications.md) |
 | ScrollAnimation | 提供元素滚动入场动画效果                                   | 已完成 | 低     | 中       | [滚动动画文档](./scrollAnimation/scrollAnimation.md) |
 
 ## 已完成分析的组件
@@ -60,9 +60,16 @@
 - **文件**：`components/scrollAnimation/scrollAnimation.js`, `components/scrollAnimation/scrollAnimation.css`
 - **详情**：[查看详细文档](./scrollAnimation/scrollAnimation.md)
 
+### Notifications 通知组件
+
+- **功能**：显示不同类型的临时通知消息
+- **特点**：多种类型（信息/成功/警告/错误）、自动/手动关闭、数量限制、可选操作按钮、自动加载样式
+- **文件**：`components/notifications/notifications.js`, `components/notifications/notifications.css`
+- **详情**：[查看详细文档](./notifications/notifications.md)
+
 ## 待分析组件
 
-1. Notifications 通知组件
+(暂无)
 
 ## 组件开发规范
 
@@ -90,3 +97,4 @@
 - **2025-04-23**：添加 Modals 组件分析
 - **2025-04-23**：添加 Sidebar 组件分析
 - **2025-04-23**：添加 ScrollAnimation 组件分析
+- **2025-04-23**：添加 Notifications 组件分析
