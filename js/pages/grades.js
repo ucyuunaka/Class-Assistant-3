@@ -209,16 +209,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     try {
-      // 首先销毁所有已存在的图表
-      if (Chart.helpers && Chart.helpers.each && Chart.instances) {
-        Chart.helpers.each(Chart.instances, function(instance) {
-          instance.destroy();
-        });
-      }
-      
-      renderTrendChart();
-      renderSubjectChart();
-      renderCompareChart();
+      // 首先销毁所有存储的图表实例
+      Object.values(chartInstances).forEach(instance => {
+          if (instance && typeof instance.destroy === 'function') {
+              instance.destroy();
+          }
+      });
+      chartInstances = {}; // 清空引用
+
+      // 渲染所有图表并存储实例
+      chartInstances.trend = renderTrendChart();
+      chartInstances.subject = renderSubjectChart();
+      chartInstances.compare = renderCompareChart();
+      chartInstances.gpaGauge = renderGpaGaugeChart();
+      renderGpaHistoryList(); // 新增：调用历史列表渲染函数
       
     } catch (error) {
       console.error('渲染图表时出错:', error);
@@ -394,24 +398,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // 比较图表
   function renderCompareChart() {
     const compareChartCtx = document.getElementById("compareChart");
-    if (!compareChartCtx) return;
+    // Ensure early return provides a null value consistent with other render functions
+    if (!compareChartCtx) return null;
     const ctx = compareChartCtx.getContext("2d");
     const colors = getThemeColors();
 
     const data = {
       labels: [
-        "高等数学",
-        "程序设计",
-        "大学物理",
-        "大学英语",
-        "数据库",
-        "操作系统",
-        "计网",
-        "线代",
-        "软件工程",
-        "人工智能",
-        "概率统计",
-        "图形学"
+        "高等数学", "程序设计", "大学物理", "大学英语", "数据库", "操作系统",
+        "计网", "线代", "软件工程", "人工智能", "概率统计", "图形学"
       ],
       datasets: [
         {
@@ -450,7 +445,8 @@ document.addEventListener("DOMContentLoaded", function () {
       ],
     };
 
-    new Chart(ctx, {
+    // Ensure chart is defined before returning
+    const chart = new Chart(ctx, {
       type: "bar",
       data: data,
       options: {
@@ -459,39 +455,172 @@ document.addEventListener("DOMContentLoaded", function () {
         scales: {
           y: {
             beginAtZero: true,
-            max: 100,
+            max: 105, // 设置最大值略高于 100
             ticks: {
-              color: colors.textColor
+              color: colors.textColor,
+              stepSize: 10, // 强制步长为 10，确保包含 100
+              callback: function(value, index, ticks) {
+                // 检查是否为最后一个刻度值 (通常是 max 值)
+                // 使用 ticks[ticks.length - 1].value 更健壮，以防刻度不均匀
+                const lastTickValue = ticks[ticks.length - 1].value;
+                if (value === lastTickValue) {
+                  return null; // 隐藏最后一个刻度标签
+                }
+                return value; // 其他刻度正常显示
+              }
             },
-            grid: {
-              color: colors.borderColor
-            }
+            grid: { color: colors.borderColor }
           },
-          x: {
-            ticks: {
-              color: colors.textColor
-            },
-            grid: {
-              color: colors.borderColor
-            }
-          }
+          x: { ticks: { color: colors.textColor }, grid: { color: colors.borderColor } }
         },
         plugins: {
-          legend: {
-            position: "top",
-            labels: {
-              color: colors.textColor
-            }
-          },
+          legend: { position: "top", labels: { color: colors.textColor } },
         },
+        layout: { // 调整布局内边距
+          padding: {
+            top: 40 // 将顶部内边距增加到 40px
+          }
+        }
       },
     });
+    return chart; // Return the created instance
+  }
+
+  // 新增：GPA 仪表盘图表
+  function renderGpaGaugeChart() {
+    const gpaGaugeCtx = document.getElementById("gpaGaugeChart");
+    if (!gpaGaugeCtx) return null; // Return null if canvas not found
+    const ctx = gpaGaugeCtx.getContext("2d");
+    const colors = getThemeColors();
+
+    // --- GPA 数据 (与 trendChart 保持一致, 考虑后续优化为共享数据源) ---
+    const gpaLabels = ["2022-2", "2023-1", "2023-2", "2024-1", "2024-2"];
+    const gpaData = [3.2, 3.4, 3.6, 3.7, 3.85];
+    // --- End GPA 数据 ---
+
+    const latestGpa = gpaData.length > 0 ? gpaData[gpaData.length - 1] : 0;
+    const previousGpa = gpaData.length > 1 ? gpaData[gpaData.length - 2] : null;
+    const maxGpa = 4.0; // GPA 满分值
+
+    // 计算趋势指示
+    let trendIcon = '';
+    let trendColor = colors.textColor;
+    if (previousGpa !== null) {
+      if (latestGpa > previousGpa) { trendIcon = '▲'; trendColor = '#0F9D58'; } // Green Up
+      else if (latestGpa < previousGpa) { trendIcon = '▼'; trendColor = '#DB4437'; } // Red Down
+      else { trendIcon = '━'; } // Neutral
+    }
+
+    // 仪表盘数据集
+    const gaugeData = {
+      datasets: [{
+        data: [latestGpa, Math.max(0, maxGpa - latestGpa)], // Ensure remaining value is not negative
+        backgroundColor: [ '#4285F4', getCSSVariableValue('--border-color') || '#e0e0e0' ],
+        borderColor: colors.backgroundColor,
+        borderWidth: 2,
+        circumference: 180, rotation: 270, cutout: '70%'
+      }]
+    };
+
+    // 自定义插件：在中心绘制文本
+    const centerTextPlugin = {
+      id: 'centerText',
+      afterDraw: (chart) => {
+        const { ctx, chartArea: { top, bottom, left, right, width, height } } = chart;
+        ctx.save();
+        const centerX = left + width / 2;
+        // const centerY = top + height * 0.85; // 原计算方式，依赖 chartArea
+        const centerY = chart.height - 45; // 新计算方式：基于 Canvas 总高度，预留底部 45px 空间
+
+        // GPA Value
+        ctx.font = 'bold 2.5em sans-serif';
+        ctx.fillStyle = colors.textColor;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom'; // 将基线改为 bottom，方便基于底部定位
+        ctx.fillText(latestGpa.toFixed(2), centerX, centerY); // 绘制 GPA 值，底部对齐 centerY
+
+        // Trend Icon & Label
+        if (trendIcon) {
+          // 绘制趋势图标和文字，相对于 GPA 值的位置
+          const trendY = centerY + 5; // 在 GPA 值下方一点
+          ctx.font = 'bold 1.5em sans-serif';
+          ctx.fillStyle = trendColor;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'top'; // 基线改为 top
+          ctx.fillText(trendIcon, centerX, trendY);
+
+          ctx.font = '0.9em sans-serif';
+          ctx.fillStyle = colors.secondaryTextColor;
+          const prevLabel = gpaLabels.length > 1 ? gpaLabels[gpaLabels.length - 2] : '';
+          ctx.fillText(`较上学期 (${prevLabel})`, centerX, trendY + 25); // 在趋势图标下方
+        } else if (gpaLabels.length > 0) {
+           // 绘制最新学期标签，相对于 GPA 值的位置
+           ctx.font = '0.9em sans-serif';
+           ctx.fillStyle = colors.secondaryTextColor;
+           ctx.textAlign = 'center';
+           ctx.textBaseline = 'top'; // 基线改为 top
+           ctx.fillText(`最新学期 (${gpaLabels[gpaLabels.length - 1]})`, centerX, centerY + 10); // 在 GPA 值下方
+        }
+        ctx.restore();
+      }
+    };
+
+    // 创建图表实例
+    const chart = new Chart(ctx, {
+      type: 'doughnut',
+      data: gaugeData,
+      options: {
+        responsive: true, maintainAspectRatio: true, aspectRatio: 2,
+        plugins: { legend: { display: false }, tooltip: { enabled: false }, centerText: {} }
+      },
+      plugins: [centerTextPlugin]
+    });
+    return chart; // 返回实例
   }
 
   // 监听主题变化，重新渲染图表
   document.addEventListener('themeChanged', function() {
-    renderCharts();
+    // 销毁所有存储的图表实例
+    Object.values(chartInstances).forEach(instance => {
+        if (instance && typeof instance.destroy === 'function') {
+            instance.destroy();
+        }
+    });
+    chartInstances = {}; // 清空引用
+    renderCharts(); // 重新渲染所有图表和列表
   });
+
+  // 新增：渲染 GPA 历史列表
+  function renderGpaHistoryList() {
+    const container = document.getElementById('gpaHistoryListContainer');
+    if (!container) return;
+
+    // --- GPA 数据 (与 trendChart/gpaGauge 保持一致) ---
+    // 考虑后续优化：将这些数据提取到公共变量或函数中
+    const gpaLabels = ["2022-2", "2023-1", "2023-2", "2024-1", "2024-2"];
+    const gpaData = [3.2, 3.4, 3.6, 3.7, 3.85];
+    // --- End GPA 数据 ---
+
+    // 清空容器并添加标题
+    container.innerHTML = '<h4>历史 GPA</h4>';
+
+    if (gpaData.length === 0) {
+      container.innerHTML += '<p>暂无历史 GPA 数据</p>';
+      return;
+    }
+
+    const list = document.createElement('ul');
+    // 反转数组以显示最新学期在顶部
+    for (let i = gpaData.length - 1; i >= 0; i--) {
+      const listItem = document.createElement('li');
+      listItem.innerHTML = `
+        <span class="semester">${gpaLabels[i]}</span>
+        <span class="gpa-value">${gpaData[i].toFixed(2)}</span>
+      `;
+      list.appendChild(listItem);
+    }
+    container.appendChild(list);
+  }
 
   // 申诉系统初始化
   function initAppealSystem() {

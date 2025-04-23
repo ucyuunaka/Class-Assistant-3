@@ -97,6 +97,19 @@
             </div>
           </div>
         </div>
+
+        <!-- 新增：GPA 仪表盘图表卡片 -->
+        <div class="chart-card full-width animate-on-scroll fade-up delay-200">
+          <h3 class="chart-title">GPA 概览</h3>
+          <div class="gpa-overview-layout"> <!-- 新增：左右布局容器 -->
+            <div class="chart-container gpa-gauge-container"> <!-- 修改：添加 gpa-gauge-container 类 -->
+              <canvas id="gpaGaugeChart"></canvas>
+            </div>
+            <div class="gpa-history-list" id="gpaHistoryListContainer"> <!-- 新增：历史记录容器 -->
+              <!-- 历史 GPA 列表将由 JS 动态填充 -->
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- 成绩录入 -->
