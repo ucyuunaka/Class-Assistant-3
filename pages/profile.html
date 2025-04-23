@@ -166,8 +166,7 @@
               </div>
 
               <div
-                class="form-group"
-                style="display: none"
+                class="form-group hidden"
                 id="save-basic-info-btn-group"
               >
                 <button type="button" class="btn" id="save-basic-info">
@@ -176,7 +175,6 @@
                 <button
                   type="button"
                   class="btn btn-outline"
-                  style="margin-left: 0.5rem"
                   id="cancel-basic-info"
                 >
                   取消
@@ -240,8 +238,7 @@
               </div>
 
               <div
-                class="form-group"
-                style="display: none"
+                class="form-group hidden"
                 id="save-education-btn-group"
               >
                 <button type="button" class="btn" id="save-education">
@@ -250,7 +247,6 @@
                 <button
                   type="button"
                   class="btn btn-outline"
-                  style="margin-left: 0.5rem"
                   id="cancel-education"
                 >
                   取消
@@ -265,18 +261,11 @@
               <h3 class="card-title">账号安全</h3>
             </div>
 
-            <div style="margin-bottom: 1rem">
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  margin-bottom: 0.75rem;
-                "
-              >
-                <div>
-                  <div style="font-weight: 500">修改密码</div>
-                  <div style="color: var(--text-secondary); font-size: 0.9rem">
+            <div>
+              <div class="account-security-item">
+                <div class="account-security-label">
+                  <div class="label-title">修改密码</div>
+                  <div class="label-description">
                     定期更改密码以保障账号安全
                   </div>
                 </div>
@@ -285,16 +274,10 @@
                 </button>
               </div>
 
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                "
-              >
-                <div>
-                  <div style="font-weight: 500">绑定手机</div>
-                  <div style="color: var(--text-secondary); font-size: 0.9rem">
+              <div class="account-security-item">
+                <div class="account-security-label">
+                  <div class="label-title">绑定手机</div>
+                  <div class="label-description">
                     已绑定手机: 138****1234
                   </div>
                 </div>
@@ -321,7 +304,7 @@
             name="username"
             autocomplete="username"
             value="current-user"
-            style="display: none"
+            class="hidden"
           />
           <div class="form-group">
             <label for="current-password" class="form-label">当前密码</label>
