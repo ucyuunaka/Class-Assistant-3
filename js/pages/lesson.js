@@ -1,5 +1,5 @@
 // 课程评价页面的主要脚本
-import { getAllCourses, subscribeToCourseUpdates, loadScheduleFromStorage } from "../data/schedule_data.js";
+import { getAllCourses, subscribeToCourseUpdates, loadScheduleFromStorage } from "/js/pages/schedule/schedule_data.js";
 import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation.js";
 
 // 声明全局通知函数

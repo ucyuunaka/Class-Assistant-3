@@ -1,5 +1,8 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import purgecss from 'vite-plugin-purgecss';
+import deadcode from 'vite-plugin-deadcode';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
   // 基本路径
@@ -80,6 +83,17 @@ export default defineConfig({
   // 插件
   plugins: [
     // 在此添加Vite插件
+    purgecss({
+      content: ['./index.html', './pages/**/*.html', './components/**/*.js', './js/**/*.js']
+    }),
+    deadcode({
+      patterns: ['./index.html', './pages/**/*.html', './components/**/*.js', './js/**/*.js'],
+      output: 'deadcode-report.txt' // 添加输出文件选项
+    }),
+    visualizer({
+      open: true,
+      filename: 'stats.html'
+    })
   ],
 
   // 优化依赖
