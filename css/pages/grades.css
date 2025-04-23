@@ -209,6 +209,21 @@
   border-radius: var(--border-radius);
   transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1); /* 苹果风格过渡 */
   padding: 0.5rem; /* 内边距 */
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+}
+
+/* 专门为成绩对比图表增加的样式 */
+.full-width .chart-container {
+  min-height: 400px; /* 增加全宽图表的最小高度，确保显示完整 */
+  padding: 1rem; /* 增加内边距，创造更多空间 */
+}
+
+/* 确保canvas能够填充容器 */
+.chart-container canvas {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 /* 苹果风格表单布局 */

@@ -376,7 +376,10 @@ document.addEventListener("DOMContentLoaded", function () {
               color: colors.borderColor
             },
             pointLabels: {
-              color: colors.textColor
+              color: colors.textColor,
+              font: {
+                size: 10 // 减小标签字体大小，更好地适应容器
+              }
             },
             angleLines: {
               color: colors.borderColor
@@ -389,6 +392,14 @@ document.addEventListener("DOMContentLoaded", function () {
             labels: {
               color: colors.textColor
             }
+          }
+        },
+        layout: {
+          padding: {
+            top: 10,
+            bottom: 10,
+            left: 10,
+            right: 10 // 添加内边距，使内容居中
           }
         }
       },
@@ -463,15 +474,34 @@ document.addEventListener("DOMContentLoaded", function () {
               color: colors.borderColor
             }
           },
-          x: { ticks: { color: colors.textColor }, grid: { color: colors.borderColor } }
+          x: { 
+            ticks: { 
+              color: colors.textColor,
+              font: {
+                size: 9 // 减小x轴标签字体，防止显示不全
+              },
+              maxRotation: 45, // 标签旋转角度
+              minRotation: 45  // 确保所有标签都会旋转，避免重叠
+            }, 
+            grid: { color: colors.borderColor } 
+          }
         },
         plugins: {
-          legend: { position: "top", labels: { color: colors.textColor } },
+          legend: { 
+            position: "top", 
+            labels: { 
+              color: colors.textColor,
+              boxWidth: 15, // 减小图例方框宽度
+              padding: 10 // 增加图例项之间的间距
+            } 
+          },
         },
         layout: { // 调整布局内边距
           padding: {
             top: 40, // 将顶部内边距增加到 40px
-            right: 10, // 为右侧添加一些内边距，给数据更多空间
+            right: 20, // 增加右侧内边距，提供更多空间
+            left: 10,  // 增加左侧内边距
+            bottom: 20 // 增加底部内边距，确保所有内容都可见
           }
         }
       },
