@@ -51,7 +51,6 @@ export function initCountdownEvents(elements) {
   
   // 监听模态框加载完成事件，以确保在异步模块加载的情况下也能正确处理
   document.addEventListener("modals:ready", function() {
-    console.log("检测到模态框组件已加载完成");
   });
   
   // 注册全局函数，用于从页面中调用
@@ -231,7 +230,6 @@ export function openEditExamModal(examId) {
     return;
   }
   
-  console.log("正在编辑考试:", exam);
   modalTitle.textContent = "编辑考试";
   
   // 填充表单
@@ -330,7 +328,6 @@ function closeExamModal() {
     // 关键修复：恢复页面滚动
     document.body.style.overflow = '';
     
-    console.log("模态框已关闭，已恢复页面滚动");
   }, 300);
 }
 
@@ -439,11 +436,9 @@ function saveExam(examData, examId) {
     if (examId) {
       // 编辑现有考试
       updateExam(parseInt(examId), examData);
-      console.log("更新的考试信息:", examData);
     } else {
       // 添加新考试
       const newExam = addExam(examData);
-      console.log("新添加的考试:", newExam);
     }
     
     applyFiltersAndSort();

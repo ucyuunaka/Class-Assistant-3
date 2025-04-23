@@ -31,7 +31,6 @@ const Modal = {
    * @returns {string} 创建的模态弹窗ID
    */
   show: function(options) {
-    console.log('正在创建模态框...');
     
     // 基本配置
     const config = Object.assign({
@@ -128,7 +127,6 @@ const Modal = {
     // 延迟一帧添加active类，确保过渡动画正常
     requestAnimationFrame(() => {
       modalEl.classList.add('active');
-      console.log(`✅ 模态框（ID: ${modalId}）创建并显示成功！`);
     });
     
     // 调用打开回调
@@ -149,7 +147,6 @@ const Modal = {
   close: function() {
     if (!this.activeModal) return;
     
-    console.log('正在关闭模态框...');
     const modalEl = this.activeModal.element;
     const modalId = this.activeModal.id;
     
@@ -164,7 +161,6 @@ const Modal = {
       modalEl.remove();
       document.body.style.overflow = '';
       
-      console.log(`✅ 模态框（ID: ${modalId}）已成功关闭`);
       
       // 调用关闭回调
       if (this._onClose) {
@@ -198,7 +194,6 @@ const Modal = {
    * @returns {string} 模态弹窗ID
    */
   showExisting: function(modalElement, options = {}) {
-    console.log('正在显示已存在的模态框...');
     
     if (!modalElement) {
       console.error('错误: 未提供有效的模态窗口元素');
@@ -269,7 +264,6 @@ const Modal = {
     // 存储关闭回调
     this._onExistingClose = config.onClose;
     
-    console.log(`✅ 已存在的模态框（ID: ${modalId}）显示成功！`);
     
     return modalId;
   },
@@ -280,7 +274,6 @@ const Modal = {
    * @param {HTMLElement} modalElement - 要隐藏的模态窗口DOM元素
    */
   hideExisting: function(modalElement) {
-    console.log('正在隐藏已存在的模态框...');
     
     if (!modalElement) {
       console.error('错误: 未提供有效的模态窗口元素');
@@ -322,7 +315,6 @@ const Modal = {
       this.activeModal = null;
     }
     
-    console.log(`✅ 已存在的模态框隐藏成功！`);
   }
 };
 

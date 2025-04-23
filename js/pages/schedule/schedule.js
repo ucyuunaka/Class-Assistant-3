@@ -29,7 +29,6 @@ function initColorPicker() {
   const colorInput = document.getElementById("course-color");
   
   if (!colorOptions.length || !colorInput) {
-    console.log("颜色选择器元素未找到");
     return;
   }
   
@@ -55,5 +54,4 @@ function initColorPicker() {
     });
   });
   
-  console.log("颜色选择器初始化完成");
 }

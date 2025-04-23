@@ -31,7 +31,6 @@ function loadNotificationStyles() {
   link.rel = 'stylesheet';
   link.href = '/components/notifications/notifications.css';
   document.head.appendChild(link);
-  console.log('✅ 通知组件样式加载成功！');
 }
 
 /**
@@ -39,16 +38,12 @@ function loadNotificationStyles() {
  * 检查并创建页面中显示通知的容器元素。
  */
 function initNotificationContainer() {
-  console.log('正在初始化通知组件容器...');
   
   // 检查是否已有通知容器
   if (!document.querySelector('.notification-container')) {
     const container = document.createElement('div');
     container.className = 'notification-container';
     document.body.appendChild(container);
-    console.log('✅ 通知组件容器初始化成功！');
-  } else {
-    console.log('✅ 通知组件容器已存在，无需重复初始化');
   }
 }
 
@@ -218,7 +213,6 @@ export function showDevelopingNotification(featureName = '', duration = 3000) {
  */
 function ensureNotificationSystem() {
   if (!window.showNotification) {
-    console.log('警告: 未检测到全局通知函数，正在恢复...');
     window.showNotification = showNotification;
   }
 }
@@ -234,7 +228,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // 监听主题变化事件
   window.addEventListener('themeChanged', function(e) {
-    console.log('通知组件: 检测到主题变化为 ' + e.detail.theme);
     // 主题变化时，通知组件本身不需要特殊处理
     // 因为它使用CSS变量，会自动适应主题变化
   });

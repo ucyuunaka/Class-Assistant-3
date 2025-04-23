@@ -401,7 +401,6 @@ function initResetSettingsButton() {
 
     resetSettingsBtn.addEventListener('click', function(e) {
       e.preventDefault();
-      console.log('重置设置按钮被点击');
       
       // 使用自定义showConfirmModal函数来显示确认对话框
       showResetSettingsConfirm();

@@ -364,8 +364,7 @@ export function moveCourse(courseId, targetDay, targetTime) {
   if (courseDuration > 1) {
     course.endTime = targetTime + courseDuration - 1;
   }
-  
-  console.log(`课程已移动: 从 ${oldCourse.day}-${oldCourse.time} 到 ${course.day}-${course.time}${courseDuration > 1 ? `，持续至 ${course.endTime}` : ''}`);
+
   
   // 保存数据
   saveScheduleToStorage();

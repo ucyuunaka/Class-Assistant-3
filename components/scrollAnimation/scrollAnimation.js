@@ -29,7 +29,6 @@ function loadScrollAnimationStyles() {
     link.href = '@components/scrollAnimation/scrollAnimation.css';
     
     document.head.appendChild(link);
-    console.log('✅ 滚动动画CSS样式已自动加载');
   }
 }
 
@@ -47,11 +46,9 @@ function loadScrollAnimationStyles() {
 export function initScrollAnimation(selector = '.animate-on-scroll', options = {}) {
   // 如果已经初始化过，则不再重复初始化
   if (scrollAnimationInitialized) {
-    console.log('滚动动画组件已经初始化，跳过重复初始化');
     return scrollAnimationController;
   }
   
-  console.log('正在初始化滚动动画组件...');
   
   const defaultOptions = {
     threshold: 0.1, // 默认当元素10%可见时触发
@@ -71,7 +68,6 @@ export function initScrollAnimation(selector = '.animate-on-scroll', options = {
     return;
   }
   
-  console.log(`找到 ${elements.length} 个滚动动画元素`);
   
   // 创建IntersectionObserver
   const observer = new IntersectionObserver(
@@ -100,7 +96,6 @@ export function initScrollAnimation(selector = '.animate-on-scroll', options = {
     observer.observe(element);
   });
   
-  console.log('✅ 滚动动画组件初始化成功！');
   
   // 设置标志为已初始化
   scrollAnimationInitialized = true;

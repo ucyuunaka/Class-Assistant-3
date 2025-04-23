@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     // 创建备用通知函数
     showNotification = (message, type) => {
-      console.log(`[${type}] ${message}`);
       alert(message);
     };
   }
@@ -116,7 +115,6 @@ function initUI() {
   
   // 特别检查emoji按钮
   if (emojiButton) {
-    console.log("找到emoji按钮:", emojiButton);
     
     // 确保按钮所在的容器是相对定位
     const actionsContainer = emojiButton.closest('.input-actions');
@@ -194,7 +192,6 @@ function initEvents() {
 // 处理窗口大小变化
 function handleResize() {
   // 调整UI布局或元素大小
-  console.log("窗口大小已调整");
 }
 
 // 加载课程数据并渲染到选择框
@@ -202,7 +199,6 @@ function renderOptionalCourses() {
   try {
     // 获取最新课程数据
     const courses = getAllCourses();
-    console.log("获取到课程数据:", courses.length, "条");
 
     if (!courseSelect) {
       console.error("无法找到课程选择框元素");
@@ -271,8 +267,6 @@ function renderOptionalCourses() {
       
       courseSelect.appendChild(group);
     });
-
-    console.log(`已加载${courses.length}个课程，分为${categories.size}个类别`);
     
     // 应用自定义样式到选择框
     applySelectBoxStyles();
@@ -299,11 +293,9 @@ function applySelectBoxStyles() {
         if ($(courseSelect).hasClass('select2-hidden-accessible')) {
           $(courseSelect).select2('destroy');
         } else {
-          console.log("该元素未初始化Select2，不需要销毁");
         }
       } catch (e) {
         // 如果没有实例，销毁会出错，但可以忽略这个错误
-        console.log("没有找到需要销毁的旧Select2实例");
       }
       
       // 重新初始化Select2
@@ -314,7 +306,6 @@ function applySelectBoxStyles() {
         dropdownCssClass: 'course-select-dropdown'
       });
       
-      console.log("成功应用Select2样式到课程选择框");
     } catch (e) {
       console.warn("Select2初始化失败，使用原生下拉框", e);
       // 添加自定义类，应用CSS样式
@@ -328,7 +319,6 @@ function applySelectBoxStyles() {
 
 // 初始化表情选择器
 function initEmojiPicker() {
-  console.log('初始化emoji选择器 - 已由debugEmojiButton替代');
   
   // 注意：此功能已被debugEmojiButton函数替代
   // 保留此函数以避免修改过多代码结构
@@ -337,16 +327,13 @@ function initEmojiPicker() {
   const oldPicker = document.getElementById("emojiFallback");
   if (oldPicker && oldPicker.parentNode) {
     oldPicker.parentNode.removeChild(oldPicker);
-    console.log("清理旧的emoji选择器");
   }
 }
 
 // 添加表情反应
 function addReaction(emoji) {
-  console.log("添加表情：", emoji);
   
   if (!selectedReactions) {
-    console.error("无法找到selectedReactions容器");
     return;
   }
 
@@ -379,10 +366,8 @@ function addReaction(emoji) {
   // 关闭表情选择器
   const fallbackPicker = document.getElementById("emojiFallback");
   if (fallbackPicker) {
-    console.log("关闭表情选择器");
     fallbackPicker.style.display = "none";
   } else {
-    console.error("无法找到表情选择器");
   }
 }
 
@@ -416,7 +401,6 @@ function loadComments() {
       });
     }
     
-    console.log(`已加载${comments.length}条历史评价`);
     return comments;
   } catch (error) {
     console.error('加载评价数据时出错:', error);
@@ -451,10 +435,8 @@ function saveComment(comment) {
     // 保存回localStorage
     localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
     
-    console.log('评价已保存到本地存储');
     return true;
   } catch (error) {
-    console.error('保存评价数据时出错:', error);
     return false;
   }
 }
@@ -625,7 +607,6 @@ function addUserReaction(commentId, emoji) {
     
     // 保存回localStorage
     localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
-    console.log(`用户对评论 ${commentId} 添加了表情反应 ${emoji}`);
   } catch (error) {
     console.error('添加用户反应时出错:', error);
   }
@@ -655,7 +636,6 @@ function removeUserReaction(commentId, emoji) {
       
       // 保存回localStorage
       localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
-      console.log(`用户从评论 ${commentId} 移除了表情反应 ${emoji}`);
     }
   } catch (error) {
     console.error('移除用户反应时出错:', error);
@@ -684,9 +664,7 @@ function updateReactionCount(commentId, emoji, count) {
     
     // 保存回localStorage
     localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
-    console.log(`评论 ${commentId} 的表情 ${emoji} 计数已更新为 ${count}`);
   } catch (error) {
-    console.error('更新反应计数时出错:', error);
   }
 }
 
@@ -777,7 +755,6 @@ function sendComment() {
 
 // 处理课程数据更新
 function handleCourseUpdates() {
-  console.log("收到课程数据更新事件，刷新选择框...");
   renderOptionalCourses();
 }
 
@@ -809,7 +786,6 @@ function listenForThemeChanges() {
   window.addEventListener('themeChanged', function(event) {
     // 获取新主题
     const newTheme = event.detail.theme;
-    console.log('课评速记页面：主题已切换为', newTheme);
 
     // 应用主题变化到UI元素
     updateLessonUIForTheme(newTheme);
@@ -818,7 +794,6 @@ function listenForThemeChanges() {
 
 // 根据主题更新UI元素
 function updateLessonUIForTheme(theme) {
-  console.log("应用主题到课评页面:", theme);
   
   // 添加主题相关的视觉调整
   const messageElements = document.querySelectorAll('.message');
@@ -861,8 +836,6 @@ function debugEmojiButton() {
     console.error("调试: 无法找到emoji按钮");
     return;
   }
-  
-  console.log("调试: 找到emoji按钮，添加直接点击事件");
   
   // 直接使用简短表情列表，避免乱码
   const emojiList = ["😊", "😂", "😍", "👍", "👎", "❤️", "🔥", "🎉", "👏", "🤔", "😢", "😎", "🙏", "💡", "⭐", "🚀"];
@@ -922,13 +895,11 @@ function debugEmojiButton() {
     // 阻止事件冒泡和默认行为
     e.stopPropagation();
     e.preventDefault();
-    
-    console.log("调试: emoji按钮被点击");
+  
     
     // 获取或创建一个简单的fallback选择器（如果不存在）
     let fallbackPicker = document.getElementById("emojiFallback");
     if (!fallbackPicker) {
-      console.log("调试: 创建简单的emoji选择器");
       fallbackPicker = document.createElement("div");
       fallbackPicker.id = "emojiFallback";
       fallbackPicker.className = "emoji-fallback";
@@ -949,7 +920,6 @@ function debugEmojiButton() {
         
         item.addEventListener("click", function(evt) {
           evt.stopPropagation();
-          console.log("调试: 点击表情", emoji);
           addReaction(emoji);
           fallbackPicker.style.display = "none";
         });
@@ -993,25 +963,17 @@ function debugEmojiButton() {
       fallbackPicker.style.left = (btnRect.left - rightOverflow - 20) + "px";
     }
     
-    console.log("调试: 设置选择器位置:", {
-      top: fallbackPicker.style.top,
-      left: fallbackPicker.style.left
-    });
-    
     // 切换显示
     if (fallbackPicker.style.display === "block") {
       fallbackPicker.style.display = "none";
-      console.log("调试: 隐藏选择器");
     } else {
       fallbackPicker.style.display = "block";
-      console.log("调试: 显示选择器");
       
       // 点击外部区域关闭选择器
       const handleClickOutside = function(event) {
         if (!fallbackPicker.contains(event.target) && event.target !== emojiBtn) {
           fallbackPicker.style.display = "none";
           document.removeEventListener("click", handleClickOutside);
-          console.log("调试: 点击外部区域，关闭选择器");
         }
       };
       
@@ -1032,7 +994,6 @@ function addSampleComments() {
     
     // 如果已经有评价数据，则不添加示例
     if (comments.length > 0) {
-      console.log("已存在评价数据，不添加示例");
       return;
     }
     
@@ -1118,7 +1079,6 @@ function addSampleComments() {
     
     // 保存示例评价到localStorage
     localStorage.setItem(STORAGE_KEY, JSON.stringify(sampleComments));
-    console.log("已添加示例评价数据");
     
   } catch (error) {
     console.error("添加示例评价数据出错:", error);
@@ -1129,17 +1089,14 @@ function addSampleComments() {
 function handleVisibilityChange() {
   if (document.visibilityState === 'visible') {
     // 当页面重新变为可见时重新加载课程数据
-    console.log("页面变为可见，重新加载课程数据");
     
     // 如果使用了Select2，先销毁旧实例
     if (typeof $ !== 'undefined' && $.fn.select2 && courseSelect) {
       try {
-        console.log("销毁可能存在的Select2实例");
         // 先检查元素是否已经初始化了Select2
         if ($(courseSelect).hasClass('select2-hidden-accessible')) {
           $(courseSelect).select2('destroy');
         } else {
-          console.log("该元素未初始化Select2，不需要销毁");
         }
       } catch (e) {
         // 忽略销毁错误
@@ -1153,14 +1110,13 @@ function handleVisibilityChange() {
 
 // 重新加载课程数据
 function reloadCoursesData() {
-  console.log("重新加载课程数据...");
   try {
     // 从localStorage重新加载最新的课程数据
     const loaded = loadScheduleFromStorage();
     if (loaded) {
-      console.log("成功从本地存储加载课程数据");
+
     } else {
-      console.warn("本地存储中没有找到课程数据");
+
     }
     
     // 如果使用了Select2，先销毁旧实例
@@ -1170,7 +1126,6 @@ function reloadCoursesData() {
         if ($(courseSelect).hasClass('select2-hidden-accessible')) {
           $(courseSelect).select2('destroy');
         } else {
-          console.log("该元素未初始化Select2，不需要销毁");
         }
       } catch (e) {
         // 忽略销毁错误
@@ -1180,7 +1135,7 @@ function reloadCoursesData() {
     // 不管是否成功加载，都尝试更新选择框
     renderOptionalCourses();
   } catch (error) {
-    console.error("重新加载课程数据时出错:", error);
+
   }
 }
 

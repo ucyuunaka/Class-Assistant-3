@@ -153,15 +153,13 @@ export function setupDragAndDrop(isEditMode) {
   const timetableGrid = document.getElementById("timetable-grid");
   if (!timetableGrid) return;
 
-  console.log(`设置拖放功能，编辑模式: ${isEditMode}`);
 
   // 确保课程缓存是最新的，先强制更新一次缓存
-  console.log("重置并重新构建课程缓存...");
   updateCoursesCache();
   
   // 打印当前课程状态，便于调试
   scheduleData.courses.forEach(course => {
-    console.log(`课程: "${course.title}" (ID:${course.id}) - 位置: 日期${course.day}, 时间${course.startTime}-${course.endTime}`);
+
   });
 
   const cells = timetableGrid.querySelectorAll(".timetable-cell");
@@ -184,7 +182,6 @@ export function setupDragAndDrop(isEditMode) {
   timetableGrid.removeEventListener("mouseout", handleGridMouseOut);
 
   if (isEditMode) {
-    console.log("启用编辑模式拖放功能");
     
     // 使用事件委托：在父容器上绑定所有拖放事件
     timetableGrid.addEventListener("dragstart", handleGridDragStart);
@@ -198,7 +195,6 @@ export function setupDragAndDrop(isEditMode) {
     
     // 单独设置每个课程卡片为可拖动
     const courseCards = timetableGrid.querySelectorAll(".course-card");
-    console.log(`设置${courseCards.length}个课程卡片为可拖动`);
     
     courseCards.forEach((card) => {
       card.setAttribute("draggable", "true");
@@ -383,7 +379,6 @@ function tempRemoveCourseFromCache(course) {
   }
   
   try {
-    console.log(`临时移除课程 "${course.title}"(ID:${course.id}) 的格子，位置: 日期${course.day}, 时间${course.time}`);
     
     // 计算课程所有占用的格子
     const startTime = course.time;
@@ -399,7 +394,6 @@ function tempRemoveCourseFromCache(course) {
         // 保存然后移除
         tempOccupiedCells.set(cellKey, course.id);
         coursesCache.occupiedCells.delete(cellKey);
-        console.log(`临时移除单元格 [${cellKey}]`);
       } else if (coursesCache.occupiedCells.has(cellKey)) {
         const otherId = coursesCache.occupiedCells.get(cellKey);
         console.warn(`意外: 单元格 [${cellKey}] 被另一个课程占用 (ID:${otherId})`);
@@ -441,7 +435,6 @@ function restoreTempRemovedCells(tempCells) {
 function updateAllCellsPreview(courseId) {
   if (!courseId) return;
   
-  console.log(`开始更新格子预览效果，courseId=${courseId}`);
   
   try {
     // 确保课程缓存是最新的
@@ -455,7 +448,6 @@ function updateAllCellsPreview(courseId) {
     }
     
     const duration = draggedCourse.endTime - draggedCourse.startTime + 1;
-    console.log(`拖动课程: ${draggedCourse.title}, 持续时长: ${duration}节`);
     
     // 临时从缓存中移除当前课程所占用的格子
     const tempOccupiedCells = tempRemoveCourseFromCache(draggedCourse);
@@ -499,7 +491,6 @@ function updateAllCellsPreview(courseId) {
     // 恢复临时移除的格子
     restoreTempRemovedCells(tempOccupiedCells);
     
-    console.log(`需要更新${updates.length}个格子显示效果`);
     
     // 使用 requestAnimationFrame 批量更新 UI
     requestAnimationFrame(() => {
@@ -758,7 +749,6 @@ function handleGridDrop(e) {
           if (updatedCourse) {
             // 确保endTime与原课程时长一致
             updatedCourse.endTime = targetTime + courseDuration - 1;
-            console.log(`更新课程 "${updatedCourse.title}" 的结束时间为: ${updatedCourse.endTime}，保持${courseDuration}节课的时长`);
           }
         }
         
@@ -821,7 +811,6 @@ function resetDragState() {
   // 移除拖动提示
   document.body.removeAttribute('data-dragging-course');
   
-  console.log("已重置所有拖动状态");
 }
 
 /**
@@ -852,8 +841,6 @@ function handleGridMouseOver(e) {
     const draggedCourse = scheduleData.courses.find(c => c.id === parseInt(draggedCourseId));
     if (!draggedCourse) return;
     
-    console.log(`检查能否放置课程 "${draggedCourse.title}" (ID:${draggedCourse.id}) 到单元格 [${day}-${time}]`);
-    console.log(`当前课程位置: 日期${draggedCourse.day}, 时间${draggedCourse.time}`);
     
     // 临时从缓存中移除当前课程所占用的格子
     const tempOccupiedCells = tempRemoveCourseFromCache(draggedCourse);
@@ -861,17 +848,14 @@ function handleGridMouseOver(e) {
     // 检查该位置是否可以放置课程
     let canPlace = false;
     try {
-      console.log(`目标位置: 日期${day}, 时间${time}`);
       
       // 检查格子是否被占用
       if (coursesCache.occupiedCells.has(`${day}-${time}`)) {
         const occupyId = coursesCache.occupiedCells.get(`${day}-${time}`);
         const occupyCourse = scheduleData.courses.find(c => c.id === occupyId);
-        console.log(`目标位置被占用: [${day}-${time}] 被 "${occupyCourse ? occupyCourse.title : '未知'}" 占用`);
       }
       
       canPlace = checkCanPlaceCourse(draggedCourseId, day, time);
-      console.log(`放置结果: ${canPlace ? "可以放置" : "不可放置"}`);
     } catch (error) {
       console.error("检查格子可放置性出错:", error);
     }
