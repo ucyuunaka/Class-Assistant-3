@@ -10,7 +10,7 @@
 | --------------- | ---------------------------------------------------------- | ------ | ------ | -------- | ------------------------------------ |
 | Buttons         | 提供多样化的交互按钮，包括涟漪效果、加载状态、确认对话框等 | 已完成 | 中等   | 高       | [按钮组件文档](./buttons/buttons.md) |
 | Footer          | 提供全站统一的页脚内容和功能，自动更新版权年份，智能导航   | 已完成 | 低     | 高       | [页脚组件文档](./footer/footer.md)   |
-| Header          | -                                                          | 待分析 | -      | -        | -                                    |
+| Header          | 提供页面顶部标题和按钮，支持首页大型顶栏和普通页面小型顶栏 | 已完成 | 中等   | 高       | [顶栏组件文档](./header/header.md)   |
 | Sidebar         | -                                                          | 待分析 | -      | -        | -                                    |
 | Modals          | -                                                          | 待分析 | -      | -        | -                                    |
 | Notifications   | -                                                          | 待分析 | -      | -        | -                                    |
@@ -32,13 +32,19 @@
 - **文件**：`components/footer/footer.js`, `components/footer/footer.css`, `components/footer/footer.html`
 - **详情**：[查看详细文档](./footer/footer.md)
 
+### Header 顶栏组件
+
+- **功能**：提供页面顶部的标题、副标题和操作按钮
+- **特点**：支持首页/普通页面两种模式、可配置按钮位置、自定义背景、响应式布局
+- **文件**：`components/header/header.js`, `components/header/header.css`
+- **详情**：[查看详细文档](./header/header.md)
+
 ## 待分析组件
 
-1. Header 头部组件
-2. Sidebar 侧边栏组件
-3. Modals 模态框组件
-4. Notifications 通知组件
-5. ScrollAnimation 滚动动画组件
+1. Sidebar 侧边栏组件
+2. Modals 模态框组件
+3. Notifications 通知组件
+4. ScrollAnimation 滚动动画组件
 
 ## 组件开发规范
 
@@ -62,3 +68,4 @@
 
 - **2025-04-23**：创建文档，完成 Buttons 组件分析
 - **2025-04-23**：添加 Footer 组件分析
+- **2025-04-23**：添加 Header 组件分析
