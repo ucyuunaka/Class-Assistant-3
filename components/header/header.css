@@ -1,0 +1,141 @@
+/* ==========================================================================
+   Header组件 (Header Component)
+   ========================================================================== */
+/*
+ * 这个文件包含了顶栏组件的所有样式，用于在页面顶部显示信息
+ * 支持两种模式：首页大型顶栏和普通页面小型顶栏
+ */
+
+/* ==========================================================================
+   顶栏基础样式 (Base Header Styles)
+   ========================================================================== */
+.header-component {
+  width: 100%;
+  color: white;
+  /* 渐变背景效果: 从主色到渐变结束色 */
+  background: linear-gradient(135deg, var(--primary-color), var(--gradient-end));
+  border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+  overflow: hidden;
+  margin-bottom: 2rem; /* 确保与内容有一定间距 */
+}
+
+/* ==========================================================================
+   首页顶栏样式 (Home Header Styles)
+   ========================================================================== */
+.home-header {
+  padding: 4rem 0;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.home-header-content {
+  max-width: 600px;
+  position: relative;
+  z-index: 2; /* 确保内容在装饰元素之上 */
+}
+
+.home-header-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.home-header-text {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.9; /* 轻微透明度，增加层次感 */
+}
+
+.home-header-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap; /* 在小屏幕上允许按钮换行 */
+}
+
+/* 首页轮廓按钮样式 - 用于"考试倒计时"按钮 */
+.home-outline-btn {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-color: white !important;
+  color: white !important;
+}
+
+/* 背景装饰元素 */
+.home-header-decoration {
+  position: absolute;
+  right: -150px;
+  top: -20px;
+  width: 600px;
+  height: 600px;
+  /* 径向渐变背景，创造圆形光晕效果 */
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   普通页面顶栏样式 (Page Header Styles)
+   ========================================================================== */
+.page-header {
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+}
+
+.page-header-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.page-header-subtitle {
+  opacity: 0.9; /* 轻微透明度，增加与标题的区分 */
+  margin-bottom: 1.5rem;
+}
+
+/* 页面顶栏按钮组样式 */
+.page-header-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+/* 页面顶栏按钮位置变体 */
+.page-header-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 垂直居中对齐 */
+}
+
+/* 当按钮位于右侧时移除顶部边距 */
+.page-header-right .page-header-buttons {
+  margin-top: 0;
+}
+
+/* ==========================================================================
+   响应式调整 (Responsive Adjustments)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .home-header {
+    padding: 3rem 0; /* 在小屏幕上减少内边距 */
+  }
+  
+  .home-header-title {
+    font-size: 2rem; /* 小屏幕上减小标题字号 */
+  }
+  
+  .page-header-title {
+    font-size: 1.75rem; /* 小屏幕上减小标题字号 */
+  }
+}
+
+/* TODO: 添加深色模式支持 */
+/* 
+@media (prefers-color-scheme: dark) {
+  .header-component {
+    background: linear-gradient(135deg, var(--primary-dark), var(--gradient-end-dark));
+  }
+}
+*/

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>课评速记 - 课堂助手</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <!-- 不再引入侧边栏CSS，由组件自动加载 -->
+    <!-- 页脚样式现在也由组件自动加载 -->
+    <!-- 滚动动画样式现在也由组件自动加载 -->
+    <!-- 添加主题样式 -->
+    <link rel="stylesheet" href="/css/themes/themes.css" />
+    <!-- 使用图标库 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- 添加 Remix Icon 库，用于侧边栏图标 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <!-- 添加页面特定样式 -->
+    <link rel="stylesheet" href="/css/pages/lesson.css" />
+
+    <!-- 添加Select2库以美化下拉框 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- Select2自定义样式 -->
+    <style>
+      /* 自定义Select2下拉框样式以匹配应用主题 */
+      .select2-container--default .select2-selection--single {
+        background-color: var(--background-input);
+        border: 2px solid var(--border-color);
+        border-radius: 12px;
+        height: 45px; /* 与原始选择框高度匹配 */
+        display: flex;
+        align-items: center;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+        transition: all 0.3s ease;
+      }
+
+      .select2-container--default
+        .select2-selection--single
+        .select2-selection__rendered {
+        color: var(--text-color);
+        line-height: normal;
+        padding-left: 1.2rem;
+      }
+
+      /* 关闭按钮样式覆盖 */
+      .select2-container--default
+        .select2-selection--single
+        .select2-selection__clear {
+        font-size: 1.1rem;
+        margin-right: 2.2rem;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.05);
+        color: var(--text-secondary);
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.7;
+        transition: all 0.25s ease;
+      }
+
+      .select2-container--default
+        .select2-selection--single
+        .select2-selection__clear:hover {
+        background-color: rgba(220, 53, 69, 0.1);
+        color: var(--danger-color);
+        opacity: 1;
+        transform: scale(1.1);
+      }
+
+      .select2-container--default
+        .select2-selection--single
+        .select2-selection__arrow {
+        height: 45px;
+      }
+
+      .select2-dropdown {
+        background-color: var(--background-secondary);
+        border: 2px solid var(--primary-light);
+        border-radius: 12px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .select2-container--default
+        .select2-results__option--highlighted[aria-selected] {
+        background-color: var(--primary-light);
+        color: var(--primary-color);
+      }
+
+      .select2-container--default
+        .select2-results__option[aria-selected="true"] {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .select2-container--default .select2-results__group {
+        background-color: var(--background-secondary);
+        color: var(--text-secondary);
+        padding: 10px 12px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .select2-container--default
+        .select2-search--dropdown
+        .select2-search__field {
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        padding: 8px 12px;
+        margin-bottom: 5px;
+      }
+
+      .select2-container--default
+        .select2-search--dropdown
+        .select2-search__field:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px var(--primary-light);
+      }
+
+      /* 注意：表情选择器样式已移至lesson.css文件中 */
+    </style>
+  </head>
+  <body>
+    <!-- 侧边栏导航 - 使用ID以便组件初始化 -->
+    <div id="sidebar-container"></div>
+
+    <!-- 移动端菜单切换按钮 -->
+    <div class="sidebar-toggle">
+      <i class="ri-menu-line"></i>
+    </div>
+    <!-- 移动端遮罩层 -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- 主内容区 -->
+    <div class="container py-4 sidebar-active">
+      <!-- 顶栏容器 - 添加ID用于组件初始化 -->
+      <div id="header-container"></div>
+
+      <div class="lesson-container">
+        <!-- 输入区域 -->
+        <div class="input-card animate-on-scroll fade-up">
+          <div class="input-header">
+            <i class="ri-chat-new-line"></i>
+            <h2 class="input-title">记录新评价</h2>
+          </div>
+          <div class="input-content">
+            <select
+              class="course-select"
+              id="courseSelect"
+              data-placeholder="选择课程..."
+            >
+              <option value="">选择课程...</option>
+              <!-- 课程选项将由JS动态添加 -->
+            </select>
+            <div class="input-actions">
+              <button class="icon-btn" id="emojiButton" title="选择表情">
+                <i class="ri-emotion-happy-line"></i>
+              </button>
+            </div>
+            <textarea
+              id="commentInput"
+              class="comment-input"
+              placeholder="输入你的评价文字（可选）..."
+            ></textarea>
+          </div>
+
+          <div class="predefined-tags-container" id="predefinedTags">
+            <span class="tag-label">快捷标签:</span>
+            <!-- 预设标签将由JS动态添加 -->
+          </div>
+
+          <div class="reaction-tag-container" id="selectedReactions">
+            <!-- 已选表情会显示在这里 -->
+          </div>
+
+          <div class="text-center mt-3">
+            <button class="send-btn" id="sendButton">
+              <i class="ri-send-plane-fill"></i> 发送评价
+            </button>
+          </div>
+        </div>
+
+        <!-- 历史评价部分 -->
+        <div class="history-card animate-on-scroll fade-up delay-100">
+          <div class="history-header">
+            <i class="ri-history-line"></i>
+            <h2 class="history-title">历史评价</h2>
+            <div class="history-actions">
+              <span class="history-filter-info">点击表情可互动</span>
+            </div>
+          </div>
+
+          <div id="commentList" class="comment-list">
+            <!-- 评价将通过JavaScript动态添加 -->
+            <div class="lesson-empty animate-on-scroll zoom-in">
+              <div class="lesson-empty-icon">
+                <i class="ri-chat-3-line"></i>
+              </div>
+              <div class="lesson-empty-text">还没有匹配的课程评价</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 表情选择器容器 - 移到body最后，确保显示在最上层 -->
+    <div class="emoji-picker-container" id="emojiPickerContainer"></div>
+
+    <!-- 页脚 - 简化为只保留容器 -->
+    <footer class="footer"></footer>
+
+    <!-- 先引入主脚本 -->
+    <script type="module" src="/js/main.js"></script>
+    <!-- 引入主题系统 -->
+    <script type="module" src="/js/themes.js"></script>
+    <!-- 引入组件 -->
+    <script type="module" src="/components/sidebar/sidebar.js"></script>
+    <script type="module" src="/components/header/header.js"></script>
+    <script type="module" src="/components/footer/footer.js"></script>
+    <script
+      type="module"
+      src="/components/scrollAnimation/scrollAnimation.js"
+    ></script>
+    <script
+      type="module"
+      src="/components/notifications/notifications.js"
+    ></script>
+
+    <!-- 初始化组件 -->
+    <script type="module">
+      import { Sidebar } from "/components/sidebar/sidebar.js";
+      import { Header } from "/components/header/header.js";
+      import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation.js";
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // 初始化侧边栏
+        const sidebar = new Sidebar("sidebar-container");
+
+        // 初始化顶栏
+        const header = new Header("header-container", {
+          title: "课评速记",
+          subtitle: "记录与分享您的课程评价",
+          isHomePage: false,
+          buttonPosition: "right",
+        });
+
+        // 初始化滚动动画
+        initScrollAnimation(".animate-on-scroll", {
+          threshold: 0.15,
+          once: true,
+        });
+      });
+    </script>
+    <!-- 页面特定脚本 -->
+    <script type="module" src="/js/pages/lesson.js"></script>
+  </body>
+</html>
