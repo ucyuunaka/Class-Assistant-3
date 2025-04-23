@@ -156,11 +156,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const maxAttempts = 20; // 最多尝试20次
       const checkInterval = setInterval(function() {
         attempts++;
-        console.log('检查Chart.js是否已加载，尝试次数：', attempts);
         
         if (typeof Chart !== 'undefined') {
           clearInterval(checkInterval);
-          console.log('Chart.js已加载，开始渲染图表');
           renderCharts();
         } else if (attempts >= maxAttempts) {
           clearInterval(checkInterval);
@@ -222,7 +220,6 @@ document.addEventListener("DOMContentLoaded", function () {
       renderSubjectChart();
       renderCompareChart();
       
-      console.log('图表渲染成功');
     } catch (error) {
       console.error('渲染图表时出错:', error);
     }

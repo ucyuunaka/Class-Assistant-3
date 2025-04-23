@@ -13,13 +13,12 @@ import { showNotification } from "/components/notifications/notifications.js"; /
  */
 export function initSchedule() {
   try {
-    console.log("正在初始化课表数据...");
     // 尝试从本地存储加载数据
     const loadedFromStorage = loadScheduleFromStorage();
     if (loadedFromStorage) {
-      console.log("从本地存储成功加载课表数据");
+
     } else {
-      console.log("使用默认课表数据");
+
     }
 
     // 初始化缓存
@@ -35,7 +34,7 @@ export function initSchedule() {
     // 初始化拖放功能（初始为非编辑模式）
     setupDragAndDrop(false);
     
-    console.log("课表数据初始化成功");
+
     return true;
   } catch (error) {
     console.error("初始化课表数据失败:", error);

@@ -51,5 +51,4 @@ document.addEventListener("DOMContentLoaded", function () {
   animateStatistics();
   
   // 如果有需要，可以在这里添加自定义逻辑
-  console.log("首页滚动动画已增强");
 });

@@ -14,8 +14,6 @@ const coursesCache = {
  * 确保课程真正占用了正确的格子
  */
 function validateCacheOccupation() {
-  console.log("验证缓存占用情况...");
-  
   let issues = 0;
   const seen = new Set(); // 用于检测重复占用
   
@@ -75,7 +73,6 @@ function validateCacheOccupation() {
   if (issues > 0) {
     console.error(`缓存验证发现 ${issues} 个问题`);
   } else {
-    console.log("缓存验证通过，未发现问题");
   }
   
   return issues === 0;
@@ -87,8 +84,6 @@ function validateCacheOccupation() {
  */
 export function updateCoursesCache() {
   try {
-    console.log("开始更新课程缓存...");
-    
     // 记录开始时间（用于性能监控）
     const startTime = performance.now();
     
@@ -155,8 +150,6 @@ export function updateCoursesCache() {
     const endTime = performance.now();
     const executionTime = (endTime - startTime).toFixed(2);
     
-    console.log(`课程缓存更新完成: ${courseCount}门课程, ${cellsCount}个占用格子, 耗时${executionTime}ms`);
-    
     return true;
   } catch (error) {
     console.error("更新课程缓存时出错:", error);
@@ -206,7 +199,6 @@ function isCellOccupied(day, time, excludeCourseId) {
  */
 export function checkCanPlaceCourse(courseId, targetDay, targetTime) {
   if (!courseId || !targetDay || !targetTime) {
-    console.log(`检查放置可行性：无效参数 courseId=${courseId}, targetDay=${targetDay}, targetTime=${targetTime}`);
     return false;
   }
   
@@ -215,31 +207,26 @@ export function checkCanPlaceCourse(courseId, targetDay, targetTime) {
   // 获取当前课程信息
   const course = scheduleData.courses.find(c => c.id === courseId);
   if (!course) {
-    console.log(`检查放置可行性：找不到课程ID=${courseId}`);
     return false;
   }
-  
-  console.log(`检查放置可行性：课程="${course.title}" (ID=${courseId}), 目标位置=[${targetDay}-${targetTime}]`);
+
   
   // 计算课程时长（节数）
   const courseDuration = course.endTime ? (course.endTime - course.time + 1) : 1;
-  console.log(`课程时长: ${courseDuration}节课 (${course.time} - ${course.endTime || course.time})`);
+
   
   // 检查时间是否超出范围
   if (targetTime + courseDuration - 1 > scheduleData.timePeriods.length) {
-    console.log(`检查放置可行性：课程在目标位置上会超出课表时间范围，目标时间=${targetTime}，持续${courseDuration}节课，最大允许=${scheduleData.timePeriods.length}`);
     return false;
   }
   
   // 检查所有需要占用的格子是否都可用
   for (let t = targetTime; t < targetTime + courseDuration; t++) {
     if (isCellOccupied(targetDay, t, courseId)) {
-      console.log(`检查放置可行性：单元格[${targetDay}-${t}]已被占用，无法放置`);
       return false;
     }
   }
   
-  console.log(`检查放置可行性：可以放置课程"${course.title}" (ID=${courseId})到[${targetDay}-${targetTime}]，占用${courseDuration}节课`);
   return true;
 }
 

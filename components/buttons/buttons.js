@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
  * 初始化所有按钮组件
  */
 function initButtons() {
-  console.log('正在初始化按钮组件...');
   
   // 初始化涟漪效果
   initRippleEffect();
@@ -36,7 +35,6 @@ function initButtons() {
   // 初始化颜色自适应
   initAutoColorButtons();
   
-  console.log('✅ 按钮组件初始化成功！');
 }
 
 // --- 核心功能实现 ---

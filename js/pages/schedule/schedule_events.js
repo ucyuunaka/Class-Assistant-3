@@ -461,7 +461,6 @@ function editCourse(course) {
  * @returns {boolean} 是否成功删除课程
  */
 function handleDeleteCourse(courseId) {
-  console.log(`请求删除课程: ID=${courseId}`);
   
   // 查找课程
   const course = scheduleData.courses.find(c => c.id === parseInt(courseId));
@@ -485,8 +484,7 @@ function handleDeleteCourse(courseId) {
       for (let time = startTime; time <= endTime; time++) {
         occupiedCells.push(`${course.day}-${time}`);
       }
-      
-      console.log(`成功删除课程 "${course.title}" (ID=${courseId})，释放单元格: ${occupiedCells.join(', ')}`);
+
       
       // 重新渲染视图
       renderTimetable();
@@ -550,7 +548,6 @@ function createNewCourse(day, time) {
  */
 function showCourseDetails(course) {
   // 可以在这里实现课程详情查看功能
-  console.log("查看课程详情:", course);
 }
 
 // 导出当前的编辑模式状态

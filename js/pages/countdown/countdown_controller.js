@@ -13,7 +13,6 @@ let countdownElements = {};
  */
 export function initCountdown() {
   try {
-    console.log("正在初始化考试倒计时数据...");
     
     // 获取DOM元素引用
     collectDOMElements();
@@ -33,7 +32,6 @@ export function initCountdown() {
     // 初始化事件处理
     initCountdownEvents(countdownElements);
     
-    console.log("考试倒计时数据初始化成功");
     return true;
   } catch (error) {
     console.error("初始化考试倒计时数据失败:", error);

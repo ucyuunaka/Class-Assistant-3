@@ -40,7 +40,6 @@ class Footer {
       // 使用绝对路径
       link.href = '/components/footer/footer.css';
       document.head.appendChild(link);
-      console.log('✅ 页脚CSS样式已自动加载');
     }
   }
 
@@ -56,7 +55,6 @@ class Footer {
       // 使用绝对路径
       const footerPath = '/components/footer/footer.html';
       
-      console.log('正在加载页脚，路径:', footerPath);
       
       // 加载页脚内容
       fetch(footerPath)
@@ -69,9 +67,6 @@ class Footer {
         .then(html => {
           // 插入页脚内容
           footer.innerHTML = `<div class="container">${html}</div>`;
-          
-          // 添加成功加载的提示
-          console.log('✅ 页脚加载成功！');
           
           // 更新年份
           this.updateCurrentYear();

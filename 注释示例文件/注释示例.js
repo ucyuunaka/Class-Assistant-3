@@ -74,7 +74,6 @@ function updateStatusDisplay() {
 function handleSubmit(event) {
   // 1. 阻止默认事件（例如表单提交可能导致页面刷新）
   event.preventDefault();
-  console.log('提交事件已被拦截。');
 
   // 2. 检查是否已达最大尝试次数
   if (currentAttempts >= MAX_ATTEMPTS) {
@@ -86,7 +85,6 @@ function handleSubmit(event) {
 
   // 3. 获取用户输入值
   const userAnswer = userInputElement ? userInputElement.value.trim() : ''; // 获取并去除首尾空格
-  console.log(`用户输入: "${userAnswer}"`);
 
   // 4. 简单的输入验证 (示例：不允许为空)
   if (userAnswer === '') {
@@ -131,7 +129,6 @@ function handleSubmit(event) {
 if (submitButtonElement) {
   // 为提交按钮添加点击事件监听器，回调函数为 handleSubmit
   submitButtonElement.addEventListener('click', handleSubmit);
-  console.log('提交按钮的点击事件监听器已设置。');
 } else {
   // 如果找不到按钮，这是一个关键错误，需要记录
   console.error('错误：无法找到提交按钮 "#submit-btn"，交互功能将无法使用！');
@@ -142,7 +139,6 @@ if (submitButtonElement) {
 
 // 1. 初始化页面状态显示
 updateStatusDisplay();
-console.log('页面状态显示已初始化。');
 
 // 2. 可以在这里执行其他初始化任务，例如从 localStorage 读取之前的得分等。
 // try {
@@ -155,4 +151,3 @@ console.log('页面状态显示已初始化。');
 //   console.error('从 localStorage 读取分数时出错:', error);
 // }
 
-console.log('脚本初始化完成。');
