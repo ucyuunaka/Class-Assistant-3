@@ -1,0 +1,131 @@
+/* ==========================================================================
+   基础样式与重置 (Base Styles & Resets)
+   ========================================================================== */
+/*
+ * 让所有元素及其伪元素都继承父元素的盒模型设置 (通常是 border-box)。
+ * 这使得元素的 width 和 height 包含 padding 和 border，布局更直观。
+ */
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+/* ==========================================================================
+   排版样式 (Typography)
+   ========================================================================== */
+body {
+    font-family: 'Arial', sans-serif;
+    /* 默认字体: 无衬线字体 Arial，如果不可用则使用系统默认无衬线字体 */
+    line-height: 1.6;
+    /* 设置基础行高，提高可读性 */
+    color: #333;
+    /* 主要文字颜色: 深灰色 */
+}
+
+/* ==========================================================================
+   组件: 按钮 (Component: Buttons)
+   ========================================================================== */
+.button {
+    display: inline-block;
+    /* 使按钮表现为行内块元素，可以设置宽高和边距 */
+    padding: 10px 15px;
+    /* 内边距: 上下 10px, 左右 15px */
+    background-color: #007bff;
+    /* 按钮背景色: 蓝色 (Bootstrap 默认 primary 蓝色) */
+    color: white;
+    /* 文字颜色: 白色 */
+    border: none;
+    /* 移除边框 */
+    border-radius: 4px;
+    /* 轻微圆角 */
+    cursor: pointer;
+    /* 鼠标悬停时显示手型光标 */
+    text-align: center;
+    /* 文字居中 */
+    transition: background-color 0.2s ease-in-out;
+    /* 背景色过渡效果 */
+}
+
+.button:hover {
+    background-color: #0056b3;
+    /* 鼠标悬停时背景色变深 */
+}
+
+/* 主要操作按钮的样式 (例如: 确认, 保存) */
+.button-primary {
+    background-color: #28a745;
+    /* 主要按钮背景色: 绿色 (Bootstrap 默认 success 绿色) */
+}
+
+.button-primary:hover {
+    background-color: #218838;
+    /* 鼠标悬停时背景色变深 */
+}
+
+/* ==========================================================================
+   布局: 页眉 (Layout: Header)
+   ========================================================================== */
+.site-header {
+    display: flex;
+    /* 使用 Flexbox 布局 */
+    justify-content: space-between;
+    /* 子元素沿主轴两端对齐，中间留空 */
+    align-items: center;
+    /* 子元素在交叉轴上居中对齐 */
+    padding: 1rem;
+    /* 内边距 */
+    /* NOTE: 固定页眉可能需要为下方内容添加上边距，以防遮挡 */
+    position: sticky;
+    /* 粘性定位: 在滚动到指定位置前表现为 relative，之后表现为 fixed */
+    top: 0;
+    /* 触发粘性定位的阈值 */
+    background: white;
+    /* 页眉背景色: 白色 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* 添加轻微底部阴影，增加层次感 */
+    z-index: 100;
+    /* 设置堆叠顺序，确保页眉在页面滚动时位于其他普通内容之上 */
+}
+
+/* ==========================================================================
+   工具类 (Utilities)
+   ========================================================================== */
+/*
+ * 工具类: 视觉上隐藏元素，但保持对屏幕阅读器等辅助技术的可见性。
+ * 常用于隐藏标签文本，但仍需为可访问性保留。
+ */
+.visually-hidden {
+    position: absolute !important;
+    /* 移出正常文档流 */
+    width: 1px !important;
+    /* 极小尺寸 */
+    height: 1px !important;
+    /* 极小尺寸 */
+    margin: -1px !important;
+    /* 负外边距，进一步移出视口 */
+    padding: 0 !important;
+    /* 无内边距 */
+    overflow: hidden !important;
+    /* 隐藏溢出内容 */
+    clip: rect(0, 0, 0, 0) !important;
+    /* 裁剪元素，使其不占空间 */
+    white-space: nowrap !important;
+    /* 防止文本换行 */
+    border: 0 !important;
+    /* 无边框 */
+}
+
+/* TODO: 添加更多用于间距 (margin/padding) 或文本对齐的工具类 */
+
+/* FIXME: 这个 hack 写法是为了兼容非常旧的 IE 浏览器，现代项目通常不再需要 */
+.legacy-ie-support {
+    /* 仅为 IE 特定的样式 */
+    display: inline\9; /* IE hack替代方案 */
+    /* 例如: 使用星号 hack 仅对 IE7 及以下生效 */
+    zoom: 1\9;
+}
