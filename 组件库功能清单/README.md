@@ -11,8 +11,8 @@
 | Buttons         | 提供多样化的交互按钮，包括涟漪效果、加载状态、确认对话框等 | 已完成 | 中等   | 高       | [按钮组件文档](./buttons/buttons.md) |
 | Footer          | 提供全站统一的页脚内容和功能，自动更新版权年份，智能导航   | 已完成 | 低     | 高       | [页脚组件文档](./footer/footer.md)   |
 | Header          | 提供页面顶部标题和按钮，支持首页大型顶栏和普通页面小型顶栏 | 已完成 | 中等   | 高       | [顶栏组件文档](./header/header.md)   |
+| Modals          | 提供多种类型的模态弹窗，支持不同尺寸、样式和按钮布局       | 已完成 | 高     | 高       | [模态弹窗文档](./modals/modals.md)   |
 | Sidebar         | -                                                          | 待分析 | -      | -        | -                                    |
-| Modals          | -                                                          | 待分析 | -      | -        | -                                    |
 | Notifications   | -                                                          | 待分析 | -      | -        | -                                    |
 | ScrollAnimation | -                                                          | 待分析 | -      | -        | -                                    |
 
@@ -39,12 +39,18 @@
 - **文件**：`components/header/header.js`, `components/header/header.css`
 - **详情**：[查看详细文档](./header/header.md)
 
+### Modals 模态弹窗组件
+
+- **功能**：提供多种类型的弹出窗口用于信息展示和用户交互
+- **特点**：支持确认、警告、危险、成功和错误等多种类型，提供多种尺寸和按钮布局选项
+- **文件**：`components/modals/modals.js`, `components/modals/modals.css`
+- **详情**：[查看详细文档](./modals/modals.md)
+
 ## 待分析组件
 
 1. Sidebar 侧边栏组件
-2. Modals 模态框组件
-3. Notifications 通知组件
-4. ScrollAnimation 滚动动画组件
+2. Notifications 通知组件
+3. ScrollAnimation 滚动动画组件
 
 ## 组件开发规范
 
@@ -69,3 +75,4 @@
 - **2025-04-23**：创建文档，完成 Buttons 组件分析
 - **2025-04-23**：添加 Footer 组件分析
 - **2025-04-23**：添加 Header 组件分析
+- **2025-04-23**：添加 Modals 组件分析
