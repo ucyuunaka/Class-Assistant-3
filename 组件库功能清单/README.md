@@ -12,7 +12,7 @@
 | Footer          | 提供全站统一的页脚内容和功能，自动更新版权年份，智能导航   | 已完成 | 低     | 高       | [页脚组件文档](./footer/footer.md)   |
 | Header          | 提供页面顶部标题和按钮，支持首页大型顶栏和普通页面小型顶栏 | 已完成 | 中等   | 高       | [顶栏组件文档](./header/header.md)   |
 | Modals          | 提供多种类型的模态弹窗，支持不同尺寸、样式和按钮布局       | 已完成 | 高     | 高       | [模态弹窗文档](./modals/modals.md)   |
-| Sidebar         | -                                                          | 待分析 | -      | -        | -                                    |
+| Sidebar         | 提供响应式侧边导航栏，支持主题切换和用户头像             | 已完成 | 高     | 高       | [侧边栏组件文档](./sidebar/sidebar.md) |
 | Notifications   | -                                                          | 待分析 | -      | -        | -                                    |
 | ScrollAnimation | -                                                          | 待分析 | -      | -        | -                                    |
 
@@ -46,11 +46,17 @@
 - **文件**：`components/modals/modals.js`, `components/modals/modals.css`
 - **详情**：[查看详细文档](./modals/modals.md)
 
+### Sidebar 侧边栏组件
+
+- **功能**：提供响应式侧边导航栏，支持主题切换和用户头像
+- **特点**：动态加载、展开/收缩、响应式布局、主题支持、菜单导航、当前页高亮、用户头像、触摸优化
+- **文件**：`components/sidebar/sidebar.js`, `components/sidebar/sidebar.css`, `components/sidebar/sidebar.html`
+- **详情**：[查看详细文档](./sidebar/sidebar.md)
+
 ## 待分析组件
 
-1. Sidebar 侧边栏组件
-2. Notifications 通知组件
-3. ScrollAnimation 滚动动画组件
+1. Notifications 通知组件
+2. ScrollAnimation 滚动动画组件
 
 ## 组件开发规范
 
@@ -76,3 +82,4 @@
 - **2025-04-23**：添加 Footer 组件分析
 - **2025-04-23**：添加 Header 组件分析
 - **2025-04-23**：添加 Modals 组件分析
+- **2025-04-23**：添加 Sidebar 组件分析
