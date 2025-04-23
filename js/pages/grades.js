@@ -398,7 +398,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // 比较图表
   function renderCompareChart() {
     const compareChartCtx = document.getElementById("compareChart");
-    // Ensure early return provides a null value consistent with other render functions
     if (!compareChartCtx) return null;
     const ctx = compareChartCtx.getContext("2d");
     const colors = getThemeColors();
@@ -445,8 +444,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ],
     };
 
-    // Ensure chart is defined before returning
-    const chart = new Chart(ctx, {
+    return new Chart(ctx, {
       type: "bar",
       data: data,
       options: {
@@ -455,21 +453,15 @@ document.addEventListener("DOMContentLoaded", function () {
         scales: {
           y: {
             beginAtZero: true,
-            max: 105, // 设置最大值略高于 100
+            max: 100, // 设置最大值为100
             ticks: {
+              stepSize: 20, // 设置刻度间隔为20
               color: colors.textColor,
-              stepSize: 10, // 强制步长为 10，确保包含 100
-              callback: function(value, index, ticks) {
-                // 检查是否为最后一个刻度值 (通常是 max 值)
-                // 使用 ticks[ticks.length - 1].value 更健壮，以防刻度不均匀
-                const lastTickValue = ticks[ticks.length - 1].value;
-                if (value === lastTickValue) {
-                  return null; // 隐藏最后一个刻度标签
-                }
-                return value; // 其他刻度正常显示
-              }
+              padding: 5, // 为刻度标签添加一些内边距
             },
-            grid: { color: colors.borderColor }
+            grid: {
+              color: colors.borderColor
+            }
           },
           x: { ticks: { color: colors.textColor }, grid: { color: colors.borderColor } }
         },
@@ -478,12 +470,12 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         layout: { // 调整布局内边距
           padding: {
-            top: 40 // 将顶部内边距增加到 40px
+            top: 40, // 将顶部内边距增加到 40px
+            right: 10, // 为右侧添加一些内边距，给数据更多空间
           }
         }
       },
     });
-    return chart; // Return the created instance
   }
 
   // 新增：GPA 仪表盘图表
