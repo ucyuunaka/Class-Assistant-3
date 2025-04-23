@@ -1,10 +1,10 @@
 // 课表事件控制器
 // 负责处理课表相关的各种事件
 
-import { scheduleData, deleteCourse, updateCourse, addCourse, clearCourses } from "@js/data/schedule_data.js";
-import { renderTimetable, renderListView } from "@js/controllers/schedule_render.js";
-import { setupDragAndDrop } from "@js/events/schedule_drag.js";
-import { updateCoursesCache } from "@js/controllers/schedule_cache.js";
+import { scheduleData, deleteCourse, updateCourse, addCourse, clearCourses } from "/js/pages/schedule/schedule_data.js"; // Updated path
+import { renderTimetable, renderListView } from "/js/pages/schedule/schedule_render.js"; // Updated path
+import { setupDragAndDrop } from "/js/pages/schedule/schedule_drag.js"; // Updated path
+import { updateCoursesCache } from "/js/pages/schedule/schedule_cache.js"; // Updated path
 
 // 当前编辑模式状态
 let isEditMode = false;

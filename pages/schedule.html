@@ -353,7 +353,7 @@
     <script type="module" src="/js/main.js"></script>
     <!-- 引入课表数据 -->
     <script type="module">
-      import { scheduleData } from "/js/data/schedule_data.js";
+      import { scheduleData } from "/js/pages/schedule/schedule_data.js"; // Updated path
       // 将模块中的数据设置为全局变量，以便main.js可以访问
       window.scheduleData = scheduleData;
     </script>
@@ -396,6 +396,6 @@
     <!-- 添加主题管理脚本 -->
     <script type="module" src="/js/themes.js"></script>
     <!-- 添加课表模块脚本 -->
-    <script type="module" src="/js/pages/schedule.js"></script>
+    <script type="module" src="/js/pages/schedule/schedule.js"></script> <!-- Updated path -->
   </body>
 </html>

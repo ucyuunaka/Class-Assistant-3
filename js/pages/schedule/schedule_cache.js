@@ -1,7 +1,7 @@
 // 课表缓存控制器
 // 用于优化课表性能，通过缓存常用数据避免重复计算
 
-import { scheduleData } from "@js/data/schedule_data.js";
+import { scheduleData } from "/js/pages/schedule/schedule_data.js"; // Updated path
 
 // 课程缓存数据结构
 const coursesCache = {
