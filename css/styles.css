@@ -479,3 +479,7 @@ select.form-control {
 .footer {
   background-color: var(--background-color);
 }
+/* Utility class for hiding elements */
+.hidden {
+  display: none !important; /* Use !important to ensure override */
+}
