@@ -14,7 +14,7 @@
 | Modals          | 提供多种类型的模态弹窗，支持不同尺寸、样式和按钮布局       | 已完成 | 高     | 高       | [模态弹窗文档](./modals/modals.md)   |
 | Sidebar         | 提供响应式侧边导航栏，支持主题切换和用户头像             | 已完成 | 高     | 高       | [侧边栏组件文档](./sidebar/sidebar.md) |
 | Notifications   | -                                                          | 待分析 | -      | -        | -                                    |
-| ScrollAnimation | -                                                          | 待分析 | -      | -        | -                                    |
+| ScrollAnimation | 提供元素滚动入场动画效果                                   | 已完成 | 低     | 中       | [滚动动画文档](./scrollAnimation/scrollAnimation.md) |
 
 ## 已完成分析的组件
 
@@ -53,10 +53,16 @@
 - **文件**：`components/sidebar/sidebar.js`, `components/sidebar/sidebar.css`, `components/sidebar/sidebar.html`
 - **详情**：[查看详细文档](./sidebar/sidebar.md)
 
+### ScrollAnimation 滚动动画组件
+
+- **功能**：为滚动进入视口的元素提供 CSS 动画效果
+- **特点**：基于 IntersectionObserver、多种动画变体、支持延迟、可配置阈值和触发次数
+- **文件**：`components/scrollAnimation/scrollAnimation.js`, `components/scrollAnimation/scrollAnimation.css`
+- **详情**：[查看详细文档](./scrollAnimation/scrollAnimation.md)
+
 ## 待分析组件
 
 1. Notifications 通知组件
-2. ScrollAnimation 滚动动画组件
 
 ## 组件开发规范
 
@@ -83,3 +89,4 @@
 - **2025-04-23**：添加 Header 组件分析
 - **2025-04-23**：添加 Modals 组件分析
 - **2025-04-23**：添加 Sidebar 组件分析
+- **2025-04-23**：添加 ScrollAnimation 组件分析
