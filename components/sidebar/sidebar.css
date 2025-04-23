@@ -385,7 +385,7 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        z-index: 1010; /* 确保按钮总是可见 */
+        z-index: 10100; /* 显著提高z-index确保按钮总是可见 */
         box-shadow: var(--shadow);
     }
     
