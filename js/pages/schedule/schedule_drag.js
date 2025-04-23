@@ -1,9 +1,9 @@
 // 课表拖放控制器
 // 负责课表的拖放交互功能
 
-import { moveCourse, scheduleData } from "@js/data/schedule_data.js";
-import { renderTimetable, renderListView, getDayName } from "@js/controllers/schedule_render.js";
-import { checkCanPlaceCourse, getPlacementBlockReason, updateCoursesCache, coursesCache } from "@js/controllers/schedule_cache.js";
+import { moveCourse, scheduleData } from "/js/pages/schedule/schedule_data.js"; // Updated path
+import { renderTimetable, renderListView, getDayName } from "/js/pages/schedule/schedule_render.js"; // Updated path
+import { checkCanPlaceCourse, getPlacementBlockReason, updateCoursesCache, coursesCache } from "/js/pages/schedule/schedule_cache.js"; // Updated path
 
 // 拖拽状态变量
 let draggedItem = null;

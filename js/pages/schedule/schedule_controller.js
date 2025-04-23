@@ -1,12 +1,12 @@
 // 课表主控制器
 // 协调其他课表模块，提供主要接口
 
-import { scheduleData, loadScheduleFromStorage, saveScheduleToStorage } from "@js/data/schedule_data.js";
-import { renderTimetable, renderListView } from "@js/controllers/schedule_render.js";
-import { updateCoursesCache } from "@js/controllers/schedule_cache.js";
-import { setupDragAndDrop } from "@js/events/schedule_drag.js";
-import { initScheduleEvents, afterCourseDataChanged } from "@js/events/schedule_events.js";
-import { showNotification } from "@components/notifications/notifications.js";
+import { scheduleData, loadScheduleFromStorage, saveScheduleToStorage, afterCourseDataChanged } from "/js/pages/schedule/schedule_data.js"; // Updated path and combined import
+import { renderTimetable, renderListView } from "/js/pages/schedule/schedule_render.js"; // Updated path
+import { updateCoursesCache } from "/js/pages/schedule/schedule_cache.js"; // Updated path
+import { setupDragAndDrop } from "/js/pages/schedule/schedule_drag.js"; // Updated path
+import { initScheduleEvents } from "/js/pages/schedule/schedule_events.js"; // Updated path and removed duplicate export
+import { showNotification } from "/components/notifications/notifications.js"; // Updated path format
 
 /**
  * 初始化课表数据和功能
@@ -52,4 +52,5 @@ export function initSchedule() {
 }
 
 // 导出一些公共方法供外部使用
+// Note: afterCourseDataChanged is now imported from schedule_data.js
 export { afterCourseDataChanged };

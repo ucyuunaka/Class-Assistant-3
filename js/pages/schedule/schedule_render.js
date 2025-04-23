@@ -1,7 +1,7 @@
 // 课表渲染控制器
 // 负责处理课表的各种视图渲染、UI显示
 
-import { scheduleData } from "@js/data/schedule_data.js";
+import { scheduleData } from "/js/pages/schedule/schedule_data.js"; // Updated path
 
 /**
  * 渲染周视图课表

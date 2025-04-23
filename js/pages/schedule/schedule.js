@@ -1,8 +1,8 @@
 // 课表页面入口文件
 // 导入主控制器和课程数据变更函数
-import { initSchedule } from "@js/controllers/schedule_controller.js";
-import { afterCourseDataChanged } from "@js/data/schedule_data.js";
-import { initScrollAnimation } from "@components/scrollAnimation/scrollAnimation.js";
+import { initSchedule } from "/js/pages/schedule/schedule_controller.js"; // Updated path
+import { afterCourseDataChanged } from "/js/pages/schedule/schedule_data.js"; // Updated path
+import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation.js"; // Updated path format
 
 document.addEventListener("DOMContentLoaded", function () {
   // 初始化滚动动画
