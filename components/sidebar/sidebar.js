@@ -222,8 +222,10 @@ export class Sidebar {
         // 确保小屏幕下非激活状态时，宽度为0
         if (!this.container.classList.contains('active')) {
           this.container.style.pointerEvents = 'none'; // 防止遮挡内容的点击
+          console.log('DEBUG: Resized - sidebar pointer-events set to:', this.container.style.pointerEvents);
         } else {
           this.container.style.pointerEvents = 'auto'; // 激活状态下允许点击
+          console.log('DEBUG: Resized - sidebar pointer-events set to:', this.container.style.pointerEvents);
         }
       }
     });
@@ -232,6 +234,7 @@ export class Sidebar {
     if (window.innerWidth <= 768) {
       this.container.style.pointerEvents = 'none';
     }
+    console.log('DEBUG: Initial sidebar pointer-events:', this.container.style.pointerEvents);
   }
 
   /**
@@ -239,6 +242,7 @@ export class Sidebar {
    * 创建移动端切换按钮和遮罩层，添加相应的事件监听
    */
   setupMobileToggle() {
+    console.log('DEBUG: setupMobileToggle function started');
     // 如果移动端切换按钮不存在，则创建一个
     if (!document.querySelector('.sidebar-toggle')) {
       const toggle = document.createElement('div');
@@ -246,9 +250,12 @@ export class Sidebar {
       toggle.innerHTML = '<i class="ri-menu-line"></i>';
       document.body.appendChild(toggle);
       
+      console.log('DEBUG: Adding click listener to toggle button:', toggle); // 新增
       toggle.addEventListener('click', () => {
+        console.log('DEBUG: Toggle button clicked!');
         this.toggleSidebar(null);
       });
+      console.log('DEBUG: Click listener supposedly added.'); // 新增
     }
 
     // 如果移动端遮罩层不存在，则创建一个
@@ -344,6 +351,7 @@ export class Sidebar {
    * @param {boolean|null} show - 是否显示，null表示切换状态
    */
   toggleSidebar(show = null) {
+    console.log('DEBUG: toggleSidebar called with show:', show);
     const overlay = document.querySelector('.sidebar-overlay');
     
     // 确定最终状态
