@@ -134,7 +134,8 @@
   transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1); /* 苹果风格过渡 */
 }
 
-/* 苹果风格模态框 */
+/* 苹果风格模态框 (样式由 components/modals/modals.css 处理) */
+/*
 .modal {
   display: none;
   position: fixed;
@@ -148,11 +149,12 @@
   z-index: 1000;
   overflow-y: auto;
   padding: 20px;
-  backdrop-filter: blur(5px); /* 苹果风格背景模糊 */
+  backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   opacity: 0;
-  transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1); /* 苹果风格过渡 */
+  transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
+*/
 
 /* 苹果风格模态内容 */
 .modal-content {
@@ -630,6 +632,8 @@
   color: var(--text-color);
 }
 
+/* .modal-dialog (结构已移除) */
+/*
 .modal-dialog {
   position: relative;
   margin: 10% auto;
@@ -637,6 +641,7 @@
   width: 90%;
   animation: modalSlideUp 0.3s cubic-bezier(0.2, 0.1, 0.2, 1);
 }
+*/
 
 .form-actions {
   display: flex;
