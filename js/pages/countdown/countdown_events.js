@@ -271,7 +271,10 @@ export function openEditExamModal(examId) {
 function showModalWithAnimation() {
   const modalContent = document.querySelector('.modal-content');
   examModal.style.display = "flex";
+  examModal.style.alignItems = "center";
+  examModal.style.justifyContent = "center";
   examModal.style.opacity = "0";
+  examModal.classList.add('active');
   
   // 使用requestAnimationFrame确保DOM更新后再添加动画
   requestAnimationFrame(() => {
@@ -308,6 +311,7 @@ function closeExamModal() {
   
   examModal.style.transition = "opacity 0.3s ease";
   examModal.style.opacity = "0";
+  examModal.classList.remove('active'); // 移除active类
   
   if (modalContent) {
     modalContent.style.transition = "opacity 0.25s ease, transform 0.25s ease";
