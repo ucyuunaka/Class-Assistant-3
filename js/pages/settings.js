@@ -208,6 +208,26 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       );
     });
+    
+  // 添加退出登录按钮事件
+  document
+    .getElementById("logout-btn")
+    .addEventListener("click", function () {
+      showConfirmModal(
+        "退出登录",
+        "您确定要退出当前账号吗？",
+        function () {
+          // 使用登录系统的退出登录功能
+          if (window.logoutSystem) {
+            window.logoutSystem();
+          } else {
+            // 如果logoutSystem不可用，执行备用退出逻辑
+            localStorage.removeItem("isLoggedIn");
+            window.location.href = "/pages/login.html";
+          }
+        }
+      );
+    });
 
   // 显示确认弹窗
   function showConfirmModal(title, message, callback) {
