@@ -116,12 +116,6 @@ function bindEventHandlers(elements) {
     const examDateInput = document.getElementById("exam-date");
     const examTimeInput = document.getElementById("exam-time");
     
-    if (examNameInput) {
-      examNameInput.addEventListener("blur", function() {
-        validateInput(examNameInput, value => value.trim() !== "", "考试名称不能为空");
-      });
-    }
-    
     if (examDateInput) {
       examDateInput.addEventListener("blur", function() {
         validateInput(examDateInput, value => value !== "", "考试日期不能为空");
@@ -323,11 +317,8 @@ function closeExamModal() {
   setTimeout(() => {
     examModal.style.display = "none";
     
-    // 重置表单错误状态
-    const inputs = examForm.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-      input.classList.remove('is-invalid');
-    });
+    // 使用clearAllFormErrors函数清除所有表单错误
+    clearAllFormErrors();
     
     // 关键修复：恢复页面滚动
     document.body.style.overflow = '';
