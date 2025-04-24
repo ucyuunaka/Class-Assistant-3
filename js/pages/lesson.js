@@ -1139,3 +1139,28 @@ function reloadCoursesData() {
   }
 }
 
+
+// --- Component Initialization (Moved from lesson.html) ---
+import { Sidebar } from "/components/sidebar/sidebar.js";
+import { Header } from "/components/header/header.js";
+import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation.js";
+
+document.addEventListener("DOMContentLoaded", function () {
+  // 初始化侧边栏
+  const sidebar = new Sidebar("sidebar-container");
+
+  // 初始化顶栏
+  const header = new Header("header-container", {
+    title: "课评速记",
+    subtitle: "记录与分享您的课程评价",
+    isHomePage: false,
+    buttonPosition: "right",
+  });
+
+  // 初始化滚动动画
+  initScrollAnimation(".animate-on-scroll", {
+    threshold: 0.15,
+    once: true,
+  });
+});
+// --- End Component Initialization ---

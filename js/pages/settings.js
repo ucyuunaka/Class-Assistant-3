@@ -522,3 +522,30 @@ function resetAllSettings() {
   // 显示成功消息
   window.showNotification('所有设置已恢复为默认值', 'success');
 }
+
+// --- Component Initialization (Moved from settings.html) ---
+import { Sidebar } from "/components/sidebar/sidebar.js";
+import { Header } from "/components/header/header.js";
+
+document.addEventListener("DOMContentLoaded", function () {
+  const sidebar = new Sidebar("sidebar-container");
+
+  // 初始化顶栏组件
+  const header = new Header("header-container", {
+    isHomePage: false,
+    title: "设置",
+    subtitle: "自定义你的应用体验和偏好",
+    buttons: [
+      {
+        text: "重置设置",
+        url: "#",
+        isPrimary: false,
+        className: "reset-settings-btn", // Ensure this class is handled by settings.js logic
+      },
+    ],
+    buttonPosition: "right",
+  });
+
+  // Note: Check if settings.js already handles '.reset-settings-btn' clicks.
+});
+// --- End Component Initialization ---

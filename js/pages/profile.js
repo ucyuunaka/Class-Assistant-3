@@ -328,3 +328,31 @@ document.addEventListener("DOMContentLoaded", function () {
     window.showNotification(message, type);
   }
 });
+
+// --- Component Initialization (Moved from profile.html) ---
+import { Sidebar } from "/components/sidebar/sidebar.js";
+import { Header } from "/components/header/header.js";
+
+document.addEventListener("DOMContentLoaded", function () {
+  const sidebar = new Sidebar("sidebar-container");
+
+  // 初始化顶栏组件
+  const header = new Header("header-container", {
+    isHomePage: false,
+    title: "个人资料",
+    subtitle: "管理你的个人信息和偏好设置",
+    buttons: [
+      {
+        text: "保存修改",
+        url: "#",
+        isPrimary: true,
+        className: "save-profile-btn", // Ensure this class is handled correctly by profile.js logic
+      },
+    ],
+    buttonPosition: "right",
+  });
+
+  // Note: Check if profile.js already handles '.save-profile-btn' clicks.
+  // If the Header component adds its own listener, ensure no conflicts.
+});
+// --- End Component Initialization ---

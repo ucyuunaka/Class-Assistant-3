@@ -642,33 +642,8 @@
       type="module"
       src="/components/notifications/notifications.js"
     ></script>
+<!-- 初始化侧边栏和顶栏组件 (Moved to js/pages/grades.js) -->
 
-    <!-- 初始化侧边栏和顶栏组件 -->
-    <script type="module">
-      import { Sidebar } from "/components/sidebar/sidebar.js";
-      import { Header } from "/components/header/header.js";
-
-      document.addEventListener("DOMContentLoaded", function () {
-        // 初始化侧边栏组件
-        const sidebar = new Sidebar("sidebar-container");
-
-        // 初始化顶栏组件
-        const header = new Header("header-container", {
-          isHomePage: false,
-          title: "成绩管理",
-          subtitle: "记录并分析你的学术表现，查看成绩趋势和GPA计算",
-          buttons: [
-            {
-              text: "添加成绩",
-              url: "#",
-              isPrimary: true,
-              className: "add-grade-btn",
-            },
-          ],
-          buttonPosition: "right",
-        });
-      });
-    </script>
 
     <!-- 添加主题和页面特定脚本 -->
     <script type="module" src="/js/themes.js"></script>
