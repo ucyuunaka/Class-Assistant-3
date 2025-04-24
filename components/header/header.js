@@ -104,12 +104,7 @@ export class Header {
     
     this.container.innerHTML = html;
     
-    // 添加滚动动画初始化，确保新添加的元素能够正常应用动画
-    if (typeof initScrollAnimation === 'function') {
-      setTimeout(() => {
-        initScrollAnimation();
-      }, 100);
-    }
+    // 滚动动画初始化已移至页面级脚本 (e.g., lesson.js)
   }
   
   /**
