@@ -1,6 +1,9 @@
 // 课程评价页面的主要脚本
 import { getAllCourses, subscribeToCourseUpdates, loadScheduleFromStorage } from "/js/pages/schedule/schedule_data.js";
 import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation.js";
+// 导入 Sidebar 和 Header 类
+import { Sidebar } from "/components/sidebar/sidebar.js";
+import { Header } from "/components/header/header.js";
 
 // 声明全局通知函数
 let showNotification;
@@ -35,7 +38,20 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // 初始化界面元素
-  initUI();
+  initUI(); // 首先获取DOM元素
+
+  // --- 组件初始化 Start ---
+  // 初始化侧边栏
+  const sidebar = new Sidebar("sidebar-container");
+
+  // 初始化顶栏
+  const header = new Header("header-container", {
+    title: "课评速记",
+    subtitle: "记录与分享您的课程评价",
+    isHomePage: false,
+    buttonPosition: "right",
+  });
+  // --- 组件初始化 End ---
 
   // 初始化表情选择器
   initEmojiPicker();
@@ -80,20 +96,23 @@ document.addEventListener("DOMContentLoaded", function () {
   // 加载保存的评价数据
   loadComments();
   
-  // 在加载评价后重新初始化滚动动画
+  // --- 统一的滚动动画初始化 Start ---
+  // 在所有内容加载和初始化后，最后调用一次滚动动画
+  // 使用更长的延迟确保所有动态内容已渲染
   setTimeout(() => {
     if (typeof initScrollAnimation === 'function') {
       initScrollAnimation(".animate-on-scroll", {
         threshold: 0.15,
-        once: false
+        once: false // 根据需要调整 once 参数，false 意味着每次滚动到都会触发
       });
-      
-      // 确保所有评价动画元素都可见
-      document.querySelectorAll('.animate-on-scroll').forEach(element => {
-        element.classList.add('visible');
-      });
+
+      // 确保所有评价动画元素都可见 (如果需要立即显示)
+      // document.querySelectorAll('.animate-on-scroll').forEach(element => {
+      //   element.classList.add('visible');
+      // });
     }
-  }, 100);
+  }, 500); // 增加延迟时间
+  // --- 统一的滚动动画初始化 End ---
 });
 
 // 初始化UI元素
@@ -1141,26 +1160,4 @@ function reloadCoursesData() {
 
 
 // --- Component Initialization (Moved from lesson.html) ---
-import { Sidebar } from "/components/sidebar/sidebar.js";
-import { Header } from "/components/header/header.js";
-import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation.js";
-
-document.addEventListener("DOMContentLoaded", function () {
-  // 初始化侧边栏
-  const sidebar = new Sidebar("sidebar-container");
-
-  // 初始化顶栏
-  const header = new Header("header-container", {
-    title: "课评速记",
-    subtitle: "记录与分享您的课程评价",
-    isHomePage: false,
-    buttonPosition: "right",
-  });
-
-  // 初始化滚动动画
-  initScrollAnimation(".animate-on-scroll", {
-    threshold: 0.15,
-    once: true,
-  });
-});
 // --- End Component Initialization ---
