@@ -56,7 +56,6 @@ export default defineConfig({
   // 服务器配置
   server: {
     port: 3000,
-    open: true, // 服务器启动时自动打开浏览器
     cors: true, // 允许跨域
   },
 
