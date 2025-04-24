@@ -55,3 +55,20 @@ function initColorPicker() {
   });
   
 }
+// --- Component Initialization (Moved from schedule.html) ---
+import { Sidebar } from "/components/sidebar/sidebar.js";
+import { Header } from "/components/header/header.js";
+
+document.addEventListener("DOMContentLoaded", function () {
+  const sidebar = new Sidebar("sidebar-container");
+
+  // 初始化顶栏组件
+  const header = new Header("header-container", {
+    isHomePage: false,
+    title: "我的课程表",
+    subtitle: "管理和安排你的课程，清晰掌握每周学习时间",
+    buttons: [], // No buttons needed in header for this page as actions are below
+    buttonPosition: "right",
+  });
+});
+// --- End Component Initialization ---

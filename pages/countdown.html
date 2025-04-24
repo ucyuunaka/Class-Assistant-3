@@ -24,23 +24,7 @@
     <link rel="stylesheet" href="/css/pages/countdown.css" />
 
     <!-- 预先加载关键模块 -->
-    <script type="module">
-      // 立即导入并初始化模态框组件，确保其全局可用
-      import {
-        Modal,
-        showConfirmModal,
-        showWarningModal,
-        showDangerModal,
-      } from "/components/modals/modals.js";
-
-      // 立即挂载到全局对象，确保在DOM加载前可用
-      window.Modal = Modal;
-      window.showConfirmModal = showConfirmModal;
-      window.showWarningModal = showWarningModal;
-      window.showDangerModal = showDangerModal;
-
-      console.log("模态框组件已在页面加载早期预初始化");
-    </script>
+    <!-- 预先加载关键模块 (Moved to js/pages/countdown/countdown.js) -->
   </head>
   <body>
     <!-- 侧边栏导航 - 使用ID以便组件初始化 -->
@@ -225,37 +209,7 @@
     <script type="module" src="/components/sidebar/sidebar.js"></script>
     <!-- 引入顶栏组件 -->
     <script type="module" src="/components/header/header.js"></script>
-    <!-- 初始化侧边栏组件 -->
-    <script type="module">
-      import { Sidebar } from "/components/sidebar/sidebar.js";
-      import { Header } from "/components/header/header.js";
-
-      document.addEventListener("DOMContentLoaded", function () {
-        // 初始化侧边栏
-        const sidebar = new Sidebar("sidebar-container");
-
-        // 初始化顶栏组件
-        const header = new Header("header-container", {
-          isHomePage: false,
-          title: "考试倒计时",
-          subtitle: "管理你的考试安排，不错过任何重要的考试",
-          buttons: [
-            {
-              text: "添加考试",
-              url: "#",
-              isPrimary: true,
-              className: "add-exam-btn", // 保持与原来相同的类名，以便原有的事件处理能够正常工作
-            },
-          ],
-          buttonPosition: "right",
-        });
-
-        // 发出模态框就绪事件通知
-        const modalReadyEvent = new CustomEvent("modals:ready");
-        document.dispatchEvent(modalReadyEvent);
-        console.log("DOMContentLoaded: 发送模态框就绪事件通知");
-      });
-    </script>
+    <!-- 初始化侧边栏组件 (Moved to js/pages/countdown/countdown.js) -->
     <!-- 添加页脚脚本 -->
     <script type="module" src="/components/footer/footer.js"></script>
     <!-- 添加滚动动画脚本 -->

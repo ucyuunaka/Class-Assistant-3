@@ -349,33 +349,13 @@
     <footer class="footer"></footer>
     <script type="module" src="/js/main.js"></script>
     <!-- 引入课表数据 -->
-    <script type="module">
-      import { scheduleData } from "/js/pages/schedule/schedule_data.js"; // Updated path
-      // 将模块中的数据设置为全局变量，以便main.js可以访问
-      window.scheduleData = scheduleData;
-    </script>
+    <!-- 课程数据现在由 js/pages/schedule/schedule.js 及其相关模块直接导入 -->
     <!-- 引入新的侧边栏组件 -->
     <script type="module" src="/components/sidebar/sidebar.js"></script>
     <!-- 引入顶栏组件 -->
     <script type="module" src="/components/header/header.js"></script>
     <!-- 初始化侧边栏组件 -->
-    <script type="module">
-      import { Sidebar } from "/components/sidebar/sidebar.js";
-      import { Header } from "/components/header/header.js";
-
-      document.addEventListener("DOMContentLoaded", function () {
-        const sidebar = new Sidebar("sidebar-container");
-
-        // 初始化顶栏组件
-        const header = new Header("header-container", {
-          isHomePage: false,
-          title: "我的课程表",
-          subtitle: "管理和安排你的课程，清晰掌握每周学习时间",
-          buttons: [],
-          buttonPosition: "right",
-        });
-      });
-    </script>
+    <!-- 初始化侧边栏组件 (Moved to js/pages/schedule/schedule.js) -->
     <!-- 添加页脚脚本 -->
     <script type="module" src="/components/footer/footer.js"></script>
     <!-- 添加滚动动画脚本 -->

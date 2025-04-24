@@ -137,31 +137,7 @@
       src="/components/notifications/notifications.js"
     ></script>
 
-    <!-- 初始化组件 -->
-    <script type="module">
-      import { Sidebar } from "/components/sidebar/sidebar.js";
-      import { Header } from "/components/header/header.js";
-      import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation.js";
-
-      document.addEventListener("DOMContentLoaded", function () {
-        // 初始化侧边栏
-        const sidebar = new Sidebar("sidebar-container");
-
-        // 初始化顶栏
-        const header = new Header("header-container", {
-          title: "课评速记",
-          subtitle: "记录与分享您的课程评价",
-          isHomePage: false,
-          buttonPosition: "right",
-        });
-
-        // 初始化滚动动画
-        initScrollAnimation(".animate-on-scroll", {
-          threshold: 0.15,
-          once: true,
-        });
-      });
-    </script>
+    <!-- 初始化组件 (Moved to js/pages/lesson.js) -->
     <!-- 页面特定脚本 -->
     <script type="module" src="/js/pages/lesson.js"></script>
   </body>
