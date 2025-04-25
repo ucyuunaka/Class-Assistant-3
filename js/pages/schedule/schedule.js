@@ -1,3 +1,5 @@
+// 导入认证检查函数
+import { checkFirstLoginExperience } from '/js/auth.js';
 // 课表页面入口文件
 // 导入主控制器和课程数据变更函数
 import { initSchedule } from "/js/pages/schedule/schedule_controller.js"; // Updated path
@@ -5,6 +7,8 @@ import { afterCourseDataChanged } from "/js/pages/schedule/schedule_data.js"; //
 import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation.js"; // Updated path format
 
 document.addEventListener("DOMContentLoaded", function () {
+// 检查首次登录体验
+  checkFirstLoginExperience();
   // 初始化滚动动画
   initScrollAnimation(".animate-on-scroll", {
     threshold: 0.1,

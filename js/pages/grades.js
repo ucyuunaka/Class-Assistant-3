@@ -1,7 +1,11 @@
+// 导入认证检查函数
+import { checkFirstLoginExperience } from '/js/auth.js';
 // 使用模块导入滚动动画组件
 import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation.js";
 
 document.addEventListener("DOMContentLoaded", function () {
+// 检查首次登录体验
+  checkFirstLoginExperience();
   // 初始化滚动动画
   initScrollAnimation(".animate-on-scroll", {
     threshold: 0.1,
