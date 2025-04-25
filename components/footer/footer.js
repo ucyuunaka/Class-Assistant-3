@@ -101,14 +101,32 @@ class Footer {
    * 根据当前URL路径自动标记对应的页脚链接
    */
   highlightCurrentPage() {
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const currentPathname = window.location.pathname;
     const footerLinks = document.querySelectorAll('.footer-links a');
-    
+
     footerLinks.forEach(link => {
       const href = link.getAttribute('href');
-      if (href === currentPage) {
-        link.style.fontWeight = '600';
-        link.style.color = 'var(--primary-color)';
+
+      // Reset styles first to handle navigation within the site
+      link.style.fontWeight = '';
+      link.style.color = '';
+
+      if (href && !href.startsWith('http')) { // Only process internal links
+        try {
+          // Resolve the link's href relative to the document's base URL (origin)
+          // This correctly handles paths like 'index.html' and 'pages/schedule.html'
+          const linkUrl = new URL(href, window.location.origin);
+          const linkPathname = linkUrl.pathname;
+
+          // Compare the resolved pathname with the current pathname
+          if (linkPathname === currentPathname) {
+            link.style.fontWeight = '600'; // 使用 '600' 或 'bold'
+            link.style.color = 'var(--primary-color)';
+          }
+        } catch (e) {
+          console.error(`Error processing footer link href: ${href}`, e);
+          // Optionally handle the error, e.g., skip this link
+        }
       }
     });
   }
