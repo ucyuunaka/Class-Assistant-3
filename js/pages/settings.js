@@ -164,33 +164,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 清除数据按钮事件
   document
-    .getElementById("clear-schedule-data")
-    .addEventListener("click", function () {
-      showConfirmModal(
-        "清除课表数据",
-        "您确定要清除所有课表数据吗？此操作无法撤销。",
-        function () {
-          // 清除课表数据
-          localStorage.removeItem("courses");
-          window.showNotification("课表数据已清除", "success");
-        }
-      );    });
-
-  document
-    .getElementById("clear-exams-data")
-    .addEventListener("click", function () {
-      showConfirmModal(
-        "清除考试数据",
-        "您确定要清除所有考试数据吗？此操作无法撤销。",
-        function () {
-          // 清除考试数据
-          localStorage.removeItem("exams");
-          window.showNotification("考试数据已清除", "success");
-        }
-      );
-    });
-
-  document
     .getElementById("clear-all-data")
     .addEventListener("click", function () {
       showConfirmModal(
@@ -409,17 +382,6 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("maxNotifications", maxCount);
     window.showNotification(`通知显示数量已设为最多${maxCount}条`, "success");
   });
-// 新增：退出登录按钮事件监听
-  const logoutButton = document.getElementById('logout-button');
-  if (logoutButton) {
-    logoutButton.addEventListener('click', () => {
-      // 跳转到 login.html
-      // 使用相对路径，Vite 会处理好基础路径
-      window.location.href = '/pages/login.html';
-    });
-  } else {
-    console.error('退出登录按钮未找到！');
-  }
 });
 
 /**
