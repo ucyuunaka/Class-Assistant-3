@@ -529,20 +529,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 初始化顶栏组件
   const header = new Header("header-container", {
-    isHomePage: false,
-    title: "设置",
-    subtitle: "自定义你的应用体验和偏好",
-    buttons: [
-      {
-        text: "重置设置",
-        url: "#",
-        isPrimary: false,
-        className: "reset-settings-btn", // Ensure this class is handled by settings.js logic
-      },
-    ],
-    buttonPosition: "right",
+    // isHomePage: false, // 移除 isHomePage
+    title: "设置", // 保留标题
+    // subtitle: "自定义你的应用体验和偏好", // 移除副标题
+    // buttons: [ ... ], // 移除按钮数组，根据计划此页面Header不需要按钮
+    // buttonPosition: "right", // 移除 buttonPosition
   });
 
-  // Note: Check if settings.js already handles '.reset-settings-btn' clicks.
+  // Note: The 'reset-settings-btn' functionality is handled elsewhere in this script.
 });
 // --- End Component Initialization ---

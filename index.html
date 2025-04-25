@@ -320,20 +320,19 @@
 
         // 初始化顶栏组件 - 首页风格
         const header = new Header("header-container", {
-          isHomePage: true,
+          // isHomePage is removed
           title: "让你的学习生活更高效有序",
-          subtitle: "课堂助手 - 让你专注于学习本身",
+          subtitle: "课堂助手 - 让你专注于学习本身", // Subtitle is kept
           buttons: [
             {
               text: "查看我的课表",
               url: "/pages/schedule.html",
-              isPrimary: true,
+              // isPrimary removed
             },
             {
               text: "考试倒计时",
               url: "/pages/countdown.html",
-              isPrimary: false,
-              className: "home-outline-btn",
+              // isPrimary and className removed
             },
           ],
         });
