@@ -95,14 +95,15 @@ class Footer {
       yearElement.textContent = new Date().getFullYear();
     }
   }
-
   /**
    * 高亮当前页面在页脚中的链接
-   * 根据当前URL路径自动标记对应的页脚链接
+   * 根据当前URL路径自动标记对应的页脚导航按钮
+   * 注：与buttons.css中的btn-nav类样式配合使用
    */
   highlightCurrentPage() {
     const currentPathname = window.location.pathname;
-    const footerLinks = document.querySelectorAll('.footer-links a');
+    // 更新选择器以匹配新的按钮类名
+    const footerLinks = document.querySelectorAll('.footer-links .btn-nav');
 
     footerLinks.forEach(link => {
       const href = link.getAttribute('href');
@@ -130,13 +131,14 @@ class Footer {
       }
     });
   }
-  
-  /**
+    /**
    * 设置页脚链接的智能导航功能
-   * 处理页脚链接点击事件，确保正确的导航行为
+   * 处理页脚导航按钮点击事件，确保正确的导航行为
+   * 注：使用了components/buttons.css中的btn-nav和btn-nav-slide类样式
    */
   setupLinkNavigation() {
-    const footerLinks = document.querySelectorAll('.footer-links a');
+    // 选择器已更新为匹配btn-nav类名
+    const footerLinks = document.querySelectorAll('.footer-links .btn-nav');
     
     footerLinks.forEach(link => {
       link.addEventListener('click', (event) => {
