@@ -3,6 +3,8 @@ import $ from 'jquery'; // 导入 jQuery
 // import '@fortawesome/fontawesome-free/css/all.min.css'; // 暂时注释掉
 // import 'ionicons/dist/css/ionicons.min.css'; // 暂时注释掉
 
+// 导入认证标记函数
+import { markLoginFlowCompleted } from '/js/auth.js';
 // LoginSignupSystem 模块化封装
 // Removed IIFE start
     // 配置选项，使用默认值
@@ -208,6 +210,8 @@ import $ from 'jquery'; // 导入 jQuery
             'transform': 'translateY(-20px)', // 缩短初始位移距离
             'transition-duration': '0.4s'     // 加快过渡动画速度
         });
+// 标记登录流程已完成
+        markLoginFlowCompleted();
 
         // 显示成功后2秒，执行卡片翻转到欢迎页面
         await delay(2000);
