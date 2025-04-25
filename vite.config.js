@@ -27,7 +27,8 @@ export default defineConfig({
         lesson: resolve(__dirname, 'pages/lesson.html'),
         profile: resolve(__dirname, 'pages/profile.html'),
         grades: resolve(__dirname, 'pages/grades.html'),
-        countdown: resolve(__dirname, 'pages/countdown.html')
+        countdown: resolve(__dirname, 'pages/countdown.html'),
+        login: resolve(__dirname, 'pages/login.html') // 添加 login 入口
       },
       output: {
         manualChunks: {
