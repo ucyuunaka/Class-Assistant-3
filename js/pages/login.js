@@ -102,10 +102,10 @@ import $ from 'jquery'; // 导入 jQuery
             );
         });
 
-        // 重置动画绑定 - 注释掉点击事件
-        // $('.trigger-anim-replay').click(function() {
-        //     resetAnimation();
-        // });
+        // 修改为点击跳转到 index.html
+        $('.trigger-anim-replay').click(function() {
+            window.location.href = '/index.html'; // 修改为跳转
+        });
     }
 
     // 通用表单切换函数
@@ -223,8 +223,8 @@ import $ from 'jquery'; // 导入 jQuery
         $('#window').addClass('flip');
 
         // 添加延时跳转到 index.html
-        await delay(1500); // 在欢迎信息显示 1.5 秒后跳转
-        window.location.href = '/index.html';
+        // await delay(1500); // 在欢迎信息显示 1.5 秒后跳转 (已注释掉)
+        // window.location.href = '/index.html'; // (已注释掉)
     }
 
     // 使用Promise重构重置动画函数
