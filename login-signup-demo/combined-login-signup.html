@@ -3,11 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>登录与注册</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <!-- 移除了 Font Awesome, Ionicons CDN -->
-    <link rel="stylesheet" href="/css/pages/login.css" />
-    <!-- 移除了 jQuery CDN -->
+    <title>登录与注册整合</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <link rel="stylesheet" href="combined-login-signup.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
     <div class="back"></div>
@@ -136,7 +142,7 @@
           <p class="user-name welcome-element">尊敬的用户</p>
           <div class="perspective">
             <button class="button inline trigger-anim-replay">
-              <i class="ion-log-in"></i> 开始使用课堂助手
+              <i class="ion-log-in"></i> 重新登录
             </button>
           </div>
         </div>
@@ -147,8 +153,31 @@
       动画效果出现问题？请等待动画完成后，点击"重新登录"。
     </div>
 
-    <script type="module" src="/js/pages/login.js"></script>
+    <script src="combined-login-signup.js"></script>
 
-    <!-- 移除了示例配置脚本 -->
+    <!-- 示例：如何配置和初始化登录系统 -->
+    <script>
+      // 这是一个示例，显示如何自定义头像和欢迎语
+      // 在实际使用时，可以根据项目需求删除或修改这段代码
+      /*
+      // 禁用自动初始化
+      LoginSignupSystem.config({
+        autoInit: false
+      });
+      
+      // 自定义配置并初始化
+      LoginSignupSystem.init({
+        defaultAvatarUrl: "您的自定义头像URL",
+        welcomeTemplate: {
+          login: "您回来了，{username}！",
+          signup: "欢迎新用户，{username}！"
+        },
+        generalWelcomeText: "您好"
+      });
+      
+      // 也可以在任何时候更新头像
+      // LoginSignupSystem.updateUserAvatar("新的头像URL");
+      */
+    </script>
   </body>
 </html>

@@ -1,4 +1,6 @@
-/* 基础样式 - 移除了 @import url(...) */
+/* 基础样式 */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:600,300,100);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900);
 
 /* 变量系统 - 扩展和整合 */
 :root {
@@ -6,7 +8,7 @@
     --global-radius: 3px;
     --global-radius-large: 15px;
     --global-radius-round: 1000px;
-
+    
     /* 动画时间 */
     --transition-fast: 0.2s;
     --transition-medium: 0.3s;
@@ -14,21 +16,21 @@
     --transition-very-slow: 1s;
     --window-anim-dur: 1.5s;
     --form-switch-duration: 0.6s;
-
+    
     /* 布局变量 */
     --window-padding: 60px;
     --form-width: 400px;
     --form-height: 450px;
     --form-padding: 20px 40px;
     --input-height: 75px;
-
+    
     /* 颜色系统 */
     --color-white: #FFFFFF;
     --color-white-transparent: rgba(255, 255, 255, 0.9);
     --color-black: #333333;
     --color-gray-light: #999999;
     --color-gray-medium: #666666;
-
+    
     /* 主题色 - 登录 */
     --color-login-primary: rgb(64, 146, 181);
     --color-login-secondary: rgb(86, 152, 170);
@@ -38,7 +40,7 @@
     --color-login-input-bg: rgb(248, 248, 253);
     --color-login-folded-bg: rgb(219, 240, 247);
     --color-success-login: #33a3dc;
-
+    
     /* 主题色 - 注册 */
     --color-signup-primary: rgb(125, 120, 180);
     --color-signup-secondary: rgb(143, 143, 214);
@@ -49,12 +51,12 @@
     --color-signup-folded-bg1: rgb(233, 226, 192);
     --color-signup-folded-bg2: rgb(225, 188, 239);
     --color-success-signup: limegreen;
-
+    
     /* 渐变背景 */
     --login-bg-gradient: linear-gradient(120deg, rgb(52, 143, 150), rgb(86, 180, 211));
     --signup-bg-gradient: linear-gradient(120deg, rgb(100, 57, 134), rgb(152, 174, 213));
     --combined-bg-gradient: linear-gradient(120deg, rgb(52, 143, 150), rgb(125, 120, 180), rgb(152, 174, 213));
-
+    
     /* 阴影 */
     --shadow-small: 0 4px 10px rgba(0, 0, 0, 0.15);
     --shadow-medium: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -66,7 +68,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif; /* 字体将通过 npm 包或全局 CSS 处理 */
+    font-family: 'Roboto', sans-serif;
 }
 
 *, *::after, *::before {
@@ -103,7 +105,7 @@ body.signup-mode .back {
 }
 
 /* 动画系统 */
-/* @keyframes window {
+@keyframes window {
     0% {
         opacity: 0;
         transform: rotateX(-90deg) translateY(300px);
@@ -112,7 +114,7 @@ body.signup-mode .back {
         opacity: 1;
         transform: rotateX(0deg) translateY(0);
     }
-} */
+}
 
 @keyframes fadeIn {
     0% {
@@ -145,12 +147,10 @@ body.signup-mode .back {
     margin: auto;
     height: var(--form-height);
     width: var(--form-width);
-    /* animation: var(--window-anim-dur) window ease-in-out backwards; */
-    opacity: 0; /* 初始设为透明 */
-    transition: opacity 1.5s ease-in-out 0.1s; /* 添加简单的过渡效果, 延迟 0.1s 启动 */
+    animation: var(--window-anim-dur) window ease-in-out backwards;
     transform-style: preserve-3d;
-    transition-property: all, opacity; /* 添加 opacity 到 transition */
-    transition-duration: var(--transition-very-slow), 1.5s; /* 添加 opacity 的 duration */
+    transition-property: all;
+    transition-duration: var(--transition-very-slow);
     perspective: 1000px;
 }
 
@@ -241,7 +241,7 @@ body.signup-mode .back {
     font-size: 28px;
     margin-bottom: 20px;
     color: var(--color-white);
-    font-family: 'Open Sans', sans-serif; /* 字体将通过 npm 包或全局 CSS 处理 */
+    font-family: 'Open Sans', sans-serif;
     font-weight: 600;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     letter-spacing: 1px;
@@ -251,7 +251,7 @@ body.signup-mode .back {
     font-size: 16px;
     color: var(--color-white-transparent);
     margin-bottom: 40px;
-    font-family: 'Roboto', sans-serif; /* 字体将通过 npm 包或全局 CSS 处理 */
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     transition-delay: 0.9s;
 }
@@ -632,12 +632,12 @@ form input:focus {
         --form-height: 420px;
         --form-padding: 15px 20px;
     }
-
+    
     .button {
         padding: 0 15px;
         font-size: 15px;
     }
-
+    
     .welcome {
         font-size: 24px;
     }
@@ -648,8 +648,8 @@ form input:focus {
         --form-width: 280px;
         --form-padding: 10px 15px;
     }
-
+    
     .login-form header h1, .signup-form header h1 {
         font-size: 20px;
     }
-}
+} 

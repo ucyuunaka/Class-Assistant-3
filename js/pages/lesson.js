@@ -1,3 +1,5 @@
+// 导入认证检查函数
+import { checkFirstLoginExperience } from '/js/auth.js';
 // 课程评价页面的主要脚本
 import { getAllCourses, subscribeToCourseUpdates, loadScheduleFromStorage } from "/js/pages/schedule/schedule_data.js";
 import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation.js";
@@ -27,6 +29,8 @@ let usingFallbackPicker = false; // 标记是否使用备用emoji选择器
 
 // 初始化函数
 document.addEventListener("DOMContentLoaded", function () {
+// 检查首次登录体验
+  checkFirstLoginExperience();
   // 尝试获取通知功能
   if (window.showNotification) {
     showNotification = window.showNotification;
