@@ -101,11 +101,14 @@
         <!-- 新增：GPA 仪表盘图表卡片 -->
         <div class="chart-card full-width animate-on-scroll fade-up delay-200">
           <h3 class="chart-title">GPA 概览</h3>
-          <div class="gpa-overview-layout"> <!-- 新增：左右布局容器 -->
-            <div class="chart-container gpa-gauge-container"> <!-- 修改：添加 gpa-gauge-container 类 -->
+          <div class="gpa-overview-layout">
+            <!-- 新增：左右布局容器 -->
+            <div class="chart-container gpa-gauge-container">
+              <!-- 修改：添加 gpa-gauge-container 类 -->
               <canvas id="gpaGaugeChart"></canvas>
             </div>
-            <div class="gpa-history-list" id="gpaHistoryListContainer"> <!-- 新增：历史记录容器 -->
+            <div class="gpa-history-list" id="gpaHistoryListContainer">
+              <!-- 新增：历史记录容器 -->
               <!-- 历史 GPA 列表将由 JS 动态填充 -->
             </div>
           </div>
@@ -634,7 +637,7 @@
     <script
       type="module"
       src="/components/scrollAnimation/scrollAnimation.js"
-    ></script>    
+    ></script>
     <script type="module" src="/components/sidebar/sidebar.js"></script>
     <script type="module" src="/components/header/header.js"></script>
     <script type="module" src="/components/buttons/buttons.js"></script>
@@ -643,8 +646,7 @@
       type="module"
       src="/components/notifications/notifications.js"
     ></script>
-<!-- 初始化侧边栏和顶栏组件 (Moved to js/pages/grades.js) -->
-
+    <!-- 初始化侧边栏和顶栏组件 (Moved to js/pages/grades.js) -->
 
     <!-- 添加主题和页面特定脚本 -->
     <script type="module" src="/js/themes.js"></script>
