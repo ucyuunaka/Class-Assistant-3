@@ -141,5 +141,17 @@
     <!-- 初始化组件 (Moved to js/pages/lesson.js) -->
     <!-- 页面特定脚本 -->
     <script type="module" src="/js/pages/lesson.js"></script>
+
+    <!-- 顶栏组件初始化 -->
+    <script type="module">
+      import { Header } from "/components/header/header.js";
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // 初始化顶栏
+        const header = new Header("header-container", {
+          title: "课评速记",
+        });
+      });
+    </script>
   </body>
 </html>

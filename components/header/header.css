@@ -24,6 +24,7 @@
    ========================================================================== */
 .unified-header {
   padding: 2rem 0; /* 统一内边距 */
+  min-height: 8.5rem; /* 新增：强制最小高度 */
 }
 
 /* 使用 Flexbox 实现左右布局 */
@@ -43,12 +44,18 @@
   font-size: 2rem; /* 统一标题字号 */
   font-weight: 700;
   margin-bottom: 0.5rem; /* 调整标题和副标题间距 */
+  white-space: nowrap; /* 新增：强制不换行 */
+  overflow: hidden; /* 新增：隐藏溢出部分 */
+  text-overflow: ellipsis; /* 新增：显示省略号 */
 }
 
 .header-subtitle {
   font-size: 1.1rem; /* 统一副标题字号 (参考原 home-header-text) */
   opacity: 0.9; /* 轻微透明度，增加层次感 */
   margin: 0; /* 移除默认边距 */
+  white-space: nowrap; /* 新增：强制不换行 */
+  overflow: hidden; /* 新增：隐藏溢出部分 */
+  text-overflow: ellipsis; /* 新增：显示省略号 */
 }
 
 /* 右侧按钮容器 */

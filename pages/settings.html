@@ -420,8 +420,6 @@
       type="module"
       src="/components/notifications/notifications.js"
     ></script>
-    <!-- 初始化侧边栏组件 -->
-    <!-- 初始化侧边栏组件 (Moved to js/pages/settings.js) -->
     <!-- 添加按钮组件脚本 -->
     <script type="module" src="/components/buttons/buttons.js"></script>
     <!-- 添加页脚脚本 -->
@@ -437,5 +435,17 @@
     <script type="module" src="/js/themes.js"></script>
     <!-- 添加页面特定脚本 -->
     <script type="module" src="/js/pages/settings.js"></script>
+
+    <!-- 顶栏组件初始化 -->
+    <script type="module">
+      import { Header } from "/components/header/header.js";
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // 初始化顶栏组件
+        const header = new Header("header-container", {
+          title: "设置",
+        });
+      });
+    </script>
   </body>
 </html>

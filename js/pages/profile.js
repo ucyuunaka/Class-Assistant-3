@@ -332,23 +332,3 @@ document.addEventListener("DOMContentLoaded", function () {
     window.showNotification(message, type);
   }
 });
-
-// --- Component Initialization (Moved from profile.html) ---
-import { Sidebar } from "/components/sidebar/sidebar.js";
-import { Header } from "/components/header/header.js";
-
-document.addEventListener("DOMContentLoaded", function () {
-  const sidebar = new Sidebar("sidebar-container");
-
-  // 初始化顶栏组件
-  const header = new Header("header-container", {
-    // isHomePage: false, // 移除 isHomePage
-    title: "个人资料", // 保留标题
-    // subtitle: "管理你的个人信息和偏好设置", // 移除副标题
-    // buttons: [ ... ], // 移除按钮数组，根据计划此页面Header不需要按钮
-    // buttonPosition: "right", // 移除 buttonPosition
-  });
-
-  // Note: The save functionality is handled by buttons within the form sections.
-});
-// --- End Component Initialization ---

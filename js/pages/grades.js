@@ -941,34 +941,3 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 });
-
-// --- Component Initialization (Moved from grades.html) ---
-import { Sidebar } from "/components/sidebar/sidebar.js";
-import { Header } from "/components/header/header.js";
-
-document.addEventListener("DOMContentLoaded", function () {
-  // 初始化侧边栏组件
-  const sidebar = new Sidebar("sidebar-container");
-
-  // 初始化顶栏组件
-  const header = new Header("header-container", {
-    // isHomePage: false, // 移除 isHomePage
-    title: "成绩管理", // 保留标题
-    // subtitle: "记录并分析你的学术表现，查看成绩趋势和GPA计算", // 移除副标题
-    buttons: [
-      {
-        text: "添加成绩",
-        url: "#", // URL 设为 #，具体行为由页面JS处理
-        // isPrimary: true, // 移除 isPrimary
-        id: "add-grade-header-btn" // 使用 id 替代 className
-      },
-    ],
-    // buttonPosition: "right", // 移除 buttonPosition
-  });
-
-  // Note: The click event for the button with id 'add-grade-header-btn'
-  // should be handled by the main grades.js logic (e.g., to show the form).
-  // The existing logic for '#addGradeBtn' might need adjustment or duplication
-  // to handle this new header button.
-});
-// --- End Component Initialization ---

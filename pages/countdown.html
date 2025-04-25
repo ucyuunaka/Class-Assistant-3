@@ -215,5 +215,31 @@
     <!-- 添加倒计时页面特定脚本 -->
     <script type="module" src="/js/pages/countdown/countdown.js"></script>
     <!-- Updated path -->
+
+    <!-- 顶栏组件初始化 -->
+    <script type="module">
+      import { Header } from "/components/header/header.js";
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // 初始化顶栏组件
+        const header = new Header("header-container", {
+          title: "考试倒计时",
+          buttons: [
+            {
+              text: "添加考试",
+              url: "#",
+              id: "add-exam-header-btn",
+            },
+          ],
+        });
+
+        // 发出模态框就绪事件通知 (如果其他脚本依赖此事件)
+        const modalReadyEvent = new CustomEvent("modals:ready");
+        document.dispatchEvent(modalReadyEvent);
+        console.log(
+          "DOMContentLoaded: 发送模态框就绪事件通知 (from HTML script)"
+        );
+      });
+    </script>
   </body>
 </html>

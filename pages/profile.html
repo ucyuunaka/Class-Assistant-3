@@ -165,10 +165,7 @@
                 />
               </div>
 
-              <div
-                class="form-group hidden"
-                id="save-basic-info-btn-group"
-              >
+              <div class="form-group hidden" id="save-basic-info-btn-group">
                 <button type="button" class="btn" id="save-basic-info">
                   保存
                 </button>
@@ -237,10 +234,7 @@
                 />
               </div>
 
-              <div
-                class="form-group hidden"
-                id="save-education-btn-group"
-              >
+              <div class="form-group hidden" id="save-education-btn-group">
                 <button type="button" class="btn" id="save-education">
                   保存
                 </button>
@@ -277,9 +271,7 @@
               <div class="account-security-item">
                 <div class="account-security-label">
                   <div class="label-title">绑定手机</div>
-                  <div class="label-description">
-                    已绑定手机: 138****1234
-                  </div>
+                  <div class="label-description">已绑定手机: 138****1234</div>
                 </div>
                 <button class="btn btn-outline" id="change-phone-btn">
                   更换
@@ -351,13 +343,12 @@
     <!-- 引入新的侧边栏组件 -->
     <script type="module" src="/components/sidebar/sidebar.js"></script>
     <!-- 引入顶栏组件 -->
-    <script type="module" src="/components/header/header.js"></script>    
+    <script type="module" src="/components/header/header.js"></script>
     <!-- 引入通知组件 -->
     <script
       type="module"
       src="/components/notifications/notifications.js"
     ></script>
-    <!-- 初始化侧边栏组件 (Moved to js/pages/profile.js) -->
     <!-- 添加按钮组件脚本 -->
     <script type="module" src="/components/buttons/buttons.js"></script>
     <!-- 添加页脚脚本 -->
@@ -371,5 +362,17 @@
     <script type="module" src="/js/themes.js"></script>
     <!-- 添加页面特定脚本 -->
     <script type="module" src="/js/pages/profile.js"></script>
+
+    <!-- 顶栏组件初始化 -->
+    <script type="module">
+      import { Header } from "/components/header/header.js";
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // 初始化顶栏组件
+        const header = new Header("header-container", {
+          title: "个人资料",
+        });
+      });
+    </script>
   </body>
 </html>

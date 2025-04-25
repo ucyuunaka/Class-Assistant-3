@@ -3,9 +3,8 @@ import { checkFirstLoginExperience } from '/js/auth.js';
 // 课程评价页面的主要脚本
 import { getAllCourses, subscribeToCourseUpdates, loadScheduleFromStorage } from "/js/pages/schedule/schedule_data.js";
 import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation.js";
-// 导入 Sidebar 和 Header 类
+// 导入 Sidebar 类
 import { Sidebar } from "/components/sidebar/sidebar.js";
-import { Header } from "/components/header/header.js";
 
 // 声明全局通知函数
 let showNotification;
@@ -47,15 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // --- 组件初始化 Start ---
   // 初始化侧边栏
   const sidebar = new Sidebar("sidebar-container");
-
-  // 初始化顶栏
-  const header = new Header("header-container", {
-    title: "课评速记", // 保留标题
-    // subtitle: "记录与分享您的课程评价", // 移除副标题
-    // isHomePage: false, // 移除 isHomePage
-    // buttonPosition: "right", // 移除 buttonPosition
-    // buttons 默认为空，无需显式设置
-  });
   // --- 组件初始化 End ---
 
   // 初始化表情选择器

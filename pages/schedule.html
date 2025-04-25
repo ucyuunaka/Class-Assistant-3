@@ -377,5 +377,44 @@
     <!-- 添加课表模块脚本 -->
     <script type="module" src="/js/pages/schedule/schedule.js"></script>
     <!-- Updated path -->
+<script type="module">
+      import { Header } from "/components/header/header.js";
+      // Assuming Sidebar is already initialized elsewhere or not needed in this specific block
+      // import { Sidebar } from "/components/sidebar/sidebar.js";
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // If Sidebar initialization needs to be here, uncomment and ensure it's not duplicated
+        // const sidebar = new Sidebar("sidebar-container");
+
+        // Initialize Header component (code moved from schedule.js)
+        const header = new Header("header-container", {
+          title: "我的课程表",
+          buttons: [
+            {
+              text: "添加课程",
+              url: "#",
+              id: "add-course-header-btn"
+            }
+          ],
+        });
+
+        // Add event listener for the header button
+        const addCourseBtn = document.getElementById('add-course-header-btn');
+        if (addCourseBtn) {
+          addCourseBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default '#' anchor behavior
+            // Attempt to open the modal
+            const modal = document.getElementById('add-course-modal');
+            if (modal && typeof modal.showModal === 'function') {
+               modal.showModal(); // Use showModal if available (native dialog)
+            } else if (modal) {
+               modal.style.display = 'block'; // Fallback to changing display style
+               // Consider adding overlay handling if not using native dialog
+            }
+            // console.log("Add course button clicked via header"); // Optional logging
+          });
+        }
+      });
+    </script>
   </body>
 </html>
