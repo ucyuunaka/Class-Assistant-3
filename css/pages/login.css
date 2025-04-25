@@ -103,7 +103,7 @@ body.signup-mode .back {
 }
 
 /* 动画系统 */
-@keyframes window {
+/* @keyframes window {
     0% {
         opacity: 0;
         transform: rotateX(-90deg) translateY(300px);
@@ -112,7 +112,7 @@ body.signup-mode .back {
         opacity: 1;
         transform: rotateX(0deg) translateY(0);
     }
-}
+} */
 
 @keyframes fadeIn {
     0% {
@@ -145,10 +145,12 @@ body.signup-mode .back {
     margin: auto;
     height: var(--form-height);
     width: var(--form-width);
-    animation: var(--window-anim-dur) window ease-in-out backwards;
+    /* animation: var(--window-anim-dur) window ease-in-out backwards; */
+    opacity: 0; /* 初始设为透明 */
+    transition: opacity 1.5s ease-in-out 0.1s; /* 添加简单的过渡效果, 延迟 0.1s 启动 */
     transform-style: preserve-3d;
-    transition-property: all;
-    transition-duration: var(--transition-very-slow);
+    transition-property: all, opacity; /* 添加 opacity 到 transition */
+    transition-duration: var(--transition-very-slow), 1.5s; /* 添加 opacity 的 duration */
     perspective: 1000px;
 }
 
