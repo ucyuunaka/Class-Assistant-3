@@ -28,7 +28,7 @@ export default defineConfig({
         profile: resolve(__dirname, 'pages/profile.html'),
         grades: resolve(__dirname, 'pages/grades.html'),
         countdown: resolve(__dirname, 'pages/countdown.html'),
-        login: resolve(__dirname, 'pages/login.html') // 添加登录页面
+        login: resolve(__dirname, 'pages/login.html') // 添加 login 入口
       },
       output: {
         manualChunks: {
@@ -84,18 +84,10 @@ export default defineConfig({
   plugins: [
     // 在此添加Vite插件
     purgecss({
-      content: ['./index.html', './pages/**/*.html', './components/**/*.js', './js/**/*.js'],
-      safelist: [
-        // 登录页面动画相关的关键CSS类
-        'next', 'fold-up', 'folded', 'form-flip-in', 'form-flip-out',
-        'icon-paper-plane', 'icon-lock', 'icon-repeat-lock',
-        'animated-button', 'welcome-element', 'flip',
-        'input-section', 'success', 'window-page', 'page-front', 'page-back'
-      ]
+      content: ['./index.html', './pages/**/*.html', './components/**/*.js', './js/**/*.js']
     }),
     deadcode({
       patterns: ['./index.html', './pages/**/*.html', './components/**/*.js', './js/**/*.js'],
-      exclude: [],
       output: 'deadcode-report.txt' // 添加输出文件选项
     }),
     visualizer({

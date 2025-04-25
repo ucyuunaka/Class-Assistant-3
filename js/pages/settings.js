@@ -1,8 +1,12 @@
+// 导入认证检查函数
+import { checkFirstLoginExperience } from '/js/auth.js';
 // 导入滚动动画组件
 import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation.js";
 import { ThemeManager } from "/js/themes.js";
 
 document.addEventListener("DOMContentLoaded", function () {
+// 检查首次登录体验
+  checkFirstLoginExperience();
   // 初始化滚动动画
   initScrollAnimation(".animate-on-scroll", {
     threshold: 0.1,
@@ -405,6 +409,17 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("maxNotifications", maxCount);
     window.showNotification(`通知显示数量已设为最多${maxCount}条`, "success");
   });
+// 新增：退出登录按钮事件监听
+  const logoutButton = document.getElementById('logout-button');
+  if (logoutButton) {
+    logoutButton.addEventListener('click', () => {
+      // 跳转到 login.html
+      // 使用相对路径，Vite 会处理好基础路径
+      window.location.href = '/pages/login.html';
+    });
+  } else {
+    console.error('退出登录按钮未找到！');
+  }
 });
 
 /**

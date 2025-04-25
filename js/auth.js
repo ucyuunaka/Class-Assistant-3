@@ -1,71 +1,33 @@
-/**
- * 用户身份验证模块
- * 用于验证用户是否已登录，未登录时重定向到登录页面
- */
-
-// 免登录页面列表 - 这些页面不需要登录即可访问
-const PUBLIC_PAGES = [
-  '/pages/login.html',
-  '/login.html',
-  // 可以添加其他不需要登录验证的页面
-];
+// js/auth.js
+import { Storage } from '/js/main.js';
 
 /**
- * 检查用户是否已登录
- * @returns {boolean} 是否已登录
+ * 检查用户是否已完成首次登录流程。
+ * 如果未完成且当前不在登录页，则重定向到登录页。
  */
-export function isLoggedIn() {
-  return localStorage.getItem('isLoggedIn') === 'true';
-}
+export function checkFirstLoginExperience() {
+  // 从 localStorage 获取标记，注意 Storage.get 会自动 JSON.parse
+  const hasCompleted = Storage.get('hasCompletedLoginFlow');
+  // 检查当前路径是否以 /login.html 或 /login 结尾 (兼容 Vite 开发服务器和构建后的路径)
+  const isLoginPage = window.location.pathname.endsWith('/login.html') || window.location.pathname.endsWith('/login');
 
-/**
- * 检查当前页面是否需要登录
- * @returns {boolean} 当前页面是否需要登录验证
- */
-export function isAuthRequired() {
-  const currentPath = window.location.pathname;
-  // 检查当前路径是否在免登录页面列表中
-  return !PUBLIC_PAGES.some(path => currentPath.endsWith(path));
-}
-
-/**
- * 重定向到登录页面
- */
-export function redirectToLogin() {
-  window.location.href = '/pages/login.html';
-}
-
-/**
- * 验证用户登录状态并在必要时重定向
- * 在需要登录验证的页面中调用此函数
- */
-export function validateAuth() {
-  // 如果当前页面需要登录验证且用户未登录，则重定向到登录页面
-  if (isAuthRequired() && !isLoggedIn()) {
-    console.log('用户未登录，正在重定向到登录页面...');
-    redirectToLogin();
+  // 如果标记不为 true 且当前不是登录页
+  if (hasCompleted !== true && !isLoginPage) {
+    console.log('首次登录流程未完成，正在重定向到登录页面...');
+    // 使用绝对路径确保跳转正确
+    window.location.href = '/pages/login.html';
   }
 }
 
 /**
- * 获取用户信息
- * @returns {Object} 用户信息对象
+ * 标记用户已完成首次登录流程。
+ * 仅在标记尚未设置时执行一次。
  */
-export function getUserInfo() {
-  return {
-    username: localStorage.getItem('username'),
-    avatarUrl: localStorage.getItem('avatarUrl'),
-    // 可以添加其他需要获取的用户信息
-  };
+export function markLoginFlowCompleted() {
+  // 检查标记是否已存在且为 true
+  if (Storage.get('hasCompletedLoginFlow') !== true) {
+    // 如果不存在或不为 true，则设置标记
+    Storage.save('hasCompletedLoginFlow', true);
+    console.log('首次登录流程完成标记已设置到 localStorage。');
+  }
 }
-
-/**
- * 退出登录
- */
-export function logout() {
-  localStorage.removeItem('isLoggedIn');
-  redirectToLogin();
-}
-
-// 自动执行验证
-validateAuth(); 
