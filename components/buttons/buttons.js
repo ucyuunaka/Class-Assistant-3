@@ -11,9 +11,26 @@
 
 // --- 全局作用域变量与初始化 ---
 document.addEventListener('DOMContentLoaded', function() {
+  // 加载按钮样式
+  loadButtonStyles();
   // 初始化按钮组件
   initButtons();
 });
+
+/**
+ * 加载按钮CSS样式
+ * 确保按钮样式在组件使用前加载
+ */
+function loadButtonStyles() {
+  // 检查是否已经加载了样式
+  if (!document.querySelector('link[href*="buttons.css"]')) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    // 使用绝对路径
+    link.href = '/components/buttons/buttons.css';
+    document.head.appendChild(link);
+  }
+}
 
 /**
  * 初始化所有按钮组件
