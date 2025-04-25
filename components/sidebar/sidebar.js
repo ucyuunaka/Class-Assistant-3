@@ -340,6 +340,7 @@ export class Sidebar {
    */
   toggleSidebar(show = null) {
     const overlay = document.querySelector('.sidebar-overlay');
+    const toggleButton = document.querySelector('.sidebar-toggle'); // 获取切换按钮
     
     // 确定最终状态
     const shouldShow = show === null ? !this.container.classList.contains('active') : show;
@@ -347,6 +348,7 @@ export class Sidebar {
     // 更新侧边栏和遮罩层状态
     if (shouldShow) {
       this.container.classList.add('active');
+      if (toggleButton) toggleButton.classList.add('hidden'); // 隐藏切换按钮
       // 确保小屏幕下侧边栏有足够宽度以激活点击区域
       if (window.innerWidth <= 768) {
         this.container.style.pointerEvents = 'auto'; // 确保事件可以被捕获
@@ -355,6 +357,7 @@ export class Sidebar {
     } else {
       this.container.classList.remove('active');
       if (overlay) overlay.classList.remove('active');
+      if (toggleButton) toggleButton.classList.remove('hidden'); // 显示切换按钮
     }
   }
 
