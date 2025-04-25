@@ -1,0 +1,27 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--background-color); /* 使用全局变量 */
+    color: var(--text-color); /* 使用全局变量 */
+}
+
+.login-container {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--card-background); /* 使用全局变量 */
+    border-radius: var(--border-radius); /* 使用全局变量 */
+    box-shadow: var(--box-shadow); /* 使用全局变量 */
+}
+
+.login-container h1 {
+    margin-bottom: 1rem;
+    color: var(--primary-color); /* 使用全局变量 */
+}
+
+.login-container p {
+    margin-bottom: 1.5rem;
+}
+
+/* 按钮样式继承自 styles.css 中的 .btn 和 .btn-primary */
