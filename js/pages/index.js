@@ -5,7 +5,7 @@ import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation
 
 document.addEventListener("DOMContentLoaded", function () {
 // 检查首次登录体验
-  checkFirstLoginExperience();
+//   checkFirstLoginExperience(); // 调试时临时注释掉
   // 初始化滚动动画（使用更低的阈值，让动画更早触发）
   const scrollAnimationController = initScrollAnimation(".animate-on-scroll", {
     threshold: 0.05, // 元素5%可见时触发动画
