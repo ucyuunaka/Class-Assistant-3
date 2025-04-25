@@ -50,10 +50,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 初始化顶栏
   const header = new Header("header-container", {
-    title: "课评速记",
-    subtitle: "记录与分享您的课程评价",
-    isHomePage: false,
-    buttonPosition: "right",
+    title: "课评速记", // 保留标题
+    // subtitle: "记录与分享您的课程评价", // 移除副标题
+    // isHomePage: false, // 移除 isHomePage
+    // buttonPosition: "right", // 移除 buttonPosition
+    // buttons 默认为空，无需显式设置
   });
   // --- 组件初始化 End ---
 

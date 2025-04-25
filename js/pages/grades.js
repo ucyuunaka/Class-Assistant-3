@@ -952,22 +952,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 初始化顶栏组件
   const header = new Header("header-container", {
-    isHomePage: false,
-    title: "成绩管理",
-    subtitle: "记录并分析你的学术表现，查看成绩趋势和GPA计算",
+    // isHomePage: false, // 移除 isHomePage
+    title: "成绩管理", // 保留标题
+    // subtitle: "记录并分析你的学术表现，查看成绩趋势和GPA计算", // 移除副标题
     buttons: [
       {
         text: "添加成绩",
-        url: "#",
-        isPrimary: true,
-        className: "add-grade-btn", // Note: This class might be handled by the main grades.js logic already
+        url: "#", // URL 设为 #，具体行为由页面JS处理
+        // isPrimary: true, // 移除 isPrimary
+        id: "add-grade-header-btn" // 使用 id 替代 className
       },
     ],
-    buttonPosition: "right",
+    // buttonPosition: "right", // 移除 buttonPosition
   });
 
-  // Note: Ensure event listeners for '.add-grade-btn' added by Header
-  // are correctly handled or potentially duplicated if main grades.js also adds listeners.
-  // Consider centralizing button handling if needed.
+  // Note: The click event for the button with id 'add-grade-header-btn'
+  // should be handled by the main grades.js logic (e.g., to show the form).
+  // The existing logic for '#addGradeBtn' might need adjustment or duplication
+  // to handle this new header button.
 });
 // --- End Component Initialization ---

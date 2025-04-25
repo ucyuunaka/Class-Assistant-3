@@ -342,21 +342,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 初始化顶栏组件
   const header = new Header("header-container", {
-    isHomePage: false,
-    title: "个人资料",
-    subtitle: "管理你的个人信息和偏好设置",
-    buttons: [
-      {
-        text: "保存修改",
-        url: "#",
-        isPrimary: true,
-        className: "save-profile-btn", // Ensure this class is handled correctly by profile.js logic
-      },
-    ],
-    buttonPosition: "right",
+    // isHomePage: false, // 移除 isHomePage
+    title: "个人资料", // 保留标题
+    // subtitle: "管理你的个人信息和偏好设置", // 移除副标题
+    // buttons: [ ... ], // 移除按钮数组，根据计划此页面Header不需要按钮
+    // buttonPosition: "right", // 移除 buttonPosition
   });
 
-  // Note: Check if profile.js already handles '.save-profile-btn' clicks.
-  // If the Header component adds its own listener, ensure no conflicts.
+  // Note: The save functionality is handled by buttons within the form sections.
 });
 // --- End Component Initialization ---

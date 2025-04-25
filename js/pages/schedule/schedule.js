@@ -68,11 +68,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 初始化顶栏组件
   const header = new Header("header-container", {
-    isHomePage: false,
-    title: "我的课程表",
-    subtitle: "管理和安排你的课程，清晰掌握每周学习时间",
-    buttons: [], // No buttons needed in header for this page as actions are below
-    buttonPosition: "right",
+    // isHomePage: false, // 移除 isHomePage
+    title: "我的课程表", // 保留标题
+    // subtitle: "管理和安排你的课程，清晰掌握每周学习时间", // 移除副标题
+    buttons: [ // 添加按钮配置
+      {
+        text: "添加课程",
+        url: "#", // URL 设为 #，具体行为由页面JS处理
+        id: "add-course-header-btn" // 添加ID以便JS绑定事件
+      }
+    ],
+    // buttonPosition: "right", // 移除 buttonPosition
   });
 });
 // --- End Component Initialization ---
