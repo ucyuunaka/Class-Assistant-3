@@ -121,78 +121,66 @@
 
     <!-- 添加/编辑考试弹框 - 修复结构确保正确显示 -->
     <div class="modal-container" id="exam-modal">
-        <div class="modal-content">
-          <div class="modal-close" id="close-exam-modal" aria-label="关闭">
-            ×
+      <div class="modal-content">
+        <div class="modal-close" id="close-exam-modal" aria-label="关闭">×</div>
+        <h2 class="modal-title" id="modal-title">添加考试</h2>
+        <form id="exam-form">
+          <div class="form-group">
+            <label class="form-label" for="exam-name">考试名称</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exam-name"
+              required
+              placeholder="例如：高等数学期末考试"
+            />
           </div>
-          <h2 class="modal-title" id="modal-title">添加考试</h2>
-          <form id="exam-form">
+          <div class="form-group">
+            <label class="form-label" for="exam-subject">科目</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exam-subject"
+              placeholder="例如：高等数学"
+            />
+          </div>
+          <div class="form-row">
             <div class="form-group">
-              <label class="form-label" for="exam-name">考试名称</label>
-              <input
-                type="text"
-                class="form-control"
-                id="exam-name"
-                required
-                placeholder="例如：高等数学期末考试"
-              />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="exam-subject">科目</label>
-              <input
-                type="text"
-                class="form-control"
-                id="exam-subject"
-                placeholder="例如：高等数学"
-              />
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label" for="exam-date">考试日期</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  id="exam-date"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="exam-time">考试时间</label>
-                <input
-                  type="time"
-                  class="form-control"
-                  id="exam-time"
-                  required
-                />
-              </div>
+              <label class="form-label" for="exam-date">考试日期</label>
+              <input type="date" class="form-control" id="exam-date" required />
             </div>
             <div class="form-group">
-              <label class="form-label" for="exam-location">考试地点</label>
-              <input
-                type="text"
-                class="form-control"
-                id="exam-location"
-                placeholder="例如：教学楼A-301"
-              />
+              <label class="form-label" for="exam-time">考试时间</label>
+              <input type="time" class="form-control" id="exam-time" required />
             </div>
-            <div class="form-group">
-              <label class="form-label" for="exam-notes">备注</label>
-              <textarea
-                class="form-control"
-                id="exam-notes"
-                rows="3"
-                placeholder="例如：考试范围、注意事项等"
-              ></textarea>
-            </div>
-            <input type="hidden" id="exam-id" value="" />
-            <div class="form-actions">
-              <button type="button" class="btn btn-outline" id="cancel-exam">
-                取消
-              </button>
-              <button type="submit" class="btn btn-primary">保存</button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exam-location">考试地点</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exam-location"
+              placeholder="例如：教学楼A-301"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="exam-notes">备注</label>
+            <textarea
+              class="form-control"
+              id="exam-notes"
+              rows="3"
+              placeholder="例如：考试范围、注意事项等"
+            ></textarea>
+          </div>
+          <input type="hidden" id="exam-id" value="" />
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" id="cancel-exam">
+              取消
+            </button>
+            <button type="submit" class="btn btn-primary">保存</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- 撤销操作按钮 -->
