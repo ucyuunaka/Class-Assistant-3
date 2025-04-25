@@ -657,3 +657,44 @@
     box-shadow: none;
   }
 }
+
+/* ==========================================================================
+   导航按钮样式 (Navigation Button Styles)
+   来源：footer组件中的导航链接
+   用途：提供轻量级导航型按钮样式，适用于各种导航场景
+   ========================================================================== */
+.btn-nav {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 0.95rem;
+  padding: 0.3rem 0.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+
+/* 导航按钮悬停基础效果 */
+.btn-nav:hover {
+  color: var(--primary-color);
+}
+
+/* 带平移效果的导航按钮 */
+.btn-nav-slide:hover {
+  transform: translateX(5px);
+}
+
+/* 垂直方向平移的导航按钮（备用，面向未来扩展） */
+.btn-nav-vertical:hover {
+  transform: translateY(-3px);
+}
+
+/* 触摸设备优化 */
+@media (hover: none) {
+  .btn-nav:hover {
+    transform: none;
+  }
+}

@@ -14,41 +14,66 @@
 
 ```html
 <ul class="footer-links">
-  <li><a href="index.html">首页</a></li>
-  <li><a href="pages/schedule.html">课表</a></li>
-  <li><a href="pages/grades.html">成绩管理</a></li>
-  <li><a href="pages/countdown.html">考试倒计时</a></li>
-  <li><a href="pages/lesson.html">课评速记</a></li>
-  <li><a href="pages/profile.html">个人资料</a></li>
-  <li><a href="pages/settings.html">设置</a></li>
+  <li><a href="index.html" class="btn-nav btn-nav-slide">首页</a></li>
+  <li><a href="pages/schedule.html" class="btn-nav btn-nav-slide">课表</a></li>
+  <li>
+    <a href="pages/grades.html" class="btn-nav btn-nav-slide">成绩管理</a>
+  </li>
+  <li>
+    <a href="pages/countdown.html" class="btn-nav btn-nav-slide">考试倒计时</a>
+  </li>
+  <li>
+    <a href="pages/lesson.html" class="btn-nav btn-nav-slide">课评速记</a>
+  </li>
+  <li>
+    <a href="pages/profile.html" class="btn-nav btn-nav-slide">个人资料</a>
+  </li>
+  <li><a href="pages/settings.html" class="btn-nav btn-nav-slide">设置</a></li>
 </ul>
 ```
 
 **相关 CSS:**
 
 ```css
-.footer-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-links li {
-  margin-bottom: 0.75rem;
-}
-
-.footer-links a {
-  color: var(--text-color);
-  text-decoration: none;
-  transition: color 0.2s, transform 0.2s;
+/* ==========================================================================
+   导航按钮样式 (Navigation Button Styles)
+   来源：footer组件中的导航链接
+   用途：提供轻量级导航型按钮样式，适用于各种导航场景
+   ========================================================================== */
+.btn-nav {
   display: inline-flex;
   align-items: center;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 0.95rem;
+  padding: 0.3rem 0.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
 }
 
-/* 链接悬停效果 */
-.footer-links a:hover {
+/* 导航按钮悬停基础效果 */
+.btn-nav:hover {
   color: var(--primary-color);
+}
+
+/* 带平移效果的导航按钮 */
+.btn-nav-slide:hover {
   transform: translateX(5px);
+}
+
+/* 垂直方向平移的导航按钮（备用，面向未来扩展） */
+.btn-nav-vertical:hover {
+  transform: translateY(-3px);
+}
+
+/* 触摸设备优化 */
+@media (hover: none) {
+  .btn-nav:hover {
+    transform: none;
+  }
 }
 ```
 
@@ -56,8 +81,14 @@
 
 ```javascript
 // 文件: footer.js
+/**
+ * 设置页脚链接的智能导航功能
+ * 处理页脚导航按钮点击事件，确保正确的导航行为
+ * 注：使用了components/buttons.css中的btn-nav和btn-nav-slide类样式
+ */
 setupLinkNavigation() {
-  const footerLinks = document.querySelectorAll('.footer-links a');
+  // 选择器已更新为匹配btn-nav类名
+  const footerLinks = document.querySelectorAll('.footer-links .btn-nav');
 
   footerLinks.forEach(link => {
     link.addEventListener('click', (event) => {
@@ -96,7 +127,7 @@ setupLinkNavigation() {
    - 有 transition 过渡效果
    - 有悬停状态变化
 
-**状态:** 已评估 - 需部分收录（外观）
+**状态:** 已部分收录（清理完成）
 
 ### 评估结果
 
@@ -136,9 +167,137 @@ setupLinkNavigation() {
 ## 统计信息
 
 - **已识别按钮总数:** 1 组（7 个链接按钮）
-- **已处理按钮数:** 0
-- **待处理按钮数:** 1 组（已评估，待执行更改）
+- **已处理按钮数:** 1 组（7 个链接按钮）
+- **待处理按钮数:** 0
 - **按分类统计:**
   - 可替换: 0
-  - 需部分收录: 1
+  - 需部分收录: 1 (已收录并清理完成)
   - 需完全收录: 0
+
+**已执行的更改:**
+
+1. **扩展 buttons.css:**
+
+   - 添加了导航按钮基础样式类 `btn-nav`
+   - 添加了带平移效果的变体类 `btn-nav-slide`
+   - 添加了垂直方向变体类 `btn-nav-vertical`（为未来扩展准备）
+   - 添加了触摸设备的优化处理
+   - 新增的 CSS 代码如下：
+
+   ```css
+   /* ==========================================================================
+      导航按钮样式 (Navigation Button Styles)
+      来源：footer组件中的导航链接
+      用途：提供轻量级导航型按钮样式，适用于各种导航场景
+      ========================================================================== */
+   .btn-nav {
+     display: inline-flex;
+     align-items: center;
+     color: var(--text-color);
+     text-decoration: none;
+     font-weight: normal;
+     font-size: 0.95rem;
+     padding: 0.3rem 0.5rem;
+     border: none;
+     background: transparent;
+     cursor: pointer;
+     transition: color 0.2s, transform 0.2s;
+   }
+
+   /* 导航按钮悬停基础效果 */
+   .btn-nav:hover {
+     color: var(--primary-color);
+   }
+
+   /* 带平移效果的导航按钮 */
+   .btn-nav-slide:hover {
+     transform: translateX(5px);
+   }
+
+   /* 垂直方向平移的导航按钮（备用，面向未来扩展） */
+   .btn-nav-vertical:hover {
+     transform: translateY(-3px);
+   }
+
+   /* 触摸设备优化 */
+   @media (hover: none) {
+     .btn-nav:hover {
+       transform: none;
+     }
+   }
+   ```
+
+2. **修改 footer.html:**
+
+   - 为所有导航链接添加了 `btn-nav btn-nav-slide` 类
+   - 修改前：
+
+   ```html
+   <ul class="footer-links">
+     <li><a href="index.html">首页</a></li>
+     <!-- 其他链接... -->
+   </ul>
+   ```
+
+   - 修改后：
+
+   ```html
+   <ul class="footer-links">
+     <li><a href="index.html" class="btn-nav btn-nav-slide">首页</a></li>
+     <!-- 其他链接... -->
+   </ul>
+   ```
+
+3. **修改 footer.js:**
+
+   - 在 `setupLinkNavigation` 和 `highlightCurrentPage` 方法中更新了选择器，从 `.footer-links a` 改为 `.footer-links .btn-nav`
+   - 添加了注释，说明使用了 buttons.css 中的样式
+   - 示例修改：
+
+   ```javascript
+   /**
+    * 设置页脚链接的智能导航功能
+    * 处理页脚导航按钮点击事件，确保正确的导航行为
+    * 注：使用了components/buttons.css中的btn-nav和btn-nav-slide类样式
+    */
+   setupLinkNavigation() {
+     // 选择器已更新为匹配btn-nav类名
+     const footerLinks = document.querySelectorAll('.footer-links .btn-nav');
+
+     // ...其余代码保持不变...
+   }
+   ```
+
+4. **清理冗余代码:**
+
+   - 从 footer.css 中移除了以下冗余 CSS 规则：
+
+   ```css
+   .footer-links a {
+     color: var(--text-color);
+     text-decoration: none;
+     transition: color 0.2s, transform 0.2s;
+     display: inline-flex;
+     align-items: center;
+   }
+
+   /* 链接悬停效果 */
+   .footer-links a:hover {
+     color: var(--primary-color);
+     transform: translateX(5px);
+   }
+   ```
+
+   - 保留了图标相关样式：
+
+   ```css
+   /* 图标样式 */
+   .footer-links i {
+     margin-right: 0.5rem;
+     color: var(--primary-color);
+   }
+   ```
+
+   - JS 代码已更新并保留，不需要删除
+
+**状态:** 已部分收录（清理完成）
