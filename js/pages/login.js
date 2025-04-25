@@ -324,3 +324,24 @@ import $ from 'jquery'; // 导入 jQuery
 if (LoginSignupSystem.config().autoInit !== false) {
     LoginSignupSystem.init();
 }
+// 确保在 DOM 加载后执行
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('--- DOMContentLoaded Fired ---', performance.now());
+
+    const windowElement = document.getElementById('window');
+    if (windowElement) {
+        // 稍微延迟以确保初始 opacity:0 被渲染
+        requestAnimationFrame(() => {
+             requestAnimationFrame(() => { // 双重 rAF 确保渲染更新
+                console.log('Triggering simple opacity transition for #window');
+                windowElement.style.opacity = '1';
+             });
+        });
+    }
+
+    // 执行原有的初始化逻辑
+    if (LoginSignupSystem.config().autoInit !== false) {
+         console.log('--- Calling LoginSignupSystem.init() ---', performance.now());
+         LoginSignupSystem.init();
+    }
+});
