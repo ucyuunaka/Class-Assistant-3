@@ -24,7 +24,7 @@
    ========================================================================== */
 .unified-header {
   padding: 2rem 0; /* 统一内边距 */
-  min-height: 8.5rem; /* 新增：强制最小高度 */
+  min-height: 10.5rem; /* 新增：强制最小高度 */
 }
 
 /* 使用 Flexbox 实现左右布局 */
@@ -116,20 +116,3 @@
     width: 100%; /* 占满宽度以便换行 */
   }
 }
-
-/* TODO: 添加深色模式支持 */
-/*
-@media (prefers-color-scheme: dark) {
-  .header-component {
-    background: linear-gradient(135deg, var(--primary-dark), var(--gradient-end-dark));
-  }
-  .header-btn {
-     background-color: rgba(0, 0, 0, 0.2) !important;
-     border-color: var(--text-color-dark) !important;
-     color: var(--text-color-dark) !important;
-  }
-   .header-btn:hover {
-    background-color: rgba(0, 0, 0, 0.3) !important;
-  }
-}
-*/
