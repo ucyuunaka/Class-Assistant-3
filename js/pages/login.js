@@ -9,7 +9,7 @@ import { markLoginFlowCompleted } from '/js/auth.js';
 // Removed IIFE start
     // 配置选项，使用默认值
     let config = {
-        defaultAvatarUrl: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/22043/avatar.jpg",
+        defaultAvatarUrl: "https://randomuser.me/api/portraits/men/32.jpg",
         welcomeTemplate: {
             login: "欢迎回来，{username}!",
             signup: "欢迎加入，{username}!"
