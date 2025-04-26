@@ -22,4 +22,7 @@ dist-ssr
 *.ntvs*
 *.njsproj
 *.sln
-*.sw? 
+*.sw?
+
+# Build artifacts
+stats.html
