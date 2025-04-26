@@ -223,15 +223,6 @@ document.addEventListener("DOMContentLoaded", function () {
       labels: ["2022-2", "2023-1", "2023-2", "2024-1", "2024-2"],
       datasets: [
         {
-          label: "GPA趋势",
-          data: [3.2, 3.4, 3.6, 3.7, 3.85],
-          borderColor: "#4285F4",
-          backgroundColor: "rgba(66, 133, 244, 0.1)",
-          borderWidth: 2,
-          fill: true,
-          tension: 0.4,
-        },
-        {
           label: "平均分",
           data: [78, 83, 87, 88, 92],
           borderColor: "#0F9D58",
