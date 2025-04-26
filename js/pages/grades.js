@@ -18,25 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
     examDateInput.valueAsDate = new Date();
   }
 
-
-  // 添加成绩表单显示/隐藏
-  const addGradeBtn = document.getElementById("addGradeBtn");
-  const addGradeForm = document.getElementById("addGradeForm");
-  const cancelAddBtn = document.getElementById("cancelAddBtn");
-
-  if (addGradeBtn && addGradeForm && cancelAddBtn) {
-    addGradeBtn.addEventListener("click", function () {
-      addGradeForm.style.display = "block";
-      this.style.display = "none";
-    });
-
-    cancelAddBtn.addEventListener("click", function () {
-      addGradeForm.style.display = "none";
-      addGradeBtn.style.display = "inline-block";
-    });
-  }
-
-
   // 成绩表单提交
   const gradeForm = document.getElementById("gradeForm");
   if (gradeForm) {
@@ -112,9 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
         // 重新计算统计信息和更新图表
         updateStatistics();
         renderCharts();
-        
-        // 重新绑定申诉按钮事件
-        initAppealButtons();
       });
   }
 
@@ -442,7 +420,7 @@ document.addEventListener("DOMContentLoaded", function () {
           hoverBackgroundColor: "rgba(244, 160, 0, 0.9)",
         },
         {
-          label: "历史最高分",
+          label: "院系最高分",
           data: [98, 100, 95, 97, 99, 96, 94, 97, 100, 98, 93, 96],
           backgroundColor: "rgba(15, 157, 88, 0.2)",
           borderColor: "rgba(15, 157, 88, 1)",
@@ -616,7 +594,7 @@ document.addEventListener("DOMContentLoaded", function () {
     renderCharts(); // 重新渲染所有图表和列表
   });
 
-  // 新增：渲染 GPA 历史列表
+  // 渲染 GPA 历史列表
   function renderGpaHistoryList() {
     const container = document.getElementById('gpaHistoryListContainer');
     if (!container) return;
@@ -825,33 +803,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // 渲染申诉记录
     function renderAppeals() {
       if (!appealsList) return;
-      
-      // 检查是否有申诉记录
-      if (appeals.length === 0) {
-        if (emptyAppealsMsg) emptyAppealsMsg.style.display = 'block';
-        appealsList.innerHTML = '';
-        return;
-      }
-      
-      // 有记录时隐藏空提示
-      if (emptyAppealsMsg) emptyAppealsMsg.style.display = 'none';
-      
-      // 按时间倒序排列申诉
-      const sortedAppeals = [...appeals].sort((a, b) => new Date(b.date) - new Date(a.date));
-      
+       
       // 清空现有列表
       appealsList.innerHTML = '';
       
       // 添加申诉卡片
       sortedAppeals.forEach(appeal => {
-        const formattedDate = new Date(appeal.date).toLocaleString('zh-CN', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit'
-        });
-        
         // 状态文本和样式
         let statusText = '待处理';
         let statusClass = 'status-pending';
@@ -864,56 +821,7 @@ document.addEventListener("DOMContentLoaded", function () {
           statusClass = 'status-rejected';
         }
         
-        // 创建申诉卡片
-        const appealCard = document.createElement('div');
-        appealCard.className = 'appeal-item';
-        appealCard.dataset.id = appeal.id;
-        
-        appealCard.innerHTML = `
-          <div class="appeal-header">
-            <div class="appeal-course">
-              ${appeal.course} (${appeal.type})
-              <span class="appeal-status ${statusClass}">${statusText}</span>
-            </div>
-            <div class="appeal-score">
-              当前分数: <strong>${appeal.score}</strong> → 
-              期望分数: <strong>${appeal.expected}</strong>
-            </div>
-          </div>
-          <div class="appeal-body">
-            <div class="appeal-reason">${appeal.reasonText}</div>
-            <div class="appeal-description">${appeal.description}</div>
-            ${appeal.feedback ? `<div class="appeal-feedback"><strong>教师反馈:</strong> ${appeal.feedback}</div>` : ''}
-          </div>
-          <div class="appeal-footer">
-            <div class="appeal-date">提交于: ${formattedDate}</div>
-            <div class="appeal-actions">
-              <button class="btn-icon withdraw-appeal" data-id="${appeal.id}" ${appeal.status !== 'pending' ? 'disabled' : ''}>
-                <i class="fas fa-times" title="撤回申诉"></i>
-              </button>
-            </div>
-          </div>
-        `;
-        
         appealsList.appendChild(appealCard);
-      });
-      
-      // 绑定撤回按钮事件
-      const withdrawBtns = document.querySelectorAll('.withdraw-appeal');
-      withdrawBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-          const id = parseInt(this.dataset.id);
-          
-          // 从列表中移除申诉
-          appeals = appeals.filter(appeal => appeal.id !== id);
-          localStorage.setItem('gradeAppeals', JSON.stringify(appeals));
-          
-          // 更新UI
-          renderAppeals();
-          updateAppealStats();
-          
-          window.showNotification('申诉已成功撤回', 'info');
-        });
       });
     }
     
@@ -942,7 +850,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-// --- Component Initialization (Moved from grades.html) ---
 import { Sidebar } from "/components/sidebar/sidebar.js";
 import { Header } from "/components/header/header.js";
 
@@ -952,23 +859,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 初始化顶栏组件
   const header = new Header("header-container", {
-    // isHomePage: false, // 移除 isHomePage
-    title: "成绩管理", // 保留标题
-    // subtitle: "记录并分析你的学术表现，查看成绩趋势和GPA计算", // 移除副标题
+    title: "成绩管理",
+    subtitle: "记录并分析你的学术表现，查看成绩趋势和GPA计算",
     buttons: [
       {
         text: "添加成绩",
-        url: "#", // URL 设为 #，具体行为由页面JS处理
-        // isPrimary: true, // 移除 isPrimary
-        id: "add-grade-header-btn" // 使用 id 替代 className
+        id: "add-grade-header-btn"
       },
     ],
-    // buttonPosition: "right", // 移除 buttonPosition
-  });
 
-  // Note: The click event for the button with id 'add-grade-header-btn'
-  // should be handled by the main grades.js logic (e.g., to show the form).
-  // The existing logic for '#addGradeBtn' might need adjustment or duplication
-  // to handle this new header button.
+  });
 });
-// --- End Component Initialization ---

@@ -34,10 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // 发出模态框就绪事件通知
-  // Note: Ensure this event dispatch is still necessary and correctly handled
-  // after moving the code. It might be better placed after modal-specific logic.
   const modalReadyEvent = new CustomEvent("modals:ready");
   document.dispatchEvent(modalReadyEvent);
   console.log("DOMContentLoaded: 发送模态框就绪事件通知 (from moved script)");
 });
-// --- End Component Initialization ---
