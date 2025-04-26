@@ -92,6 +92,12 @@
   transform: translateY(0); /* 点击时恢复原位 */
 }
 
+/* 单个按钮样式调整 - 保持与多个按钮时右侧边界和上侧高度一致 */
+.header-buttons .header-btn:only-child {
+  margin-right: 0.75rem; /* 与按钮间距一致，确保右侧边界对齐 */
+  align-self: center; /* 确保垂直居中，与多按钮情况下的对齐一致 */
+  margin-top: 0; /* 确保上侧边距一致 */
+}
 
 /* ==========================================================================
    响应式调整 (Responsive Adjustments)
