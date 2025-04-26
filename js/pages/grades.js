@@ -484,33 +484,33 @@ document.addEventListener("DOMContentLoaded", function () {
   // 新增：GPA 仪表盘图表
   function renderGpaGaugeChart() {
     const gpaGaugeCtx = document.getElementById("gpaGaugeChart");
-    if (!gpaGaugeCtx) return null; // Return null if canvas not found
+    if (!gpaGaugeCtx) return null;
     const ctx = gpaGaugeCtx.getContext("2d");
     const colors = getThemeColors();
 
-    // --- GPA 数据 (与 trendChart 保持一致, 考虑后续优化为共享数据源) ---
+    // --- GPA 数据 ---
     const gpaLabels = ["2022-2", "2023-1", "2023-2", "2024-1", "2024-2"];
     const gpaData = [3.2, 3.4, 3.6, 3.7, 3.85];
     // --- End GPA 数据 ---
 
     const latestGpa = gpaData.length > 0 ? gpaData[gpaData.length - 1] : 0;
     const previousGpa = gpaData.length > 1 ? gpaData[gpaData.length - 2] : null;
-    const maxGpa = 4.0; // GPA 满分值
+    const maxGpa = 4.0;
 
     // 计算趋势指示
     let trendIcon = '';
     let trendColor = colors.textColor;
     if (previousGpa !== null) {
-      if (latestGpa > previousGpa) { trendIcon = '▲'; trendColor = '#0F9D58'; } // Green Up
-      else if (latestGpa < previousGpa) { trendIcon = '▼'; trendColor = '#DB4437'; } // Red Down
-      else { trendIcon = '━'; } // Neutral
+      if (latestGpa > previousGpa) { trendIcon = '▲'; trendColor = '#0F9D58'; }
+      else if (latestGpa < previousGpa) { trendIcon = '▼'; trendColor = '#DB4437'; }
+      else { trendIcon = '━'; }
     }
 
     // 仪表盘数据集
     const gaugeData = {
       datasets: [{
-        data: [latestGpa, Math.max(0, maxGpa - latestGpa)], // Ensure remaining value is not negative
-        backgroundColor: [ '#4285F4', getCSSVariableValue('--border-color') || '#e0e0e0' ],
+        data: [latestGpa, Math.max(0, maxGpa - latestGpa)],
+        backgroundColor: [ getCSSVariableValue('--primary-color'), getCSSVariableValue('--border-color') || '#e0e0e0' ],
         borderColor: colors.backgroundColor,
         borderWidth: 2,
         circumference: 180, rotation: 270, cutout: '70%'
@@ -524,14 +524,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const { ctx, chartArea: { top, bottom, left, right, width, height } } = chart;
         ctx.save();
         const centerX = left + width / 2;
-        // const centerY = top + height * 0.85; // 原计算方式，依赖 chartArea
-        const centerY = chart.height - 45; // 新计算方式：基于 Canvas 总高度，预留底部 45px 空间
+        const centerY = chart.height - 45;
 
         // GPA Value
         ctx.font = 'bold 2.5em sans-serif';
         ctx.fillStyle = colors.textColor;
         ctx.textAlign = 'center';
-        ctx.textBaseline = 'bottom'; // 将基线改为 bottom，方便基于底部定位
+        ctx.textBaseline = 'bottom';
         ctx.fillText(latestGpa.toFixed(2), centerX, centerY); // 绘制 GPA 值，底部对齐 centerY
 
         // Trend Icon & Label
@@ -570,7 +569,7 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       plugins: [centerTextPlugin]
     });
-    return chart; // 返回实例
+    return chart;
   }
 
   // 监听主题变化，重新渲染图表
