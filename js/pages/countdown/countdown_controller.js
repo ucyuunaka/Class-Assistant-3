@@ -3,7 +3,7 @@
 
 import { loadExams, saveExams, getAllExams, getExamStatus } from '/js/pages/countdown/countdown_data.js';
 import { initCountdownEvents, applyFiltersAndSort } from '/js/pages/countdown/countdown_events.js';
-import { initScrollAnimation } from '/components/scrollAnimation/scrollAnimation.js'; // Assuming @components points to js/components
+import { initScrollAnimation } from '/components/scrollAnimation/scrollAnimation.js';
 
 // 存储DOM元素引用
 let countdownElements = {};

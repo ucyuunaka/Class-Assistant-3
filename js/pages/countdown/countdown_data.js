@@ -1,5 +1,5 @@
 // 考试倒计时数据管理模块
-import { Storage } from '/js/main.js'; // Updated path
+import { Storage } from '/js/main.js';
 
 // 本地存储的默认数据
 const DEFAULT_EXAMS = [
