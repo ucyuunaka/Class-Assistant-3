@@ -530,8 +530,8 @@ select.form-control {
 
 .gpa-history-list {
   flex: 1 1 50%; /* 右侧历史列表占一半空间 */
-  padding-top: 0.5rem; /* 稍微向下调整，与仪表盘视觉对齐 */
-  max-height: 250px; /* 限制最大高度，超出则滚动 */
+  padding-top: 4.5rem; /* 稍微向下调整，与仪表盘视觉对齐 */
+  max-height: 440px; /* 限制最大高度，超出则滚动 */
   overflow-y: auto; /* 允许垂直滚动 */
 }
 
