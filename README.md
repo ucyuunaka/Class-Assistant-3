@@ -250,16 +250,6 @@ export default defineConfig({
 
 ## 开发环境搭建详解
 
-### 推荐的开发工具
-
-- **编辑器/IDE**: Visual Studio Code
-- **推荐插件**:
-  - ESLint: 代码质量检查
-  - Prettier: 代码格式化
-  - Live Server: 实时预览
-  - HTML CSS Support: HTML 和 CSS 支持
-  - JavaScript (ES6) code snippets: ES6 代码片段
-
 ### 开发工作流程
 
 1. **本地开发**：使用 `start-dev.bat` 脚本启动开发服务器，它会自动打开浏览器
@@ -290,29 +280,3 @@ export default defineConfig({
 - **构建验证**：运行 `npm run build` 后，使用 `npm run preview` 预览构建结果
 - **死代码检测**：查看 `deadcode-report.txt` 了解未使用的代码
 - **局部构建**：使用 Vite 的 HMR (热模块替换) 实现局部更新，提高开发效率
-
-## 开发指南
-
-### 组件开发
-
-项目采用基于原生 JavaScript 的组件化架构，每个组件通常包含三个文件：
-
-- `.html` - 组件的 HTML 模板
-- `.js` - 组件的 JavaScript 逻辑
-- `.css` - 组件的样式
-
-### 主题系统
-
-项目支持主题切换功能，主题定义在 `css/themes/themes.css` 文件中。
-
-### 构建与优化
-
-项目使用 Vite 作为构建工具，配置文件位于 `vite.config.js`。
-
-## 贡献指南
-
-欢迎提交 Issue 或 Pull Request 来改进项目。请确保在提交 PR 前测试你的更改。
-
-## 许可证
-
-[待定]
