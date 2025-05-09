@@ -33,5 +33,4 @@ document.addEventListener("DOMContentLoaded", function () {
   // （调试）发出模态框就绪事件通知
   const modalReadyEvent = new CustomEvent("modals:ready");
   document.dispatchEvent(modalReadyEvent);
-  console.log("DOMContentLoaded: 发送模态框就绪事件通知 (from moved script)");
 });

@@ -34,8 +34,6 @@ export function initCountdown() {
     
     return true;
   } catch (error) {
-    console.error("初始化考试倒计时数据失败:", error);
-    
     // 显示错误信息
     if (countdownElements.countdownList) {
       countdownElements.countdownList.innerHTML = `
@@ -81,8 +79,9 @@ function collectDOMElements() {
     throw new Error("关键DOM元素 'countdown-list' 未找到");
   }
   
+  // 简化非关键元素的检测逻辑，移除 console.warn
   if (!countdownElements.emptyState) {
-    console.warn("DOM元素 'empty-state' 未找到");
+    // 可以创建一个简单的空白状态元素或者静默失败
   }
 }
 

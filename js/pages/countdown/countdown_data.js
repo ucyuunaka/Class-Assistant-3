@@ -239,7 +239,6 @@ export function undoDeleteExam() {
  */
 export function formatDate(date, format = "YYYY-MM-DD") {
   if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
-    console.warn("无效的日期对象", date);
     return "无效日期";
   }
   

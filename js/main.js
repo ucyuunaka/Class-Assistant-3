@@ -194,7 +194,6 @@ export const Storage = {
     try {
       localStorage.setItem(key, JSON.stringify(value));
     } catch (e) {
-      console.error('存储数据失败:', e);
     }
   },
   
@@ -210,7 +209,6 @@ export const Storage = {
       if (value === null) return defaultValue;
       return JSON.parse(value);
     } catch (e) {
-      console.error('获取数据失败:', e);
       return defaultValue;
     }
   },
@@ -223,7 +221,6 @@ export const Storage = {
     try {
       localStorage.removeItem(key);
     } catch (e) {
-      console.error('移除数据失败:', e);
     }
   },
   
@@ -234,7 +231,6 @@ export const Storage = {
     try {
       localStorage.clear();
     } catch (e) {
-      console.error('清除数据失败:', e);
     }
   }
 };
@@ -254,7 +250,8 @@ export const Translator = {
     this.currentLanguage = language || Storage.get('language', 'zh');
     this.loadTranslations(this.currentLanguage)
       .then(() => this.applyTranslations())
-      .catch(error => console.error('加载翻译失败:', error));
+      .catch(error => {
+      });
   },
   
   /**

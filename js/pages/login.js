@@ -1,4 +1,3 @@
-console.log('--- Login JS Start ---');
 import $ from 'jquery';
 
 // 导入认证标记函数
@@ -166,14 +165,12 @@ import { markLoginFlowCompleted } from '/js/auth.js';
     // 设置表单阶段转换
     function setupFormStageTransition(buttonSelector, currentSectionSelector, nextSectionSelector, logMessage) {
         $(buttonSelector).click(function(){
-            console.log(logMessage);
             $(currentSectionSelector).addClass("fold-up");
             $(nextSectionSelector).removeClass("folded");
         });
     }
 
     async function handleFormSuccess(formType, lastSectionSelector, successSelector, netIdSelector) {
-        console.log(`${formType}：完成输入`);
         $(lastSectionSelector).addClass("fold-up");
         $(successSelector).css("marginTop", 0);
         var userNetId = $(netIdSelector).val();
@@ -219,7 +216,7 @@ import { markLoginFlowCompleted } from '/js/auth.js';
                 win.fadeIn(500);
             })
             .catch(function(error) {
-                console.error("动画重置过程中出错:", error);
+                // 错误处理保留但移除了 console.error
             });
     }
 
@@ -277,14 +274,11 @@ if (LoginSignupSystem.config().autoInit !== false) {
 }
 // 确保在 DOM 加载后执行
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('--- DOMContentLoaded Fired ---', performance.now());
-
     const windowElement = document.getElementById('window');
     if (windowElement) {
         // 稍微延迟以确保 opacity:0 被渲染
         requestAnimationFrame(() => {
              requestAnimationFrame(() => {
-                console.log('Triggering simple opacity transition for #window');
                 windowElement.style.opacity = '1';
              });
         });
@@ -292,7 +286,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ！！原有的初始化逻辑
     if (LoginSignupSystem.config().autoInit !== false) {
-         console.log('--- Calling LoginSignupSystem.init() ---', performance.now());
          LoginSignupSystem.init();
     }
 });

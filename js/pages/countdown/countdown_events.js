@@ -140,14 +140,12 @@ function bindEventHandlers(elements) {
   // 筛选和排序处理
   if (filterSelect) {
     filterSelect.addEventListener("change", () => {
-      console.debug(`状态筛选变更为: ${filterSelect.value}`);
       animateFilterChange(countdownList, applyFiltersAndSort);
     });
   }
   
   if (sortSelect) {
     sortSelect.addEventListener("change", () => {
-      console.debug(`排序变更为: ${sortSelect.value}`);
       animateFilterChange(countdownList, applyFiltersAndSort);
     });
   }
@@ -155,7 +153,6 @@ function bindEventHandlers(elements) {
   if (searchInput) {
     let searchTimeout;
     searchInput.addEventListener("input", () => {
-      console.debug(`搜索词变更为: ${searchInput.value}`);
       clearTimeout(searchTimeout);
       searchTimeout = setTimeout(() => {
         animateFilterChange(countdownList, applyFiltersAndSort);
@@ -167,7 +164,6 @@ function bindEventHandlers(elements) {
   if (clearSortBtn) {
     clearSortBtn.addEventListener("click", () => {
       sortSelect.value = "date-desc";
-      console.debug("重置排序为默认值");
       clearSortBtn.classList.add('active');
       setTimeout(() => clearSortBtn.classList.remove('active'), 300);
       animateFilterChange(countdownList, applyFiltersAndSort);
@@ -177,7 +173,6 @@ function bindEventHandlers(elements) {
   if (clearFilterBtn) {
     clearFilterBtn.addEventListener("click", () => {
       filterSelect.value = "all";
-      console.debug("重置状态筛选为默认值");
       clearFilterBtn.classList.add('active');
       setTimeout(() => clearFilterBtn.classList.remove('active'), 300);
       animateFilterChange(countdownList, applyFiltersAndSort);
@@ -390,7 +385,6 @@ function handleExamFormSubmit(event) {
     // 直接保存考试数据
     saveExam(examData, examId);
   } catch (error) {
-    console.error("表单提交错误:", error);
     // 显示错误通知
     if (typeof window.showNotification === "function") {
       window.showNotification("保存失败: " + error.message, "error", 5000);
@@ -758,7 +752,6 @@ function saveSortFilterPreference(sortValue, filterValue) {
   try {
     localStorage.setItem("countdown_sort_preference", sortValue);
     localStorage.setItem("countdown_filter_preference", filterValue);
-    console.debug(`保存用户筛选偏好 - 排序: ${sortValue}, 筛选: ${filterValue}`);
   } catch (e) {
     console.error("保存筛选偏好失败:", e);
   }
@@ -774,7 +767,6 @@ function loadSortFilterPreference() {
     
     if (savedSort && sortSelect) {
       sortSelect.value = savedSort;
-      console.debug(`加载排序偏好: ${savedSort}`);
     }
     
     if (savedFilter && filterSelect) {
@@ -783,7 +775,6 @@ function loadSortFilterPreference() {
       
       // 设置筛选值
       filterSelect.value = savedFilter;
-      console.debug(`加载筛选偏好: ${savedFilter}`);
     }
   } catch (e) {
     console.error("加载筛选偏好失败:", e);
@@ -808,7 +799,6 @@ function ensurePastOptionExists() {
       pastOption.value = "past";
       pastOption.textContent = "已结束";
       filterSelect.appendChild(pastOption);
-      console.debug("已添加'已结束'筛选选项");
     }
   }
 }
