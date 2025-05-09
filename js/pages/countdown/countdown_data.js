@@ -1,7 +1,7 @@
 // 考试倒计时数据管理模块
 import { Storage } from '/js/main.js';
 
-// 本地存储的默认数据
+// 本地存储展示的默认数据
 const DEFAULT_EXAMS = [
   {
     id: 1,
@@ -77,7 +77,7 @@ let deletedExamData = null;
 
 /**
  * 从Storage加载考试数据
- * @returns {Array} 考试数据数组
+ * @returns {Array}
  */
 export function loadExams() {
   exams = Storage.get("exams", DEFAULT_EXAMS);

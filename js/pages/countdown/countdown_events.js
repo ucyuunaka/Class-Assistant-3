@@ -20,10 +20,9 @@ let processedExams = [];
 
 /**
  * 初始化倒计时事件处理
- * @param {Object} elements - DOM元素引用对象
+ * @param {Object} elements
  */
 export function initCountdownEvents(elements) {
-  // 保存DOM元素引用
   countdownList = elements.countdownList;
   emptyState = elements.emptyState;
   examModal = elements.examModal;
@@ -49,16 +48,15 @@ export function initCountdownEvents(elements) {
   // 初始渲染
   applyFiltersAndSort();
   
-  // 监听模态框加载完成事件，以确保在异步模块加载的情况下也能正确处理
+  // 监听模态框加载完成事件
   document.addEventListener("modals:ready", function() {
   });
   
-  // 注册全局函数，用于从页面中调用
   window.openEditExamModal = openEditExamModal;
   window.deleteExam = handleDeleteExam;
   
   return {
-    openAddExamModal,  // 导出方法供外部使用
+    openAddExamModal,  // 供外部使用的备用
     openEditExamModal,
     applyFiltersAndSort
   };
@@ -66,7 +64,7 @@ export function initCountdownEvents(elements) {
 
 /**
  * 绑定事件处理器
- * @param {Object} elements - DOM元素引用对象
+ * @param {Object} elements
  */
 function bindEventHandlers(elements) {
   // 添加考试按钮
@@ -100,7 +98,7 @@ function bindEventHandlers(elements) {
     if (event.target === examModal) closeExamModal();
   });
   
-  // 清除定时器（页面卸载时）
+  // 清除定时器（离开页面）
   window.addEventListener("beforeunload", () => {
     if (window.countdownInterval) {
       clearInterval(window.countdownInterval);
@@ -155,7 +153,6 @@ function bindEventHandlers(elements) {
   }
   
   if (searchInput) {
-    // 添加防抖处理，避免输入时频繁刷新
     let searchTimeout;
     searchInput.addEventListener("input", () => {
       console.debug(`搜索词变更为: ${searchInput.value}`);
@@ -169,7 +166,7 @@ function bindEventHandlers(elements) {
   // 清除按钮事件监听
   if (clearSortBtn) {
     clearSortBtn.addEventListener("click", () => {
-      sortSelect.value = "date-desc"; // 重置为默认排序
+      sortSelect.value = "date-desc";
       console.debug("重置排序为默认值");
       clearSortBtn.classList.add('active');
       setTimeout(() => clearSortBtn.classList.remove('active'), 300);
@@ -179,7 +176,7 @@ function bindEventHandlers(elements) {
   
   if (clearFilterBtn) {
     clearFilterBtn.addEventListener("click", () => {
-      filterSelect.value = "all"; // 重置为默认筛选
+      filterSelect.value = "all";
       console.debug("重置状态筛选为默认值");
       clearFilterBtn.classList.add('active');
       setTimeout(() => clearFilterBtn.classList.remove('active'), 300);
@@ -235,12 +232,6 @@ export function openEditExamModal(examId) {
   const dateStr = examDate.toISOString().split('T')[0];
   let timeStr = examDate.toTimeString().substring(0, 5);
   
-  // 解决时区问题
-  if (!timeStr || timeStr === "NaN:NaN") {
-    // 回退到默认时间
-    timeStr = "09:00";
-  }
-  
   document.getElementById("exam-date").value = dateStr;
   document.getElementById("exam-time").value = timeStr;
   document.getElementById("exam-location").value = exam.location || "";
@@ -270,7 +261,7 @@ function showModalWithAnimation() {
   examModal.style.opacity = "0";
   examModal.classList.add('active');
   
-  // 使用requestAnimationFrame确保DOM更新后再添加动画
+  // 使用requestAnimationFrame，确保DOM更新后再添加动画
   requestAnimationFrame(() => {
     examModal.style.transition = "opacity 0.3s ease";
     examModal.style.opacity = "1";
@@ -287,7 +278,7 @@ function showModalWithAnimation() {
     }
   });
   
-  // 聚焦到第一个输入框，提高可访问性
+  // 聚焦到第一个输入框
   setTimeout(() => {
     const firstInput = document.getElementById("exam-name");
     if (firstInput) {
@@ -305,7 +296,7 @@ function closeExamModal() {
   
   examModal.style.transition = "opacity 0.3s ease";
   examModal.style.opacity = "0";
-  examModal.classList.remove('active'); // 移除active类
+  examModal.classList.remove('active');
   
   if (modalContent) {
     modalContent.style.transition = "opacity 0.25s ease, transform 0.25s ease";
@@ -320,7 +311,6 @@ function closeExamModal() {
     // 使用clearAllFormErrors函数清除所有表单错误
     clearAllFormErrors();
     
-    // 关键修复：恢复页面滚动
     document.body.style.overflow = '';
     
   }, 300);
@@ -420,13 +410,12 @@ function saveExam(examData, examId) {
   const saveBtn = examForm.querySelector('button[type="submit"]');
   const originalBtnText = saveBtn.innerHTML;
   
-  // 如果模态框已关闭，按钮可能不在DOM中，需要进行检查
   if (saveBtn) {
     saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 保存中...';
     saveBtn.disabled = true;
   }
   
-  // 使用setTimeout模拟网络延迟，更好的用户体验
+  // 使用setTimeout模拟网络延迟（更真实）
   setTimeout(() => {
     if (examId) {
       // 编辑现有考试
@@ -448,7 +437,6 @@ function saveExam(examData, examId) {
       3000
     );
     
-    // 只有当按钮存在于DOM中时才恢复其状态
     if (saveBtn && saveBtn.isConnected) {
       saveBtn.innerHTML = originalBtnText;
       saveBtn.disabled = false;
@@ -475,7 +463,7 @@ function handleDeleteExam(examId) {
   const confirmDialog = document.createElement('div');
   confirmDialog.className = 'modal confirm-dialog';
   confirmDialog.style.display = 'flex';
-  confirmDialog.style.zIndex = '1100'; // 确保在其他模态框之上
+  confirmDialog.style.zIndex = '1100';
   
   confirmDialog.innerHTML = `
     <div class="modal-content" style="max-width: 400px;">
@@ -569,9 +557,9 @@ function handleDeleteExam(examId) {
             undoNotification.classList.add('fade-out');
             setTimeout(() => undoNotification.remove(), 300);
           }
-        }, 10000); // 撤销通知显示10秒
+        }, 10000);
       }
-    }, 500); // 主通知后延迟显示撤销通知
+    }, 500);
   });
   
   // 取消删除

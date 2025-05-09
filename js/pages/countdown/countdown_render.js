@@ -22,7 +22,7 @@ export function renderExamList(filteredExams, countdownList, emptyState) {
   emptyState.style.display = "none";
   countdownList.style.display = "block";
 
-  // 创建一个文档片段来提高渲染性能
+  // 使用一个文档片段来提高渲染性能
   const fragment = document.createDocumentFragment();
   
   filteredExams.forEach((exam) => {
@@ -91,23 +91,19 @@ export function renderExamList(filteredExams, countdownList, emptyState) {
       </div>
     `;
     
-    // 使用CSS类控制动画而不是setTimeout
     item.style.opacity = "0";
     item.style.transform = "translateY(20px)";
     
     // 添加到文档片段中
     fragment.appendChild(item);
   });
-  
-  // 一次性添加所有元素到DOM
+
   countdownList.appendChild(fragment);
   
-  // 使用requestAnimationFrame触发回流和重绘后再应用动画
   requestAnimationFrame(() => {
     // 获取所有新添加的项目
     const items = countdownList.querySelectorAll('.countdown-item');
     
-    // 使用stagger效果依次显示元素
     items.forEach((item, index) => {
       setTimeout(() => {
         item.style.transition = "opacity 0.3s ease, transform 0.3s ease";
@@ -199,7 +195,6 @@ export function stopCountdownTimer() {
 export function animateFilterChange(countdownList, applyFiltersAndSort) {
   // 如果有列表内容，先淡出现有内容
   if (countdownList.children.length > 0) {
-    // 淡入加载指示器
     let loadingIndicator = document.querySelector('.loading-indicator');
     
     // 如果加载指示器不存在，创建一个
@@ -230,9 +225,8 @@ export function animateFilterChange(countdownList, applyFiltersAndSort) {
     setTimeout(() => {
       loadingIndicator.classList.remove('active');
       applyFiltersAndSort();
-    }, 300); // 延长一点时间让动画更平滑
+    }, 300);
   } else {
-    // 如果没有现有内容，直接应用筛选
     applyFiltersAndSort();
   }
 }

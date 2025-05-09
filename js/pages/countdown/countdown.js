@@ -19,21 +19,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 初始化顶栏组件
   const header = new Header("header-container", {
-    // isHomePage: false, // 移除 isHomePage
     title: "考试倒计时", // 保留标题
-    // subtitle: "管理你的考试安排，不错过任何重要的考试", // 移除副标题
+    subtitle: "嘿！不错过任何重要的考试", // 移除副标题
     buttons: [
       {
         text: "添加考试",
-        url: "#", // URL 设为 #，具体行为由页面JS处理
-        // isPrimary: true, // 移除 isPrimary
-        id: "add-exam-header-btn" // 使用 id 替代 className
+        url: "#",
+        id: "add-exam-header-btn"
       },
     ],
-    // buttonPosition: "right", // 移除 buttonPosition
   });
 
-  // 发出模态框就绪事件通知
+  // （调试）发出模态框就绪事件通知
   const modalReadyEvent = new CustomEvent("modals:ready");
   document.dispatchEvent(modalReadyEvent);
   console.log("DOMContentLoaded: 发送模态框就绪事件通知 (from moved script)");

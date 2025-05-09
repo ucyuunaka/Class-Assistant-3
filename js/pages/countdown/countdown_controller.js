@@ -90,7 +90,6 @@ function collectDOMElements() {
  * 注册全局方法，使HTML中可以直接调用
  */
 function registerGlobalMethods() {
-  // 注册getExamStatus到window，以便在HTML中直接使用
   window.getExamStatus = getExamStatus;
   
   // 其他可能需要全局访问的方法也可以在这里注册
@@ -105,10 +104,8 @@ export function refreshCountdownList() {
 
 /**
  * 获取所有考试数据
- * @returns {Array} 考试数据数组
+ * @returns {Array}
  */
 export function getExams() {
   return getAllExams();
 }
-
-// 导出其他需要从外部访问的函数
