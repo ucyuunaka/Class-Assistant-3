@@ -136,24 +136,20 @@
   display: none;
 }
 
-/* --- Styles moved from profile.html inline styles --- */
-
-/* Button spacing in form action groups */
 #basic-info-form .form-group .btn-outline,
 #education-form .form-group .btn-outline {
   margin-left: 0.5rem;
 }
 
-/* Account Security Section Layout */
 .account-security-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.75rem;
 }
-/* Remove bottom margin from the last item */
+
 .account-security-item:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .account-security-label .label-title {
@@ -165,4 +161,3 @@
   font-size: 0.9rem;
 }
 
-/* --- End moved styles --- */

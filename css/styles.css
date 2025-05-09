@@ -1,9 +1,7 @@
 /* 
    课堂助手 CSS 样式表
-   参考 Hugging Face 风格的配色方案
 */
 
-/* 全局 Box Sizing */
 *,
 *::before,
 *::after {
@@ -410,7 +408,7 @@ select.form-control {
 
 /* 模态框样式 */
 .modal {
-  display: none; /* 默认隐藏 */
+  display: none;
   position: fixed;
   z-index: 1050;
   left: 0;
@@ -418,9 +416,9 @@ select.form-control {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
-  align-items: center; /* 垂直居中 */
-  justify-content: center; /* 水平居中 */
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-content {
@@ -432,7 +430,6 @@ select.form-control {
   width: 90%;
   max-width: 500px;
   position: relative;
-  /* 添加动画基础样式 */
   opacity: 0;
   transform: scale(0.9) translateY(20px);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
@@ -479,7 +476,7 @@ select.form-control {
 .footer {
   background-color: var(--background-color);
 }
-/* Utility class for hiding elements */
+/* 隐藏元素 */
 .hidden {
-  display: none !important; /* Use !important to ensure override */
+  display: none !important;
 }

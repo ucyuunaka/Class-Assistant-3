@@ -159,7 +159,7 @@ input:checked + .theme-slider:before {
   }
 
   .theme-switcher {
-    gap: 1rem; /* Adjusted from 15px */
+    gap: 1rem;
   }
 
   .theme-ball {
@@ -168,7 +168,7 @@ input:checked + .theme-slider:before {
   }
   
   .theme-ball-wrapper {
-    margin-bottom: 1.25rem; /* Adjusted from 20px */
+    margin-bottom: 1.25rem;
   }
   
   .tooltip {
@@ -189,7 +189,7 @@ input:checked + .theme-slider:before {
 
 @media (max-width: 576px) {
   .theme-switcher {
-    gap: 0.75rem; /* Adjusted from 12px */
+    gap: 0.75rem;
   }
 
   .theme-ball {
@@ -198,17 +198,17 @@ input:checked + .theme-slider:before {
   }
   
   .theme-ball-wrapper {
-    margin-bottom: 1rem; /* Adjusted from 15px */
+    margin-bottom: 1rem;
   }
   
   .tooltip {
     max-width: 120px;
     font-size: 0.75rem;
-    padding: 0.5rem 0.5rem; /* Adjusted from 6px 8px */
+    padding: 0.5rem 0.5rem;
   }
 }
 
-/* 添加模态框样式 */
+/* 模态框样式 */
 .modal {
   display: none;
   position: fixed;
@@ -252,10 +252,10 @@ input:checked + .theme-slider:before {
   margin-top: 1.5rem;
 }
 
-/* 修复可能的样式冲突 */
+/* 样式冲突修复相关 */
 #confirm-modal {
   z-index: 10000 !important;
-  /* 确保弹窗显示 */
+  /* 确保弹窗显示 */  
   display: none; /* 初始状态为隐藏 */
 }
 
@@ -272,7 +272,6 @@ input:checked + .theme-slider:before {
   background-color: var(--background-color) !important;
   color: var(--text-primary) !important;
   z-index: 10001 !important;
-  /* 确保内容可见 */
   display: block !important;
   max-height: 90vh !important;
   overflow-y: auto !important;
@@ -289,16 +288,16 @@ input:checked + .theme-slider:before {
 
 /* 主题球包装器 */
 .theme-ball-wrapper {
-  margin-bottom: 2rem; /* Adjusted from 30px */
+  margin-bottom: 2rem;
   position: relative;
   display: inline-block;
 }
 
-/* 小球主题切换器样式 - 完全重写 */
+/* 小球主题切换器样式 */
 .theme-switcher {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem; /* Adjusted from 20px */
+  gap: 1.25rem;
   justify-content: center;
   margin: 1.5rem 0;
 }
@@ -323,16 +322,16 @@ input:checked + .theme-slider:before {
   box-shadow: 0 0 0 3px var(--gradient-start);
 }
 
-/* 提示框样式 - 完全重写 */
+/* 提示框样式 */
 .tooltip {
   position: absolute;
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 0.75rem; /* Adjusted from 10px */
+  margin-top: 0.75rem;
   background: #333;
   color: white;
-  padding: 0.5rem 0.75rem; /* Adjusted from 8px 12px */
+  padding: 0.5rem 0.75rem;
   border-radius: 6px;
   font-size: 0.85rem;
   opacity: 0;
@@ -425,7 +424,7 @@ input:checked + .theme-slider:before {
 /* 下拉选择框美化 */
 .form-control {
   width: 180px;
-  padding: 0.5rem 1rem; /* Adjusted from 0.6rem */
+  padding: 0.5rem 1rem;
   padding-left: 2.5rem;
   font-size: 0.95rem;
   border-radius: var(--border-radius);
@@ -440,7 +439,7 @@ input:checked + .theme-slider:before {
   color: var(--text-primary);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 0.75rem center; /* Adjusted from 0.8rem */
+  background-position: right 0.75rem center;
   background-size: 1em;
   padding-right: 2.5rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
@@ -454,7 +453,7 @@ input:checked + .theme-slider:before {
 
 .select-icon {
   position: absolute;
-  left: 0.75rem; /* Adjusted from 0.8rem */
+  left: 0.75rem;
   top: 50%;
   transform: translateY(-50%);
   color: var(--primary-color);
@@ -478,19 +477,17 @@ input:checked + .theme-slider:before {
   color: var(--primary-color);
   opacity: 0.8;
 }
-
-/* 为支持:has()选择器的现代浏览器提供样式 */
+/* 修复:has()选择器的兼容问题 */
 .select-wrapper:has(.form-control:focus) .select-icon {
   color: var(--primary-color);
 }
 
-/* 为不支持:has()选择器的浏览器提供JS驱动的替代方案 */
 .select-wrapper.focus .select-icon {
   color: var(--primary-color);
 }
 
 .form-control option {
-  padding: 0.75rem; /* Adjusted from 0.7rem */
+  padding: 0.75rem;
   background-color: var(--background-color);
   color: var(--text-primary);
 }

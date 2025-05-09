@@ -1,29 +1,29 @@
-/* 考试倒计时页面特定样式 - 苹果风格优化 */
+/* 考试倒计时页面特定样式 */
 .countdown-list {
   margin-top: 2rem;
   min-height: 100px; /* 添加最小高度防止列表变化时页面跳动 */
   position: relative; /* 为绝对定位的加载指示器准备 */
 }
 
-/* 苹果风格卡片 */
+/* 卡片设计 */
 .countdown-item {
   background-color: var(--background-color);
-  border-radius: 16px; /* 更圆润的边角 */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06); /* 更精致的阴影 */
-  padding: 1.75rem; /* 增加内边距 */
-  margin-bottom: 1.75rem; /* 增加间距 */
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 1.75rem;
+  margin-bottom: 1.75rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 1.75rem; /* 增加内部元素间距 */
+  gap: 1.75rem;
   position: relative;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1); /* 苹果风格过渡 */
-  border: none; /* 移除边框 */
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1); 
+  border: none;
 }
 
 .countdown-item:hover {
-  transform: translateY(-3px); /* 悬停时上浮效果 */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* 悬停时增强阴影 */
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
 }
 
 .countdown-main {
@@ -32,37 +32,37 @@
 }
 
 .countdown-title {
-  font-size: 1.6rem; /* 增大字体 */
-  font-weight: 600; /* 苹果风格字重 */
+  font-size: 1.6rem;
+  font-weight: 600;
   margin-bottom: 0.85rem;
   color: var(--text-color);
-  letter-spacing: -0.02em; /* 苹果风格字距 */
-  line-height: 1.2; /* 紧凑行高 */
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .countdown-details {
   color: var(--text-secondary);
-  margin-bottom: 1.25rem; /* 增加间距 */
-  font-size: 0.95rem; /* 稍微调整字体大小 */
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
 }
 
 .countdown-details div {
-  margin-bottom: 0.65rem; /* 增加行间距 */
+  margin-bottom: 0.65rem;
 }
 
 .countdown-detail-label {
   font-weight: 500;
   margin-right: 0.5rem;
-  color: var(--text-secondary); /* 降低对比度 */
+  color: var(--text-secondary);
 }
 
 .countdown-actions {
   display: flex;
-  gap: 0.75rem; /* 符合苹果风格的紧凑设计 */
+  gap: 0.75rem;
   margin-top: 0.5rem;
 }
 
-/* 苹果风格倒计时显示区域 */
+/* 倒计时显示区域 */
 .countdown-display {
   flex: 1;
   min-width: 250px;
@@ -70,10 +70,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(var(--primary-color-rgb, 5, 147, 252), 0.05); /* 微妙的背景色 */
-  border-radius: 12px; /* 圆角 */
+  background-color: rgba(var(--primary-color-rgb, 5, 147, 252), 0.05);
+  border-radius: 12px;
   padding: 1.75rem;
-  border: 1px solid rgba(var(--primary-color-rgb, 5, 147, 252), 0.1); /* 微妙的边框 */
+  border: 1px solid rgba(var(--primary-color-rgb, 5, 147, 252), 0.1);
 }
 
 .countdown-label {
@@ -89,7 +89,7 @@
   margin-top: 0.75rem;
 }
 
-/* 苹果风格倒计时单元 */
+/* 倒计时单元 */
 .countdown-unit {
   display: flex;
   flex-direction: column;
@@ -98,15 +98,15 @@
 }
 
 .countdown-value {
-  font-size: 2.2rem; /* 增大字体 */
-  font-weight: 600; /* 苹果风格字重 */
-  color: var(--text-color); /* 使用主文本颜色 */
-  background-color: rgba(var(--primary-color-rgb, 5, 147, 252), 0.1); /* 微妙的背景色 */
-  border-radius: 12px; /* 圆角 */
-  padding: 0.6rem 0.4rem; /* 调整内边距 */
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  background-color: rgba(var(--primary-color-rgb, 5, 147, 252), 0.1);
+  border-radius: 12px;
+  padding: 0.6rem 0.4rem;
   min-width: 64px;
   text-align: center;
-  letter-spacing: -0.03em; /* 紧凑字距 */
+  letter-spacing: -0.03em;
   line-height: 1;
 }
 
@@ -117,11 +117,11 @@
   font-weight: 500;
 }
 
-/* 苹果风格进度条 */
+/* 进度条 */
 .progress-bar {
-  height: 6px; /* 稍微减小高度 */
-  background-color: rgba(var(--primary-color-rgb, 5, 147, 252), 0.1); /* 微妙的背景色 */
-  border-radius: 100px; /* 圆角 */
+  height: 6px;
+  background-color: rgba(var(--primary-color-rgb, 5, 147, 252), 0.1);
+  border-radius: 100px;
   overflow: hidden;
   margin-top: 1.25rem;
   width: 100%;
@@ -131,30 +131,8 @@
   height: 100%;
   background-color: var(--primary-color);
   border-radius: 100px;
-  transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1); /* 苹果风格过渡 */
+  transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
-
-/* 苹果风格模态框 (样式由 components/modals/modals.css 处理) */
-/*
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  overflow-y: auto;
-  padding: 20px;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  opacity: 0;
-  transition: opacity 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-*/
 
 /* 确保弹窗容器正确居中 */
 .modal-container {
@@ -178,23 +156,23 @@
   pointer-events: all;
 }
 
-/* 苹果风格模态内容 */
+/* 模态框内容 */
 .modal-content {
   background-color: var(--background-color);
   color: var(--text-color);
-  border-radius: 16px; /* 更圆润的边角 */
-  padding: 28px; /* 增加内边距 */
+  border-radius: 16px;
+  padding: 28px;
   width: 90%;
   max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.02); /* 精致的阴影，微妙的边框 */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.02);
   opacity: 0;
   transform: translateY(-20px);
-  transition: all 0.35s cubic-bezier(0.2, 0.1, 0.25, 1); /* 苹果风格过渡 */
+  transition: all 0.35s cubic-bezier(0.2, 0.1, 0.25, 1);
   will-change: opacity, transform;
-  border: none; /* 移除边框 */
+  border: none;
 }
 
 .modal-close {
@@ -204,23 +182,23 @@
   font-size: 24px;
   cursor: pointer;
   color: var(--text-secondary);
-  transition: color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1); /* 苹果风格过渡 */
-  opacity: 0.6; /* 降低不必要的视觉突出 */
+  transition: color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1); 
+  opacity: 0.6;
   width: 32px;
   height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%; /* 圆形 */
+  border-radius: 50%;
 }
 
 .modal-close:hover {
   color: var(--danger-color);
   opacity: 1;
-  background-color: rgba(var(--danger-color-rgb, 229, 62, 62), 0.1); /* 悬停背景色 */
+  background-color: rgba(var(--danger-color-rgb, 229, 62, 62), 0.1);
 }
 
-/* 苹果风格表单 */
+/* 表单设计 */
 .modal .form-group {
   margin-bottom: 20px;
 }
@@ -230,18 +208,18 @@
   margin-bottom: 8px;
   font-weight: 500;
   font-size: 0.95rem;
-  color: var(--text-secondary); /* 使用次要文本颜色 */
+  color: var(--text-secondary);
 }
 
 .modal .form-control {
   width: 100%;
-  padding: 12px 16px; /* 增加内边距 */
-  border-radius: 10px; /* 圆角 */
+  padding: 12px 16px;
+  border-radius: 10px;
   background-color: var(--input-background, var(--background-color));
   color: var(--text-color);
-  border: 1px solid rgba(0, 0, 0, 0.1); /* 更轻的边框 */
+  border: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 1rem;
-  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1); /* 苹果风格过渡 */
+  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .modal .form-control:focus {
@@ -250,14 +228,14 @@
   box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb, 5, 147, 252), 0.15); /* 聚焦时显示轮廓 */
 }
 
-/* 苹果风格按钮 */
+/* 按钮设计 */
 .modal .btn {
   min-width: 120px;
-  border-radius: 10px; /* 圆角 */
-  padding: 12px 20px; /* 增加内边距 */
+  border-radius: 10px;
+  padding: 12px 20px;
   font-weight: 500;
-  transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1); /* 苹果风格过渡 */
-  letter-spacing: -0.01em; /* 苹果风格字距 */
+  transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+  letter-spacing: -0.01em;
 }
 
 .modal h2 {
@@ -265,7 +243,7 @@
   font-weight: 600;
   color: var(--text-color);
   margin-bottom: 1.5rem;
-  letter-spacing: -0.02em; /* 苹果风格字距 */
+  letter-spacing: -0.02em;
 }
 
 /* 改进移动设备响应式调整 */
@@ -328,7 +306,7 @@
   }
 }
 
-/* 苹果风格筛选反馈 */
+/* 筛选反馈 */
 .filter-feedback {
   background-color: rgba(var(--primary-color-rgb, 5, 147, 252), 0.05);
   border-radius: 10px;
@@ -337,11 +315,11 @@
   font-size: 0.95rem;
   color: var(--text-color);
   display: none;
-  transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1); /* 苹果风格过渡 */
+  transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
   border: 1px solid rgba(var(--primary-color-rgb, 5, 147, 252), 0.1);
 }
 
-/* 苹果风格筛选选项 */
+/* 筛选选项 */
 .filter-options {
   display: flex;
   justify-content: space-between;
@@ -365,7 +343,7 @@
   font-size: 0.95rem;
 }
 
-/* 苹果风格下拉菜单 */
+/* 下拉菜单 */
 .filter-group select {
   padding: 10px 14px;
   border-radius: 10px;
@@ -378,7 +356,7 @@
   background-position: right 12px center;
   padding-right: 32px;
   font-size: 0.95rem;
-  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1); /* 苹果风格过渡 */
+  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .filter-group select:focus {
@@ -387,7 +365,7 @@
   outline: none;
 }
 
-/* 苹果风格搜索框 */
+/* 搜索框设计 */
 .search-box {
   position: relative;
   display: flex;
@@ -408,7 +386,7 @@
   height: 44px; /* 增加高度 */
   border: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 0.95rem;
-  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1); /* 苹果风格过渡 */
+  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 #search-input:focus {
@@ -416,7 +394,7 @@
   box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb, 5, 147, 252), 0.15); /* 聚焦时显示轮廓 */
 }
 
-/* 苹果风格清除按钮 */
+/* 清除按钮 */
 .btn-clear {
   background: none;
   border: none;
@@ -430,7 +408,7 @@
   width: 28px;
   height: 28px;
   font-size: 0.85rem;
-  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1); /* 苹果风格过渡 */
+  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
   opacity: 0.7;
 }
 
@@ -449,7 +427,7 @@
   opacity: 1;
 }
 
-/* 苹果风格状态样式 */
+/* 状态样式 */
 .countdown-item.urgent {
   border-left: 4px solid var(--danger-color);
 }
@@ -467,27 +445,27 @@
   opacity: 0.8;
 }
 
-/* 苹果风格状态徽章 */
+/* 状态徽章 */
 .status-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 6px 12px;
-  border-radius: 20px; /* 更圆润的边角，符合苹果设计 */
+  border-radius: 20px;
   font-size: 0.85rem;
-  font-weight: 600; /* 略微加粗 */
+  font-weight: 600;
   text-align: center;
   white-space: nowrap;
   line-height: 1.2;
-  letter-spacing: -0.01em; /* 苹果风格字距 */
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* 微妙的阴影 */
-  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1); /* 苹果风格过渡 */
-  border: 1px solid transparent; /* 为边框预留空间 */
-  min-width: 80px; /* 确保最小宽度一致 */
+  letter-spacing: -0.01em;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  border: 1px solid transparent;
+  min-width: 80px;
 }
 
 .status-badge:hover {
-  transform: translateY(-1px); /* 微妙的悬停效果 */
+  transform: translateY(-1px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
@@ -515,7 +493,7 @@
   border-color: rgba(var(--text-secondary-rgb, 75, 85, 99), 0.2);
 }
 
-/* 苹果风格筛选区域 */
+/* 筛选区域 */
 .filters {
   background-color: var(--background-color);
   border-radius: 16px;
@@ -524,7 +502,7 @@
   margin-bottom: 2rem;
 }
 
-/* 苹果风格加载指示器 */
+/* 加载指示器 */
 .loading-indicator {
   display: flex;
   flex-direction: column;
@@ -561,7 +539,7 @@
   pointer-events: all;
 }
 
-/* 苹果风格危险按钮 */
+/* 危险按钮 */
 .btn-danger {
   background-color: var(--danger-color);
   color: white;
@@ -571,7 +549,7 @@
   background-color: var(--danger-dark, #c53030);
 }
 
-/* 苹果风格确认对话框 */
+/* 确认对话框 */
 .confirm-dialog .modal-content {
   max-width: 400px;
   text-align: center;
@@ -583,7 +561,7 @@
   font-weight: 400;
 }
 
-/* 苹果风格小按钮 */
+/* 小按钮 */
 .btn-sm {
   /* 与其他页面顶栏按钮保持一致 */
   font-size: 1rem;
@@ -592,7 +570,7 @@
   border-radius: var(--border-radius);
 }
 
-/* 苹果风格撤销按钮 */
+/* 撤销按钮 */
 .undo-btn {
   position: fixed;
   bottom: 30px;
@@ -612,7 +590,7 @@
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
 }
 
-/* 苹果风格空状态 */
+/* 空状态 */
 .empty-state {
   text-align: center;
   padding: 3rem 1rem;
@@ -653,17 +631,6 @@
   letter-spacing: -0.02em;
   color: var(--text-color);
 }
-
-/* .modal-dialog (结构已移除) */
-/*
-.modal-dialog {
-  position: relative;
-  margin: 10% auto;
-  max-width: 600px;
-  width: 90%;
-  animation: modalSlideUp 0.3s cubic-bezier(0.2, 0.1, 0.2, 1);
-}
-*/
 
 .form-actions {
   display: flex;
@@ -716,21 +683,6 @@
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-/* 高DPI屏幕优化 */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .countdown-item,
-  .filters,
-  .modal-content,
-  .empty-state {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  }
-  
-  .countdown-value,
-  .form-control {
-    border-width: 0.5px;
   }
 }
 
@@ -815,7 +767,7 @@
   }
 }
 
-/* 新增考试高亮效果 */
+/* 考试高亮效果 */
 .countdown-item.highlight-new {
   animation: highlightNew 2s ease-in-out;
 }
@@ -836,7 +788,7 @@
   color: var(--primary-color);
 }
 
-/* 新增考试高亮效果动画 */
+/* 考试高亮效果动画 */
 @keyframes highlightNew {
   0%, 100% {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);

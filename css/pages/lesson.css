@@ -192,7 +192,7 @@
   margin-top: 1.8rem !important;
 }
 
-/* 发送按钮美化 */
+/* 发送按钮 */
 .send-btn {
   display: flex;
   align-items: center;
@@ -574,7 +574,7 @@
   border: 1px solid var(--tag-border);
 }
 
-/* 表情反应 - 增强版 */
+/* 表情反应 */
 .comment-reactions {
   display: flex;
   flex-wrap: wrap;
@@ -756,7 +756,7 @@
   transform: scale(0.95);
 }
 
-/* 添加必要的动画关键帧 */
+/* 动画关键帧 */
 @keyframes scaleIn {
   0% {
     opacity: 0;
@@ -875,12 +875,12 @@
   transform: scale(1.1) !important;
 }
 
-/* 优化课程下拉框中的关闭按钮 */
+/* 课程下拉框中的关闭按钮 */
 .select2-container--default .select2-selection--single .select2-selection__clear {
   margin-right: 30px !important;
 }
 
-/* 自定义X按钮样式 */
+/* X按钮样式 */
 .select2-container--default .select2-selection--single .select2-selection__clear {
   position: relative !important;
   display: flex !important;
@@ -904,13 +904,12 @@
   transform: scale(1.1) !important;
 }
 
-/* --- Select2 Custom Styles (Moved from lesson.html) --- */
 /* 自定义Select2下拉框样式以匹配应用主题 */
 .select2-container--default .select2-selection--single {
   background-color: var(--background-input);
   border: 2px solid var(--border-color);
   border-radius: 12px;
-  height: 45px; /* 与原始选择框高度匹配 */
+  height: 45px;
   display: flex;
   align-items: center;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
@@ -1004,6 +1003,3 @@
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px var(--primary-light);
 }
-
-/* 注意：表情选择器样式已移至lesson.css文件中 */
-/* --- End Select2 Custom Styles --- */

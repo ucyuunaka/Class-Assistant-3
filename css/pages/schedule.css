@@ -42,10 +42,10 @@
 
 .timetable-grid {
   display: grid;
-  grid-template-columns: 65px repeat(7, 1fr); /* 恢复原来的布局，但保持列宽一致 */
+  grid-template-columns: 65px repeat(7, 1fr);
   min-width: 700px;
-  grid-auto-rows: 80px; /* 固定行高 */
-  grid-template-rows: 80px repeat(auto-fill, 80px); /* 确保所有行高一致 */
+  grid-auto-rows: 80px;
+  grid-template-rows: 80px repeat(auto-fill, 80px);
 }
 
 .timetable-header {
@@ -72,7 +72,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80px; /* 确保高度固定 */
+  height: 80px;
   font-size: 0.8rem;
 }
 
@@ -80,9 +80,9 @@
   border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   padding: 0.35rem;
-  height: 80px; /* 固定高度 */
+  height: 80px;
   position: relative;
-  overflow: visible; /* 恢复为visible，允许内容溢出显示 */
+  overflow: visible;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -90,12 +90,11 @@
   transition: min-height 0.3s ease;
 }
 
-/* 为每列添加细微背景色交替，提高可读性 */
 .timetable-cell:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.01);
 }
 
-/* 为周末添加微妙的背景色 */
+/* 周末的特殊背景色 */
 .timetable-cell[data-day="6"],
 .timetable-cell[data-day="7"],
 .timetable-header:nth-child(7),
@@ -128,15 +127,15 @@
   box-sizing: border-box;
   justify-content: space-between;
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); /* 添加微妙阴影 */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .course-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12); /* 增强悬停时的阴影 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
-/* 添加可拖动卡片的效果 */
+/* 可拖动卡片的效果 */
 .course-card.draggable {
   cursor: grab;
 }
@@ -171,7 +170,7 @@
 
 /* 课程颜色变量 */
 .course-math {
-  background-color: rgba(0, 122, 255, 0.8);  /* iOS蓝色 */
+  background-color: rgba(0, 122, 255, 0.8);
   color: white;
 }
 
@@ -213,58 +212,58 @@
 }
 
 .course-physics {
-  background-color: rgba(255, 149, 0, 0.8);  /* iOS橙色 */
+  background-color: rgba(255, 149, 0, 0.8);
   color: white;
 }
 
 .course-chemistry {
-  background-color: rgba(52, 199, 89, 0.8);  /* iOS绿色 */
+  background-color: rgba(52, 199, 89, 0.8);
   color: white;
 }
 
 .course-biology {
-  background-color: rgba(175, 82, 222, 0.8);  /* iOS紫色 */
+  background-color: rgba(175, 82, 222, 0.8);
   color: white;
 }
 
 .course-literature {
-  background-color: rgba(88, 86, 214, 0.8);  /* iOS靛蓝色 */
+  background-color: rgba(88, 86, 214, 0.8);
   color: white;
 }
 
 .course-history {
-  background-color: rgba(162, 132, 94, 0.8);  /* iOS棕色 */
+  background-color: rgba(162, 132, 94, 0.8);
   color: white;
 }
 
 .course-english {
-  background-color: rgba(48, 176, 199, 0.8);  /* iOS青色 */
+  background-color: rgba(48, 176, 199, 0.8);
   color: white;
 }
 
 /* 新增课程颜色 */
 .course-computer {
-  background-color: rgba(50, 173, 230, 0.8);  /* iOS浅蓝色 */
+  background-color: rgba(50, 173, 230, 0.8);
   color: white;
 }
 
 .course-art {
-  background-color: rgba(255, 59, 48, 0.8);  /* iOS红色 */
+  background-color: rgba(255, 59, 48, 0.8);
   color: white;
 }
 
 .course-music {
-  background-color: rgba(255, 204, 0, 0.8);  /* iOS黄色 */
+  background-color: rgba(255, 204, 0, 0.8);
   color: white;
 }
 
 .course-sports {
-  background-color: rgba(90, 200, 250, 0.8);  /* iOS天蓝色 */
+  background-color: rgba(90, 200, 250, 0.8);
   color: white;
 }
 
 .course-politics {
-  background-color: rgba(191, 90, 242, 0.8);  /* iOS淡紫色 */
+  background-color: rgba(191, 90, 242, 0.8);
   color: white;
 }
 
@@ -310,7 +309,7 @@
   color: white;
 }
 
-/* 拖放相关样式 - 与主题系统集成 */
+/* 拖放相关样式 */
 .timetable-cell.drag-over {
   background-color: rgba(var(--primary-color-rgb, 0, 150, 136), 0.1);
   box-shadow: inset 0 0 0 2px var(--primary-color, #009688);
@@ -319,7 +318,7 @@
 }
 
 .timetable-cell.drag-over::after {
-  content: '\2713'; /* Unicode for checkmark (√) */
+  content: '\2713';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -339,7 +338,7 @@
 }
 
 .timetable-cell.drag-preview-valid::after {
-  content: '\2713'; /* Unicode for checkmark (√) */
+  content: '\2713';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -631,7 +630,7 @@
   }
 
   .timetable-grid {
-    grid-template-columns: 60px repeat(7, 1fr); /* 恢复原来的响应式布局 */
+    grid-template-columns: 60px repeat(7, 1fr);
   }
 
   .form-row {
@@ -800,20 +799,20 @@
 /* 被占用的单元格 */
 .timetable-cell.occupied-cell {
   position: relative;
-  opacity: 0.9; /* 恢复为半透明效果，但比原来的0.15更明显一些 */
+  opacity: 0.9;
   pointer-events: none;
   background-color: rgba(var(--primary-color-rgb, 0, 123, 255), 0.03);
 }
 
 /* 被占用单元格的信息样式 */
 .occupied-cell-info {
-  display: none; /* 隐藏占用信息，恢复原来的样式 */
+  display: none;
 }
 
 /* 多时间段课程样式 */
 .multi-slot-course {
   position: relative;
-  overflow: visible; /* 恢复为visible，允许内容溢出显示 */
+  overflow: visible; /* 设置为visible，允许内容溢出显示 */
   z-index: 2;
   box-shadow: inset 0 0 0 1px rgba(var(--primary-color-rgb, 0, 123, 255), 0.4);
   background-color: rgba(var(--primary-color-rgb, 0, 123, 255), 0.05);
@@ -832,8 +831,8 @@
 }
 
 .multi-slot-course .course-card:hover {
-  transform: translateY(-2px) scale(1.01); /* 轻微放大效果 */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* 更强的悬停阴影 */
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 /* 多时间段课程在列表视图中的样式 */
@@ -869,7 +868,7 @@
   background-color: var(--primary-light);
 }
 
-/* 为有课程的单元格添加微妙阴影和视觉效果 */
+/* 为有课程的单元格添加阴影和视觉效果 */
 .timetable-cell:has(.course-card) {
   box-shadow: inset 0 0 0 1px rgba(var(--primary-color-rgb, 0, 123, 255), 0.2);
   background-color: rgba(var(--primary-color-rgb, 0, 123, 255), 0.02);
@@ -897,46 +896,46 @@
   left: 0;
   right: 0;
   bottom: 0;
-  border: 1px solid rgba(var(--primary-color-rgb, 0, 123, 255), 0.3); /* 更明显的边框 */
+  border: 1px solid rgba(var(--primary-color-rgb, 0, 123, 255), 0.3);
   border-radius: var(--border-radius-sm);
   pointer-events: none;
   z-index: 1;
 }
 
 /* 用于颜色选择器的颜色需要保持高饱和度 */
-.color-option[data-class="course-math"] { background-color: rgb(0, 122, 255); }      /* iOS蓝色 */
-.color-option[data-class="course-physics"] { background-color: rgb(255, 149, 0); }   /* iOS橙色 */
-.color-option[data-class="course-chemistry"] { background-color: rgb(52, 199, 89); } /* iOS绿色 */
-.color-option[data-class="course-biology"] { background-color: rgb(175, 82, 222); }  /* iOS紫色 */
-.color-option[data-class="course-literature"] { background-color: rgb(88, 86, 214); } /* iOS靛蓝色 */
-.color-option[data-class="course-history"] { background-color: rgb(162, 132, 94); }  /* iOS棕色 */
-.color-option[data-class="course-english"] { background-color: rgb(48, 176, 199); }  /* iOS青色 */
-.color-option[data-class="course-computer"] { background-color: rgb(50, 173, 230); } /* iOS浅蓝色 */
-.color-option[data-class="course-art"] { background-color: rgb(255, 59, 48); }       /* iOS红色 */
-.color-option[data-class="course-music"] { background-color: rgb(255, 204, 0); }     /* iOS黄色 */
-.color-option[data-class="course-sports"] { background-color: rgb(90, 200, 250); }   /* iOS天蓝色 */
-.color-option[data-class="course-politics"] { background-color: rgb(191, 90, 242); } /* iOS淡紫色 */
+.color-option[data-class="course-math"] { background-color: rgb(0, 122, 255); }
+.color-option[data-class="course-physics"] { background-color: rgb(255, 149, 0); }
+.color-option[data-class="course-chemistry"] { background-color: rgb(52, 199, 89); }
+.color-option[data-class="course-biology"] { background-color: rgb(175, 82, 222); }
+.color-option[data-class="course-literature"] { background-color: rgb(88, 86, 214); }
+.color-option[data-class="course-history"] { background-color: rgb(162, 132, 94); }
+.color-option[data-class="course-english"] { background-color: rgb(48, 176, 199); }
+.color-option[data-class="course-computer"] { background-color: rgb(50, 173, 230); }
+.color-option[data-class="course-art"] { background-color: rgb(255, 59, 48); }
+.color-option[data-class="course-music"] { background-color: rgb(255, 204, 0); }
+.color-option[data-class="course-sports"] { background-color: rgb(90, 200, 250); }
+.color-option[data-class="course-politics"] { background-color: rgb(191, 90, 242); }
 
 .course-info {
   color: var(--text-secondary);
-  font-size: 0.75rem; /* 减小内容字体 */
+  font-size: 0.75rem;
   overflow: visible;
   text-overflow: ellipsis;
   word-break: break-word;
   white-space: normal;
-  line-height: 1.1; /* 减小行高 */
-  margin-bottom: 0.1rem; /* 减小间距 */
+  line-height: 1.1;
+  margin-bottom: 0.1rem;
 }
 
 .course-location {
   display: flex;
   align-items: flex-start;
   gap: 0.25rem;
-  margin-top: 0.2rem; /* 减小间距 */
-  font-size: 0.75rem; /* 减小位置字体 */
+  margin-top: 0.2rem;
+  font-size: 0.75rem;
   overflow: visible;
   text-overflow: ellipsis;
   word-break: break-word;
   white-space: normal;
-  line-height: 1.1; /* 减小行高 */
+  line-height: 1.1;
 }

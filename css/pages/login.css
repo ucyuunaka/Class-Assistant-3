@@ -1,6 +1,6 @@
-/* 基础样式 - 移除了 @import url(...) */
+/* 基础样式 */
 
-/* 变量系统 - 扩展和整合 */
+/* 变量系统 */
 :root {
     /* 基础变量 */
     --global-radius: 3px;
@@ -102,18 +102,6 @@ body.signup-mode .back {
     background: var(--combined-bg-gradient);
 }
 
-/* 动画系统 */
-/* @keyframes window {
-    0% {
-        opacity: 0;
-        transform: rotateX(-90deg) translateY(300px);
-    }
-    100% {
-        opacity: 1;
-        transform: rotateX(0deg) translateY(0);
-    }
-} */
-
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -129,7 +117,7 @@ body.signup-mode .back {
     animation: fadeIn 1s ease-in-out backwards;
 }
 
-/* 延迟系列 */
+/* 延迟设置 */
 .delay1 { animation-delay: .3s; }
 .delay2 { animation-delay: .6s; }
 .delay3 { animation-delay: .9s; }
@@ -145,11 +133,10 @@ body.signup-mode .back {
     margin: auto;
     height: var(--form-height);
     width: var(--form-width);
-    /* animation: var(--window-anim-dur) window ease-in-out backwards; */
-    opacity: 0; /* 初始设为透明 */
-    transition: opacity 1.5s ease-in-out 0.1s; /* 添加简单的过渡效果, 延迟 0.1s 启动 */
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out 0.1s;
     transform-style: preserve-3d;
-    transition-property: all, opacity; /* 添加 opacity 到 transition */
+    transition-property: all, opacity;
     transition-duration: var(--transition-very-slow), 1.5s; /* 添加 opacity 的 duration */
     perspective: 1000px;
 }

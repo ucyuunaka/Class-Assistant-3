@@ -360,7 +360,6 @@
 }
 
 /* 以下是从 index.html 移植的样式 */
-/* Apple-inspired styles with adjusted spacing and theme variable support */
 :root {
   --apple-primary: var(--primary-color); /* 使用主题变量 */
   --apple-secondary: var(--text-color);
@@ -373,16 +372,15 @@
   --apple-transition: all 0.3s cubic-bezier(0.42, 0, 0.58, 1);
 }
 
-/* Featured section */
 .featured-section {
   padding: var(--apple-spacing) 0;
   text-align: center;
 }
 
 .section-title {
-  font-size: 36px; /* 减小标题大小 */
+  font-size: 36px;
   font-weight: 600;
-  margin-bottom: 40px; /* 减少标题下方空间 */
+  margin-bottom: 40px;
   text-align: center;
 }
 
@@ -391,21 +389,21 @@
   font-weight: 400;
   color: var(--text-secondary);
   max-width: 680px;
-  margin: -20px auto 40px; /* 减少上下间距 */
+  margin: -20px auto 40px;
   text-align: center;
 }
 
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px; /* 减少卡片间距 */
-  margin-top: 40px; /* 减少上方空间 */
+  gap: 30px;
+  margin-top: 40px;
 }
 
 .feature-card {
   background-color: var(--background-secondary);
   border-radius: var(--apple-radius);
-  padding: 30px 25px; /* 减少内部填充 */
+  padding: 30px 25px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
   transition: var(--apple-transition);
   text-align: left;
@@ -415,7 +413,7 @@
 }
 
 .feature-card:hover {
-  transform: translateY(-6px); /* 减少悬停效果的幅度 */
+  transform: translateY(-6px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
@@ -457,7 +455,6 @@
   transform: translateX(4px);
 }
 
-/* News section */
 .news-section {
   padding: var(--apple-spacing) 0;
   background-color: var(--background-secondary);
@@ -495,7 +492,6 @@
   color: var(--text-secondary);
 }
 
-/* Quickstart section */
 .quickstart-section {
   padding: var(--apple-spacing) 0;
   background-color: var(--background-color);
@@ -542,7 +538,6 @@
   color: var(--text-secondary);
 }
 
-/* Testimonials */
 .testimonials-section {
   padding: var(--apple-spacing) 0;
   background-color: var(--background-secondary);
@@ -602,7 +597,6 @@
   color: var(--text-secondary);
 }
 
-/* CTA section */
 .cta-section {
   padding: var(--apple-spacing) 0;
   text-align: center;
@@ -639,9 +633,8 @@
   transform: translateY(-2px);
 }
 
-/* Stats section */
 .stats-section {
-  padding: 60px 0; /* 减少上下间距 */
+  padding: 60px 0;
   background-color: var(--text-color);
   color: white;
 }
@@ -675,7 +668,6 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* Download section */
 .download-section {
   padding: var(--apple-spacing) 0;
   background-color: var(--background-secondary);
@@ -728,7 +720,6 @@
   }
 }
 
-/* 增强滚动动画效果 */
 /* 卡片悬浮效果 */
 .feature-card:hover,
 .download-card:hover,
