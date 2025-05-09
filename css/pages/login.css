@@ -578,24 +578,6 @@ form input:focus {
     text-align: center;
 }
 
-/* 浏览器警告 */
-.browser-warning {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 10px;
-    background: rgba(255, 255, 255, .7);
-    color: var(--color-black);
-    font-size: 14px;
-    text-align: center;
-    transition: all .4s ease-in-out;
-}
-
-.browser-warning.hidden {
-    transform: translateY(100%);
-}
-
 /* 登录注册表单切换动画 */
 .form-flip-out {
     transform: rotateY(-90deg);

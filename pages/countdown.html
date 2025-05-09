@@ -5,29 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>考试倒计时 - 课堂助手</title>
     <link rel="stylesheet" href="/css/styles.css" />
-    <!-- 不再引入侧边栏CSS，由组件自动加载 -->
-    <!-- 页脚样式现在也由组件自动加载 -->
-    <!-- 滚动动画样式现在也由组件自动加载 -->
-    <!-- 添加主题样式 -->
     <link rel="stylesheet" href="/css/themes/themes.css" />
-    <!-- 使用图标库 -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
-    <!-- 添加 Remix Icon 库，用于侧边栏图标 -->
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
-    <!-- 添加页面特定样式 -->
     <link rel="stylesheet" href="/css/pages/countdown.css" />
 
-    <!-- 预先加载关键模块 -->
-    <!-- 预先加载关键模块 (Moved to js/pages/countdown/countdown.js) -->
   </head>
   <body>
-    <!-- 侧边栏导航 - 使用ID以便组件初始化 -->
+    <!-- 侧边栏导航 -->
     <div id="sidebar-container"></div>
 
     <!-- 移动端菜单切换按钮 -->
@@ -95,8 +86,7 @@
 
       <!-- 考试倒计时列表 -->
       <div class="countdown-list" id="countdown-list">
-        <!-- 动态生成考试列表，移除静态内容 -->
-        <!-- 添加加载指示器 -->
+        <!-- 动态生成 -->
         <div class="loading-indicator" id="loading-indicator">
           <i class="fas fa-circle-notch fa-spin"></i>
           <p>加载中...</p>
@@ -119,7 +109,7 @@
       </div>
     </div>
 
-    <!-- 添加/编辑考试弹框 - 修复结构确保正确显示 -->
+    <!-- 添加/编辑考试弹框 -->
     <div class="modal-container" id="exam-modal">
       <div class="modal-content">
         <div class="modal-close" id="close-exam-modal" aria-label="关闭">×</div>
@@ -188,32 +178,22 @@
       <i class="fas fa-undo-alt"></i> 撤销删除
     </button>
 
-    <!-- 页脚 - 简化为只保留容器 -->
+    <!-- 页脚 -->
     <footer class="footer"></footer>
     <script type="module" src="/js/main.js"></script>
-    <!-- 引入新的侧边栏组件 -->
     <script type="module" src="/components/sidebar/sidebar.js"></script>
-    <!-- 引入顶栏组件 -->
     <script type="module" src="/components/header/header.js"></script>
-    <!-- 初始化侧边栏组件 (Moved to js/pages/countdown/countdown.js) -->
-    <!-- 添加按钮组件脚本 -->
     <script type="module" src="/components/buttons/buttons.js"></script>
-    <!-- 添加页脚脚本 -->
     <script type="module" src="/components/footer/footer.js"></script>
-    <!-- 添加滚动动画脚本 -->
     <script
       type="module"
       src="/components/scrollAnimation/scrollAnimation.js"
     ></script>
-    <!-- 添加通知组件脚本 -->
     <script
       type="module"
       src="/components/notifications/notifications.js"
     ></script>
-    <!-- 添加主题管理脚本 -->
     <script type="module" src="/js/themes.js"></script>
-    <!-- 添加倒计时页面特定脚本 -->
     <script type="module" src="/js/pages/countdown/countdown.js"></script>
-    <!-- Updated path -->
   </body>
 </html>
