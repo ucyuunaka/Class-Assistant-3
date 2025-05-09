@@ -317,36 +317,71 @@
   position: relative;
 }
 
-.timetable-cell.drag-over::after {
-  content: '\2713';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-  color: var(--primary-color, #009688);
-  opacity: 0;
-  animation: checkmark-pulse 1.5s infinite;
+/* 有效放置的脉冲动画 */
+.preview-pulse-animation {
+  animation: validPulse 1.5s infinite;
 }
 
-
-.timetable-cell.drag-preview-valid {
-  background-color: rgba(var(--primary-color-rgb, 0, 150, 136), 0.05);
-  box-shadow: inset 0 0 0 1px var(--primary-color, #009688);
-  transition: all 0.3s ease;
-  position: relative;
+@keyframes validPulse {
+  0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(40, 167, 69, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
 }
 
-.timetable-cell.drag-preview-valid::after {
-  content: '\2713';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 16px;
-  color: var(--primary-color, #009688);
-  opacity: 0.5;
-  animation: checkmark-fade 2s infinite;
+/* 无效放置的警告动画 */
+.preview-error-animation {
+  animation: invalidPulse 1.5s infinite;
+}
+
+@keyframes invalidPulse {
+  0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(220, 53, 69, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+}
+
+/* 进入有效区域的动画 */
+.drag-enter-animation {
+  animation: scaleIn 0.3s forwards;
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* 进入无效区域的动画 */
+.drag-enter-error-animation {
+  animation: shakeError 0.4s forwards;
+}
+
+@keyframes shakeError {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* 强化可放置/不可放置样式 */
+.drag-preview-valid {
+  background-color: rgba(40, 167, 69, 0.2) !important;
+  border: 2px dashed #28a745 !important;
+}
+
+.drag-preview-invalid {
+  background-color: rgba(220, 53, 69, 0.2) !important;
+  border: 2px dashed #dc3545 !important;
+}
+
+.drag-over {
+  background-color: rgba(40, 167, 69, 0.3) !important;
+  border: 2px solid #28a745 !important;
+}
+
+.drag-over-invalid {
+  background-color: rgba(220, 53, 69, 0.3) !important;
+  border: 2px solid #dc3545 !important;
 }
 
 @keyframes theme-pulse {
@@ -392,36 +427,29 @@
   }
 }
 
-/* 课程拖动时的提示 */
+/* 强化拖拽提示样式 */
 .drag-tooltip {
   position: absolute;
-  background-color: var(--tooltip-bg, rgba(0, 0, 0, 0.8));
-  color: var(--tooltip-text, white);
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
   padding: 5px 10px;
   border-radius: 4px;
   font-size: 12px;
   z-index: 1000;
   pointer-events: none;
   white-space: nowrap;
-  max-width: 200px;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 5px;
-  backdrop-filter: blur(2px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  animation: tooltip-fade-in 0.2s ease-out;
+  max-width: 250px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  animation: fadeIn 0.2s;
 }
 
-@keyframes tooltip-fade-in {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* 添加课程弹窗 */

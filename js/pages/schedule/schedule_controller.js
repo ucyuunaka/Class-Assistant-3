@@ -13,13 +13,8 @@ import { showNotification } from "/components/notifications/notifications.js"; /
  */
 export function initSchedule() {
   try {
-    // 尝试从本地存储加载数据
+    // 从本地存储加载数据
     const loadedFromStorage = loadScheduleFromStorage();
-    if (loadedFromStorage) {
-
-    } else {
-
-    }
 
     // 初始化缓存
     updateCoursesCache();
@@ -50,6 +45,5 @@ export function initSchedule() {
   }
 }
 
-// 导出一些公共方法供外部使用
-// Note: afterCourseDataChanged is now imported from schedule_data.js
+// 导出一些公共方法供其他调用
 export { afterCourseDataChanged };

@@ -8,7 +8,8 @@ import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation
 
 document.addEventListener("DOMContentLoaded", function () {
 // 检查首次登录体验
-//   checkFirstLoginExperience(); // 调试时临时注释掉
+  //   checkFirstLoginExperience(); // 调试时临时注释掉
+  
   // 初始化滚动动画
   initScrollAnimation(".animate-on-scroll", {
     threshold: 0.1,
@@ -59,7 +60,7 @@ function initColorPicker() {
   });
   
 }
-// --- Component Initialization (Moved from schedule.html) ---
+
 import { Sidebar } from "/components/sidebar/sidebar.js";
 import { Header } from "/components/header/header.js";
 
@@ -68,17 +69,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 初始化顶栏组件
   const header = new Header("header-container", {
-    // isHomePage: false, // 移除 isHomePage
-    title: "我的课程表", // 保留标题
-    // subtitle: "管理和安排你的课程，清晰掌握每周学习时间", // 移除副标题
-    buttons: [ // 添加按钮配置
+    title: "我的课程表",
+    subtitle: "管理并安排课程，清晰掌握每周学习时间",
+    buttons: [
       {
         text: "添加课程",
-        url: "#", // URL 设为 #，具体行为由页面JS处理
-        id: "add-course-header-btn" // 添加ID以便JS绑定事件
+        url: "#",
+        id: "add-course-header-btn"
       }
     ],
-    // buttonPosition: "right", // 移除 buttonPosition
   });
 });
-// --- End Component Initialization ---

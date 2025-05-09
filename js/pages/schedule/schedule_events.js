@@ -121,7 +121,6 @@ export function initScheduleEvents() {
   closeClearModal.addEventListener("click", hideClearConfirm);
   cancelClear.addEventListener("click", hideClearConfirm);
   confirmClear.addEventListener("click", function() {
-    // 使用clearCourses函数清空课程数据
     clearCourses();
 
     // 更新视图
@@ -205,7 +204,7 @@ export function initScheduleEvents() {
         if (success) {
           window.showNotification("课程已更新", "success");
           afterCourseDataChanged();
-          closeAddCourseModal(); // 关闭模态框
+          closeAddCourseModal();
         } else {
           window.showNotification("更新课程失败", "error");
         }
@@ -215,7 +214,7 @@ export function initScheduleEvents() {
         if (newCourse) {
           window.showNotification("课程已添加", "success");
           afterCourseDataChanged();
-          closeAddCourseModal(); // 关闭模态框
+          closeAddCourseModal();
         } else {
           window.showNotification("添加课程失败", "error");
         }
@@ -336,7 +335,7 @@ function setupCourseCardEvents() {
     ) {
       if (isEditMode) {
         e.preventDefault();
-        e.stopImmediatePropagation(); // 使用更严格的事件阻止
+        e.stopImmediatePropagation();
 
         const deleteIcon = e.target.closest(".course-delete-icon");
         const courseCard = deleteIcon.closest(".course-card");
@@ -344,7 +343,7 @@ function setupCourseCardEvents() {
 
         showDeleteConfirm(courseId);
       }
-      return; // 确保不会继续处理其他事件
+      return;
     }
 
     // 原有的课程卡片点击事件
@@ -547,7 +546,7 @@ function createNewCourse(day, time) {
  * @param {Object} course - 课程数据
  */
 function showCourseDetails(course) {
-  // 可以在这里实现课程详情查看功能
+  // 【备用】可以在这里实现课程详情查看功能
 }
 
 // 导出当前的编辑模式状态

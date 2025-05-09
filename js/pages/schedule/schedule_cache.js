@@ -1,7 +1,7 @@
 // 课表缓存控制器
 // 用于优化课表性能，通过缓存常用数据避免重复计算
 
-import { scheduleData } from "/js/pages/schedule/schedule_data.js"; // Updated path
+import { scheduleData } from "/js/pages/schedule/schedule_data.js";
 
 // 课程缓存数据结构
 const coursesCache = {
@@ -10,12 +10,11 @@ const coursesCache = {
 };
 
 /**
- * 验证缓存中的单元格占用情况
- * 确保课程真正占用了正确的格子
+ * （调试）验证缓存中的单元格占用情况，以确保课程真正占用了正确的格子
  */
 function validateCacheOccupation() {
   let issues = 0;
-  const seen = new Set(); // 用于检测重复占用
+  const seen = new Set(); // 检测重复占用
   
   // 首先检查所有课程声明的占用格子
   for (const course of scheduleData.courses) {
@@ -26,7 +25,7 @@ function validateCacheOccupation() {
     for (let time = startTime; time <= endTime; time++) {
       const cellKey = `${course.day}-${time}`;
       
-      // 检查这个格子在缓存中是否被同一课程占用
+      // （调试）检查这个格子在缓存中是否被同一课程占用
       if (!coursesCache.occupiedCells.has(cellKey)) {
         console.error(`缓存验证失败: 单元格 [${cellKey}] 应被课程 "${course.title}" (ID:${course.id}) 占用，但未在缓存中找到`);
         issues++;
@@ -38,7 +37,7 @@ function validateCacheOccupation() {
         }
       }
       
-      // 检查重复占用
+      // （调试）检查重复占用
       if (seen.has(cellKey)) {
         console.error(`重复占用检测: 单元格 [${cellKey}] 被多个课程声明占用`);
         issues++;
@@ -84,7 +83,6 @@ function validateCacheOccupation() {
  */
 export function updateCoursesCache() {
   try {
-    // 记录开始时间（用于性能监控）
     const startTime = performance.now();
     
     // 重置缓存
@@ -106,8 +104,7 @@ export function updateCoursesCache() {
       
       // 验证课程数据完整性
       if (!course.id || !course.day || !course.time) {
-        console.warn(`发现不完整的课程数据: ${JSON.stringify(course)}`);
-        return; // 跳过此课程
+        return; // 跳过
       }
       
       // 将课程添加到对应天的数组
@@ -127,7 +124,7 @@ export function updateCoursesCache() {
           const existingId = coursesCache.occupiedCells.get(cellKey);
           if (existingId !== course.id) {
             const existingCourse = scheduleData.courses.find(c => c.id === existingId);
-            console.warn(`单元格冲突: [${cellKey}] 已被课程 "${existingCourse ? existingCourse.title : '未知'}" (ID:${existingId}) 占用，现尝试被 "${course.title}" (ID:${course.id}) 占用`);
+            // console.warn(`单元格冲突: [${cellKey}] 已被课程 "${existingCourse ? existingCourse.title : '未知'}" (ID:${existingId}) 占用，现尝试被 "${course.title}" (ID:${course.id}) 占用`);
           }
         }
         
@@ -165,9 +162,8 @@ export function updateCoursesCache() {
  * @returns {boolean} 是否被占用
  */
 function isCellOccupied(day, time, excludeCourseId) {
-  // 确保输入参数有效
   if (!day || !time) {
-    console.warn(`检查无效的单元格: 日期=${day}, 时间=${time}`);
+    // console.warn(`检查无效的单元格: 日期=${day}, 时间=${time}`);
     return true; // 无效单元格视为被占用
   }
   
@@ -210,10 +206,8 @@ export function checkCanPlaceCourse(courseId, targetDay, targetTime) {
     return false;
   }
 
-  
   // 计算课程时长（节数）
   const courseDuration = course.endTime ? (course.endTime - course.time + 1) : 1;
-
   
   // 检查时间是否超出范围
   if (targetTime + courseDuration - 1 > scheduleData.timePeriods.length) {

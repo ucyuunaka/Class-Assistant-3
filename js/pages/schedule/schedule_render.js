@@ -17,10 +17,9 @@ export function renderTimetable() {
   // 清空现有内容
   timetableGrid.innerHTML = "";
 
-  // 添加表头
   timetableGrid.appendChild(createHeader());
 
-  // 创建一个数组跟踪已渲染的课程ID，避免重复渲染
+  // 创建一个数组保存已渲染的课程ID，避免重复渲染
   const renderedCourses = new Set();
   
   // 记录每个单元格的DOM引用，方便后续处理跨时间段课程
@@ -197,20 +196,18 @@ function adjustFontSize(card) {
   const infoElements = card.querySelectorAll(".course-info");
   const locationElement = card.querySelector(".course-location");
 
-  // 设置最小字体大小和基准字体大小
-  const minFontSize = 0.6; // rem - 允许更小的字体以确保完整显示
-  const baseTitleSize = 1.05; // rem - 将基准大小从0.95增加到1.05
-  const baseInfoSize = 0.8; // rem
+  const minFontSize = 0.6;
+  const baseTitleSize = 1.05;
+  const baseInfoSize = 0.8;
 
   try {
     // 调整课程名称字体大小 - 始终应用自适应缩放
     if (titleElement) {
       const titleLength = titleElement.textContent.length;
 
-      // 课程名称自适应算法 - 根据字符数更积极地缩放
+      // 课程名称自适应算法 - 根据字符数缩放
       let scaleFactor = 1;
       if (titleLength > 4) {
-        // 字符越多，缩放越明显
         scaleFactor = Math.min(1, 4 / titleLength + 0.1);
       }
 
@@ -221,7 +218,7 @@ function adjustFontSize(card) {
       titleElement.style.fontSize = `${newSize}rem`;
     }
 
-    // 调整教师信息字体大小 - 所有内容都应用自适应缩放
+    // 调整教师信息字体大小 - 自适应缩放
     infoElements.forEach((element) => {
       if (element) {
         const textLength = element.textContent.length;
@@ -239,7 +236,7 @@ function adjustFontSize(card) {
       }
     });
 
-    // 调整位置信息字体大小 - 所有内容都应用自适应缩放
+    // 调整位置信息字体大小 - 自适应缩放
     if (locationElement) {
       const locationText = locationElement.textContent.trim();
       const textLength = locationText.length;
@@ -270,10 +267,7 @@ export function renderListView() {
   const listContainer = document.getElementById("list-view-container");
   if (!listContainer) return;
 
-  // 保存当前滚动位置
   const scrollTop = listContainer.scrollTop;
-
-  // 清空现有内容
   listContainer.innerHTML = "";
 
   // 按天组织课程
@@ -348,7 +342,6 @@ export function renderListView() {
     listContainer.appendChild(dayCard);
   });
 
-  // 恢复滚动位置
   listContainer.scrollTop = scrollTop;
 }
 

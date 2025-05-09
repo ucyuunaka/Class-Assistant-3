@@ -33,7 +33,7 @@ const courseDef = [
     location: "东2-305",
     color: "course-computer",
     day: 1,
-    timeSlots: [7, 8] // 第7-8节
+    timeSlots: [7, 8]
   },
   {
     title: "智能体集群控制技术（含实验）",
@@ -41,7 +41,7 @@ const courseDef = [
     location: "东1-101",
     color: "course-computer",
     day: 2,
-    timeSlots: [3, 4] // 第3-4节
+    timeSlots: [3, 4]
   },
   {
     title: "物联网技术与应用",
@@ -49,7 +49,7 @@ const courseDef = [
     location: "东1-101",
     color: "course-computer",
     day: 4,
-    timeSlots: [5, 6] // 第5-6节
+    timeSlots: [5, 6]
   },
   {
     title: "最优化理论与方法",
@@ -57,7 +57,7 @@ const courseDef = [
     location: "东2-206",
     color: "course-math",
     day: 3,
-    timeSlots: [5, 6] // 第5-6节
+    timeSlots: [5, 6]
   },
   {
     title: "自然语言处理",
@@ -65,7 +65,7 @@ const courseDef = [
     location: "东1-101",
     color: "course-computer",
     day: 3,
-    timeSlots: [9, 10] // 第9-10节
+    timeSlots: [9, 10]
   },
   {
     title: "软件工程（含实验）",
@@ -73,7 +73,7 @@ const courseDef = [
     location: "东2-207",
     color: "course-computer",
     day: 1,
-    timeSlots: [3, 4] // 第3-4节
+    timeSlots: [3, 4]
   },
   {
     title: "现代控制理论",
@@ -81,7 +81,7 @@ const courseDef = [
     location: "东2-206",
     color: "course-physics",
     day: 4,
-    timeSlots: [3, 4] // 第3-4节
+    timeSlots: [3, 4]
   },
   {
     title: "数字信号处理",
@@ -89,7 +89,7 @@ const courseDef = [
     location: "东1-101",
     color: "course-computer",
     day: 2,
-    timeSlots: [7, 8] // 第7-8节
+    timeSlots: [7, 8]
   },
   {
     title: "机器学习基础",
@@ -97,7 +97,7 @@ const courseDef = [
     location: "东2-305",
     color: "course-computer",
     day: 5,
-    timeSlots: [3, 4] // 第3-4节
+    timeSlots: [3, 4]
   },
   {
     title: "计算机视觉",
@@ -105,7 +105,7 @@ const courseDef = [
     location: "东1-101",
     color: "course-computer",
     day: 5,
-    timeSlots: [5, 6] // 第5-6节
+    timeSlots: [5, 6]
   },
   {
     title: "智能机器人导论",
@@ -113,7 +113,7 @@ const courseDef = [
     location: "东2-207",
     color: "course-physics",
     day: 2,
-    timeSlots: [5, 6] // 第5-6节
+    timeSlots: [5, 6]
   },
   {
     title: "毕业设计指导",
@@ -121,7 +121,7 @@ const courseDef = [
     location: "创新实验室",
     color: "course-sports",
     day: 6,
-    timeSlots: [3, 4] // 第3-4节
+    timeSlots: [3, 4]
   },
   {
     title: "专业英语",
@@ -129,7 +129,7 @@ const courseDef = [
     location: "外语楼206",
     color: "course-english",
     day: 3,
-    timeSlots: [7, 8] // 第7-8节
+    timeSlots: [7, 8]
   },
   {
     title: "嵌入式系统",
@@ -137,7 +137,7 @@ const courseDef = [
     location: "东2-207",
     color: "course-computer",
     day: 4,
-    timeSlots: [7, 8] // 第7-8节
+    timeSlots: [7, 8]
   },
   {
     title: "人工智能导论",
@@ -145,7 +145,7 @@ const courseDef = [
     location: "东1-101",
     color: "course-computer",
     day: 1,
-    timeSlots: [5, 6] // 第5-6节
+    timeSlots: [5, 6]
   },
   {
     title: "工业互联网技术与应用",
@@ -153,7 +153,7 @@ const courseDef = [
     location: "东2-206",
     color: "course-computer",
     day: 5,
-    timeSlots: [7, 8] // 第7-8节
+    timeSlots: [7, 8]
   }
 ];
 
@@ -180,7 +180,7 @@ function generateCourses() {
   return courses;
 }
 
-// 导出课表数据
+// 课表数据
 export const scheduleData = {
   courses: generateCourses(),
   timePeriods: [
@@ -207,7 +207,7 @@ export const scheduleData = {
   ],
 };
 
-// 本地存储的键名
+// 本地存储名
 const STORAGE_KEY = 'classroom-assistant-schedule';
 
 // 从本地存储加载数据
@@ -225,7 +225,7 @@ export function loadScheduleFromStorage() {
       return true;
     }
   } catch (error) {
-    console.error('从本地存储加载课表数据失败:', error);
+    //console.error('从本地存储加载课表数据失败:', error);
   }
   
   return false;
@@ -246,7 +246,7 @@ export function saveScheduleToStorage() {
 
 // 添加课程
 export function addCourse(courseData) {
-  // 自动生成ID (使用当前最大ID + 1)
+  // 自动生成ID (当前最大ID + 1)
   const maxId = scheduleData.courses.reduce((max, course) => Math.max(max, course.id || 0), 0);
   const newCourse = {
     id: maxId + 1,

@@ -1,9 +1,9 @@
 // 课表拖放控制器
 // 负责课表的拖放交互功能
 
-import { moveCourse, scheduleData } from "/js/pages/schedule/schedule_data.js"; // Updated path
-import { renderTimetable, renderListView, getDayName } from "/js/pages/schedule/schedule_render.js"; // Updated path
-import { checkCanPlaceCourse, getPlacementBlockReason, updateCoursesCache, coursesCache } from "/js/pages/schedule/schedule_cache.js"; // Updated path
+import { moveCourse, scheduleData } from "/js/pages/schedule/schedule_data.js";
+import { renderTimetable, renderListView, getDayName } from "/js/pages/schedule/schedule_render.js";
+import { checkCanPlaceCourse, getPlacementBlockReason, updateCoursesCache, coursesCache } from "/js/pages/schedule/schedule_cache.js";
 
 // 拖拽状态变量
 let draggedItem = null;
@@ -13,8 +13,8 @@ const mouseOverThrottle = 100; // 鼠标悬停事件节流间隔（毫秒）
 
 // UI 更新队列优化
 const uiUpdateQueue = {
-  cells: new Map(), // 单元格更新队列
-  pendingUpdate: false, // 是否有等待的更新
+  cells: new Map(),
+  pendingUpdate: false,
   
   // 添加单元格到更新队列
   queueCellUpdate(cell, updates) {
@@ -39,7 +39,7 @@ const uiUpdateQueue = {
           if (!cellUpdates.classes.add.includes(cls) && !cell.classList.contains(cls)) {
             cellUpdates.classes.add.push(cls);
           }
-          // 从移除列表中删除，如果存在的话
+          // 从移除列表中删除（如果存在）
           const removeIndex = cellUpdates.classes.remove.indexOf(cls);
           if (removeIndex !== -1) {
             cellUpdates.classes.remove.splice(removeIndex, 1);
@@ -47,7 +47,7 @@ const uiUpdateQueue = {
         });
       } else if (!cellUpdates.classes.add.includes(updates.addClass) && !cell.classList.contains(updates.addClass)) {
         cellUpdates.classes.add.push(updates.addClass);
-        // 从移除列表中删除，如果存在的话
+        // 从移除列表中删除（如果存在）
         const removeIndex = cellUpdates.classes.remove.indexOf(updates.addClass);
         if (removeIndex !== -1) {
           cellUpdates.classes.remove.splice(removeIndex, 1);
@@ -61,7 +61,7 @@ const uiUpdateQueue = {
           if (!cellUpdates.classes.remove.includes(cls) && cell.classList.contains(cls)) {
             cellUpdates.classes.remove.push(cls);
           }
-          // 从添加列表中删除，如果存在的话
+          // 从添加列表中删除（如果存在）
           const addIndex = cellUpdates.classes.add.indexOf(cls);
           if (addIndex !== -1) {
             cellUpdates.classes.add.splice(addIndex, 1);
@@ -69,7 +69,7 @@ const uiUpdateQueue = {
         });
       } else if (!cellUpdates.classes.remove.includes(updates.removeClass) && cell.classList.contains(updates.removeClass)) {
         cellUpdates.classes.remove.push(updates.removeClass);
-        // 从添加列表中删除，如果存在的话
+        // 从添加列表中删除（如果存在）
         const addIndex = cellUpdates.classes.add.indexOf(updates.removeClass);
         if (addIndex !== -1) {
           cellUpdates.classes.add.splice(addIndex, 1);
@@ -77,12 +77,11 @@ const uiUpdateQueue = {
       }
     }
     
-    // 设置 tooltip
     if (updates.tooltip !== undefined) {
       cellUpdates.tooltip = updates.tooltip;
     }
     
-    // 如果没有挂起的更新，请求动画帧
+    // 如果无挂起的更新，更新动画帧
     if (!this.pendingUpdate) {
       this.pendingUpdate = true;
       requestAnimationFrame(() => this.processUpdates());
@@ -103,7 +102,6 @@ const uiUpdateQueue = {
         cell.classList.remove(...updates.classes.remove);
       }
       
-      // 处理 tooltip
       if (updates.tooltip !== null) {
         const existingTooltip = cell.querySelector(".drag-tooltip");
         
@@ -116,7 +114,7 @@ const uiUpdateQueue = {
           tooltip.textContent = updates.tooltip;
           cell.appendChild(tooltip);
         } 
-        // 提示为空且存在当前提示，移除它
+        // 提示为空且存在当前提示，则移除
         else if (updates.tooltip === '' && existingTooltip) {
           existingTooltip.remove();
         }
@@ -215,112 +213,7 @@ export function setupDragAndDrop(isEditMode) {
     window.removeEventListener('themeChanged', updateDragDropTheme);
   }
   
-  // 注入CSS动画样式，如果还没有添加过
-  injectDragDropStyles();
-}
-
-/**
- * 注入拖放样式
- */
-function injectDragDropStyles() {
-  if (!document.getElementById("drag-animation-styles")) {
-    const styleElement = document.createElement("style");
-    styleElement.id = "drag-animation-styles";
-    styleElement.textContent = `
-      /* 有效放置的脉冲动画 */
-      .preview-pulse-animation {
-        animation: validPulse 1.5s infinite;
-      }
-      
-      @keyframes validPulse {
-        0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4); }
-        70% { box-shadow: 0 0 0 8px rgba(40, 167, 69, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
-      }
-      
-      /* 无效放置的警告动画 */
-      .preview-error-animation {
-        animation: invalidPulse 1.5s infinite;
-      }
-      
-      @keyframes invalidPulse {
-        0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
-        70% { box-shadow: 0 0 0 8px rgba(220, 53, 69, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
-      }
-      
-      /* 进入有效区域的动画 */
-      .drag-enter-animation {
-        animation: scaleIn 0.3s forwards;
-      }
-      
-      @keyframes scaleIn {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-      }
-      
-      /* 进入无效区域的动画 */
-      .drag-enter-error-animation {
-        animation: shakeError 0.4s forwards;
-      }
-      
-      @keyframes shakeError {
-        0% { transform: translateX(0); }
-        25% { transform: translateX(-5px); }
-        50% { transform: translateX(5px); }
-        75% { transform: translateX(-5px); }
-        100% { transform: translateX(0); }
-      }
-      
-      /* 强化拖拽提示样式 */
-      .drag-tooltip {
-        position: absolute;
-        top: -30px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 5px 10px;
-        border-radius: 4px;
-        font-size: 12px;
-        z-index: 1000;
-        pointer-events: none;
-        white-space: nowrap;
-        max-width: 250px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        animation: fadeIn 0.2s;
-      }
-      
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-      
-      /* 强化可放置/不可放置样式 */
-      .drag-preview-valid {
-        background-color: rgba(40, 167, 69, 0.2) !important;
-        border: 2px dashed #28a745 !important;
-      }
-      
-      .drag-preview-invalid {
-        background-color: rgba(220, 53, 69, 0.2) !important;
-        border: 2px dashed #dc3545 !important;
-      }
-      
-      .drag-over {
-        background-color: rgba(40, 167, 69, 0.3) !important;
-        border: 2px solid #28a745 !important;
-      }
-      
-      .drag-over-invalid {
-        background-color: rgba(220, 53, 69, 0.3) !important;
-        border: 2px solid #dc3545 !important;
-      }
-    `;
-    document.head.appendChild(styleElement);
-  }
+  // 样式已迁移到 css/pages/schedule.css
 }
 
 /**
@@ -334,20 +227,18 @@ function updateDragDropTheme() {
   const currentTheme = document.body.getAttribute('data-theme') || 'light';
   
   if (currentTheme === 'dark') {
-    // 深色模式下使用 requestAnimationFrame 批量更新
     requestAnimationFrame(() => {
       cells.forEach(cell => {
         if (cell.classList.contains("drag-preview-valid")) {
-          cell.style.backgroundColor = "rgba(40, 167, 69, 0.2)"; // 深色主题中的有效预览颜色
+          cell.style.backgroundColor = "rgba(40, 167, 69, 0.2)";
         } else if (cell.classList.contains("drag-preview-invalid")) {
-          cell.style.backgroundColor = "rgba(220, 53, 69, 0.2)"; // 深色主题中的无效预览颜色
+          cell.style.backgroundColor = "rgba(220, 53, 69, 0.2)";
         } else {
           cell.style.backgroundColor = "";
         }
       });
     });
   } else {
-    // 浅色模式下使用 requestAnimationFrame 批量恢复默认样式
     requestAnimationFrame(() => {
       cells.forEach(cell => {
         cell.style.backgroundColor = "";
@@ -396,9 +287,9 @@ function tempRemoveCourseFromCache(course) {
         coursesCache.occupiedCells.delete(cellKey);
       } else if (coursesCache.occupiedCells.has(cellKey)) {
         const otherId = coursesCache.occupiedCells.get(cellKey);
-        console.warn(`意外: 单元格 [${cellKey}] 被另一个课程占用 (ID:${otherId})`);
+        console.warn(`单元格 [${cellKey}] 被另一个课程占用 (ID:${otherId})`);
       } else {
-        console.warn(`意外: 单元格 [${cellKey}] 不在占用缓存中`);
+        console.warn(`单元格 [${cellKey}] 不在占用缓存中`);
       }
     }
   } catch (error) {
@@ -492,7 +383,7 @@ function updateAllCellsPreview(courseId) {
     restoreTempRemovedCells(tempOccupiedCells);
     
     
-    // 使用 requestAnimationFrame 批量更新 UI
+    // requestAnimationFrame 批量更新 UI
     requestAnimationFrame(() => {
       updates.forEach(update => {
         try {
@@ -511,14 +402,12 @@ function updateAllCellsPreview(courseId) {
             "drag-enter-error-animation"
           );
           
-          // 添加合适的预览样式类
           if (update.canPlace) {
             update.cell.classList.add("drag-preview-valid");
           } else {
             update.cell.classList.add("drag-preview-invalid");
           }
           
-          // 移除可能的tooltip
           const tooltip = update.cell.querySelector(".drag-tooltip");
           if (tooltip) tooltip.remove();
         } catch (updateError) {
@@ -725,7 +614,7 @@ function handleGridDrop(e) {
         draggedItem.style.opacity = "1";
       }
       
-      // 确保清理拖动状态并更新缓存
+      // （32）确保清理拖动状态并更新缓存
       resetDragState();
       updateCoursesCache();
       return;
@@ -760,7 +649,7 @@ function handleGridDrop(e) {
         renderListView();
         
         // 重新设置拖放功能
-        setupDragAndDrop(true); // 传递true以保持编辑模式
+        setupDragAndDrop(true);
         
         // 显示成功消息
         window.showNotification("课程已移动", "success");
@@ -902,7 +791,7 @@ function handleGridMouseOver(e) {
  * @param {Event} e - 鼠标事件对象
  */
 function handleGridMouseOut(e) {
-  // 鼠标离开拖动相关处理可以添加在这里
+  // 【备用】鼠标离开拖动相关处理可以添加在这里
 }
 
 // 导出函数以供其他模块使用
