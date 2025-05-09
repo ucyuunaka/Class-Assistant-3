@@ -164,7 +164,7 @@ export const ThemeManager = {
     // 从CSS变量获取颜色
     let startColor = styleVars.getPropertyValue('--gradient-start').trim();
     
-    // 如果无法获取，使用备用颜色
+    // 无法获取的情况下使用备用颜色
     if (!startColor) {
       switch(themeId) {
         case 'classic-blue-pink': startColor = '#91defe'; break;

@@ -8,15 +8,11 @@ import { showNotification } from '/components/notifications/notifications.js';
 
 // 文档加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
-  // 初始化主题
+  // 初始化
   initTheme();
-  
-  // 初始化响应式导航菜单 (如果存在)
   if (document.querySelector('.nav-toggle')) {
     initNavbar();
   }
-  
-  // 课表渲染由各自页面的JS处理
 });
 
 /**
@@ -27,17 +23,17 @@ export function initNavbar() {
   const navLinks = document.querySelector('.nav-links');
   
   // 如果找到了导航切换按钮和链接容器
-  if (navToggle && navLinks) { // 确保 navLinks 也存在
+  if (navToggle && navLinks) {
     navToggle.addEventListener('click', function() {
       // 切换导航菜单的显示/隐藏
       navLinks.classList.toggle('active');
     });
     
-    // 点击导航链接后关闭菜单（移动端）
+    // 移动端的兼容
     const links = document.querySelectorAll('.nav-links a');
     links.forEach(link => {
       link.addEventListener('click', function() {
-        // 如果是在移动端视图下
+
         if (window.innerWidth <= 768) {
           navLinks.classList.remove('active');
         }
@@ -58,7 +54,7 @@ export function initNavbar() {
         navLinks.classList.remove('active');
       }
     });
-  } // 添加了对 navLinks 的检查
+  }
 }
 
 /**
@@ -66,17 +62,14 @@ export function initNavbar() {
  * 读取本地存储的主题偏好，并应用到页面
  */
 export function initTheme() {
-  // 从本地存储中获取主题偏好
+  // 本地存储中获取主题
   const savedTheme = localStorage.getItem('theme');
   
-  // 应用主题
   if (savedTheme === 'dark') {
     document.body.setAttribute('data-theme', 'dark');
   } else {
     document.body.setAttribute('data-theme', 'light');
   }
-  
-  // 应用字体大小
   const fontScale = localStorage.getItem('fontScale');
   if (fontScale) {
     document.documentElement.style.fontSize = `${fontScale}rem`;
@@ -288,7 +281,7 @@ export const Translator = {
             'countdown.title': 'Exam Countdown',
             'profile.title': 'My Profile',
             'settings.title': 'Settings',
-            // 添加更多翻译...
+            // 更多...
           };
         } else {
           this.translations.zh = {
@@ -298,7 +291,7 @@ export const Translator = {
             'countdown.title': '考试倒计时',
             'profile.title': '个人资料',
             'settings.title': '设置',
-            // 添加更多翻译...
+            // 更多...
           };
         }
         resolve();

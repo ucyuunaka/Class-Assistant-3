@@ -66,8 +66,6 @@ import { Header } from "/components/header/header.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   const sidebar = new Sidebar("sidebar-container");
-
-  // 初始化顶栏组件
   const header = new Header("header-container", {
     title: "我的课程表",
     subtitle: "管理并安排课程，清晰掌握每周学习时间",

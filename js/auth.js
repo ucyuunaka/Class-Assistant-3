@@ -8,13 +8,10 @@ import { Storage } from '/js/main.js';
 export function checkFirstLoginExperience() {
   // 从 localStorage 获取标记，注意 Storage.get 会自动 JSON.parse
   const hasCompleted = Storage.get('hasCompletedLoginFlow');
-  // 检查当前路径是否以 /login.html 或 /login 结尾 (兼容 Vite 开发服务器和构建后的路径)
   const isLoginPage = window.location.pathname.endsWith('/login.html') || window.location.pathname.endsWith('/login');
 
-  // 如果标记不为 true 且当前不是登录页
   if (hasCompleted !== true && !isLoginPage) {
     console.log('首次登录流程未完成，正在重定向到登录页面...');
-    // 使用绝对路径确保跳转正确
     window.location.href = '/pages/login.html';
   }
 }

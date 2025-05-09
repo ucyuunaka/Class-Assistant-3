@@ -1,13 +1,9 @@
-// 导入认证检查函数
 import { checkFirstLoginExperience } from '/js/auth.js';
-// 课程评价页面的主要脚本
 import { getAllCourses, subscribeToCourseUpdates, loadScheduleFromStorage } from "/js/pages/schedule/schedule_data.js";
 import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation.js";
-// 导入 Sidebar 和 Header 类
 import { Sidebar } from "/components/sidebar/sidebar.js";
 import { Header } from "/components/header/header.js";
 
-// 声明全局通知函数
 let showNotification;
 
 // 初始化变量
@@ -43,20 +39,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 初始化界面元素
   initUI(); // 首先获取DOM元素
-
-  // --- 组件初始化 Start ---
-  // 初始化侧边栏
   const sidebar = new Sidebar("sidebar-container");
-
-  // 初始化顶栏
   const header = new Header("header-container", {
-    title: "课评速记", // 保留标题
-    // subtitle: "记录与分享您的课程评价", // 移除副标题
-    // isHomePage: false, // 移除 isHomePage
-    // buttonPosition: "right", // 移除 buttonPosition
-    // buttons 默认为空，无需显式设置
+    title: "课评速记",
+    subtitle: "记录并与大家分享您的课程评价",
   });
-  // --- 组件初始化 End ---
 
   // 初始化表情选择器
   initEmojiPicker();
@@ -64,10 +51,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // 添加表情按钮直接调试
   debugEmojiButton();
 
-  // 添加示例评价数据（如果没有现有数据）
+  // 添加示例评价数据
   addSampleComments();
 
-  // 强制从本地存储重新加载课程数据，确保获取最新数据
   loadScheduleFromStorage();
   
   // 加载课程数据
@@ -100,24 +86,16 @@ document.addEventListener("DOMContentLoaded", function () {
   
   // 加载保存的评价数据
   loadComments();
-  
-  // --- 统一的滚动动画初始化 Start ---
-  // 在所有内容加载和初始化后，最后调用一次滚动动画
-  // 使用更长的延迟确保所有动态内容已渲染
+
+  // 在所有内容加载和初始化后，调用一次滚动动画
   setTimeout(() => {
     if (typeof initScrollAnimation === 'function') {
       initScrollAnimation(".animate-on-scroll", {
         threshold: 0.15,
-        once: false // 根据需要调整 once 参数，false 意味着每次滚动到都会触发
+        once: false
       });
-
-      // 确保所有评价动画元素都可见 (如果需要立即显示)
-      // document.querySelectorAll('.animate-on-scroll').forEach(element => {
-      //   element.classList.add('visible');
-      // });
     }
-  }, 500); // 增加延迟时间
-  // --- 统一的滚动动画初始化 End ---
+  }, 500);
 });
 
 // 初始化UI元素
@@ -137,21 +115,21 @@ function initUI() {
     showNotification("页面加载出现问题，请刷新重试", "error");
   }
   
-  // 特别检查emoji按钮
+  // 额外检查emoji按钮
   if (emojiButton) {
     
-    // 确保按钮所在的容器是相对定位
+    // 按钮所在的容器相对定位
     const actionsContainer = emojiButton.closest('.input-actions');
     if (actionsContainer) {
       actionsContainer.style.position = 'relative';
     }
     
-    // 确保按钮可点击
+    // 按钮可点击
     emojiButton.style.pointerEvents = "auto";
     emojiButton.style.cursor = "pointer";
     emojiButton.style.zIndex = "100";
     
-    // 添加高亮的hover效果
+    // 添加高亮效果
     emojiButton.addEventListener("mouseenter", function() {
       this.style.backgroundColor = "var(--primary-light, #e6f7ff)";
     });
@@ -167,9 +145,8 @@ function initUI() {
 // 渲染预设标签
 function renderPredefinedTags() {
   if (!predefinedTagsContainer) return;
-  // 清空现有标签（除了标签文本） 
   const label = predefinedTagsContainer.querySelector('.tag-label');
-  predefinedTagsContainer.innerHTML = ''; // 清空
+  predefinedTagsContainer.innerHTML = '';
   if (label) {
     predefinedTagsContainer.appendChild(label); // 重新添加标签文本
   }
@@ -205,17 +182,12 @@ function initEvents() {
   if (sendButton) {
     sendButton.addEventListener("click", sendComment);
   }
-
-  // 添加消息过滤功能 (如果需要的话)
-  // document.querySelectorAll('.filter-tag').forEach(tag => { ... });
-
-  // 添加窗口调整大小监听
   window.addEventListener('resize', handleResize);
 }
 
 // 处理窗口大小变化
 function handleResize() {
-  // 调整UI布局或元素大小
+  // 【备用】调整UI布局或元素大小
 }
 
 // 加载课程数据并渲染到选择框
@@ -308,18 +280,16 @@ function renderOptionalCourses() {
 function applySelectBoxStyles() {
   if (!courseSelect) return;
   
-  // 使用Select2库美化下拉框(如果引入了)
+  // 使用Select2库美化下拉框
   if (typeof $ !== 'undefined' && $.fn.select2) {
     try {
-      // 先销毁可能存在的旧实例，避免重复初始化
       try {
-        // 先检查元素是否已经初始化了Select2
         if ($(courseSelect).hasClass('select2-hidden-accessible')) {
           $(courseSelect).select2('destroy');
         } else {
         }
       } catch (e) {
-        // 如果没有实例，销毁会出错，但可以忽略这个错误
+        // 【备用】如果没有实例，销毁会出错，但可以忽略这个错误
       }
       
       // 重新初始化Select2
@@ -332,11 +302,9 @@ function applySelectBoxStyles() {
       
     } catch (e) {
       console.warn("Select2初始化失败，使用原生下拉框", e);
-      // 添加自定义类，应用CSS样式
       courseSelect.classList.add('enhanced-select');
     }
   } else {
-    // 添加自定义类，应用CSS样式
     courseSelect.classList.add('enhanced-select');
   }
 }
@@ -344,10 +312,10 @@ function applySelectBoxStyles() {
 // 初始化表情选择器
 function initEmojiPicker() {
   
-  // 注意：此功能已被debugEmojiButton函数替代
+  // 注：此功能已被debugEmojiButton函数替代
   // 保留此函数以避免修改过多代码结构
   
-  // 清理可能的旧选择器
+  // 清理旧选择器
   const oldPicker = document.getElementById("emojiFallback");
   if (oldPicker && oldPicker.parentNode) {
     oldPicker.parentNode.removeChild(oldPicker);
@@ -356,7 +324,6 @@ function initEmojiPicker() {
 
 // 添加表情反应
 function addReaction(emoji) {
-  
   if (!selectedReactions) {
     return;
   }
@@ -374,7 +341,7 @@ function addReaction(emoji) {
 
     // 点击删除标签
     reactionTag.querySelector(".remove").addEventListener("click", (e) => {
-      e.stopPropagation(); // 防止触发其他事件
+      e.stopPropagation();
       reactionMap.delete(emoji);
       reactionTag.remove();
     });
@@ -491,12 +458,12 @@ function addCommentToUI(comment, prepend = false) {
     </div>
   `;
   
-  // 添加评价文本(如果存在)
+  // 添加评价文本
   if (comment.text) {
     html += `<div class="comment-message">${comment.text}</div>`;
   }
   
-  // 添加表情反应(如果存在)
+  // 添加表情反应
   if (comment.reactions && Object.keys(comment.reactions).length > 0) {
     html += `
       <div class="comment-reactions">
@@ -511,7 +478,7 @@ function addCommentToUI(comment, prepend = false) {
     `;
   }
   
-  // 添加标签(如果存在)
+  // 添加标签
   if (comment.tags && comment.tags.length > 0) {
     html += `
       <div class="comment-tags">
@@ -612,12 +579,11 @@ function addUserReaction(commentId, emoji) {
     
     const comment = comments[commentIndex];
     
-    // 初始化用户反应数组（如果不存在）
+    // 初始化用户反应数组
     if (!comment.userReactions) {
       comment.userReactions = [];
     }
     
-    // 如果用户尚未对此表情反应，则添加到数组
     if (!comment.userReactions.includes(emoji)) {
       comment.userReactions.push(emoji);
     }
@@ -713,7 +679,6 @@ function formatTime(timestamp) {
 function sendComment() {
   if (!courseSelect || !commentInput) return;
 
-  // 获取选择的课程
   const course = courseSelect.value;
   if (!course) {
     showNotification("请选择一个课程", "error");
@@ -723,7 +688,7 @@ function sendComment() {
   // 获取评价文本
   const text = commentInput.value.trim();
   
-  // 获取选择的预设标签
+  // 获取预设标签
   const tags = Array.from(selectedPredefinedTags);
   
   // 获取表情反应
@@ -732,7 +697,7 @@ function sendComment() {
     reactions[emoji] = count;
   }
   
-  // 验证至少有文本、表情或标签之一
+  // ！！至少有文本、表情或标签之一，才能成功发送评价
   if (text === "" && Object.keys(reactions).length === 0 && tags.length === 0) {
     showNotification("请输入评价内容、选择表情或标签", "error");
     return;
@@ -782,36 +747,10 @@ function handleCourseUpdates() {
   renderOptionalCourses();
 }
 
-// 过滤消息 (如果需要)
-function filterMessages(category) {
-  if (!messageList) return;
-
-  const messages = messageList.querySelectorAll('.message');
-  const emptyState = document.getElementById('emptyState');
-  let hasVisibleMessages = false;
-
-  messages.forEach(message => {
-    if (!category || message.dataset.category === category) {
-      message.style.display = 'block';
-      hasVisibleMessages = true;
-    } else {
-      message.style.display = 'none';
-    }
-  });
-
-  // 显示或隐藏空状态
-  if (emptyState) {
-    emptyState.style.display = hasVisibleMessages ? 'none' : 'block';
-  }
-}
-
 // 监听主题变化事件
 function listenForThemeChanges() {
   window.addEventListener('themeChanged', function(event) {
-    // 获取新主题
     const newTheme = event.detail.theme;
-
-    // 应用主题变化到UI元素
     updateLessonUIForTheme(newTheme);
   });
 }
@@ -819,17 +758,16 @@ function listenForThemeChanges() {
 // 根据主题更新UI元素
 function updateLessonUIForTheme(theme) {
   
-  // 添加主题相关的视觉调整
   const messageElements = document.querySelectorAll('.message');
   
   messageElements.forEach((msg, index) => {
     // 根据主题给消息添加不同的视觉效果
     if (theme.includes('dark')) {
-      // 为深色主题调整样式
+      // 深色主题
       msg.style.borderLeftWidth = '3px';
       msg.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.2)';
     } else {
-      // 为浅色主题调整样式
+      // 浅色主题
       msg.style.borderLeftWidth = '4px';
       msg.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
     }
@@ -853,7 +791,7 @@ function updateLessonUIForTheme(theme) {
   }
 }
 
-// 表情按钮调试函数
+// 【调试】表情按钮调试
 function debugEmojiButton() {
   const emojiBtn = document.getElementById("emojiButton");
   if (!emojiBtn) {
@@ -861,7 +799,7 @@ function debugEmojiButton() {
     return;
   }
   
-  // 直接使用简短表情列表，避免乱码
+  // 直接使用本地表情
   const emojiList = ["😊", "😂", "😍", "👍", "👎", "❤️", "🔥", "🎉", "👏", "🤔", "😢", "😎", "🙏", "💡", "⭐", "🚀"];
   
   // 获取按钮所在的容器
@@ -874,40 +812,37 @@ function debugEmojiButton() {
   // 添加辅助定位类
   actionsContainer.classList.add('emoji-picker-wrapper');
   
-  // 获取或创建一个选择器容器 - 直接添加到body以避免任何容器的限制
+  // 获取或创建一个选择器容器
   let pickerContainer = document.getElementById("emojiPickerContainer");
   if (pickerContainer) {
-    // 如果容器不在body中，移动到body
     if (pickerContainer.parentNode !== document.body) {
       document.body.appendChild(pickerContainer);
     }
   } else {
-    // 创建一个新的容器并添加到body
+    // 创建一个新的容器
     pickerContainer = document.createElement('div');
     pickerContainer.id = "emojiPickerContainer";
     pickerContainer.className = "emoji-picker-container";
     document.body.appendChild(pickerContainer);
   }
   
-  // 添加滚动事件监听，确保表情选择器跟随按钮
+  // 添加滚动事件监听，确保表情选择器跟随
   window.addEventListener('scroll', updatePickerPosition, { passive: true });
   window.addEventListener('resize', updatePickerPosition, { passive: true });
   
-  // 辅助函数 - 更新选择器位置
+  // ！！辅助函数 - 更新选择器位置
   function updatePickerPosition() {
     const fallbackPicker = document.getElementById("emojiFallback");
     if (fallbackPicker && fallbackPicker.style.display === "block") {
       const btnRect = emojiBtn.getBoundingClientRect();
       
-      // 调整选择器的位置为按钮的绝对位置
       fallbackPicker.style.position = "fixed";
       fallbackPicker.style.top = (btnRect.bottom + 5) + "px";
       fallbackPicker.style.left = btnRect.left + "px";
       
-      // 检查是否会超出右边界
+      // 如果表情选择器超出右边界，则向左偏移
       const viewportWidth = window.innerWidth;
       if (btnRect.left + 320 > viewportWidth) {
-        // 如果会超出右边界，则向左偏移
         const rightOverflow = (btnRect.left + 320) - viewportWidth;
         fallbackPicker.style.left = (btnRect.left - rightOverflow - 20) + "px";
       }
@@ -916,23 +851,19 @@ function debugEmojiButton() {
   
   // 添加直接点击事件，独立于其他事件处理
   emojiBtn.addEventListener("click", function(e) {
-    // 阻止事件冒泡和默认行为
     e.stopPropagation();
     e.preventDefault();
   
     
-    // 获取或创建一个简单的fallback选择器（如果不存在）
+    // 获取或创建一个简单的fallback选择器
     let fallbackPicker = document.getElementById("emojiFallback");
     if (!fallbackPicker) {
       fallbackPicker = document.createElement("div");
       fallbackPicker.id = "emojiFallback";
       fallbackPicker.className = "emoji-fallback";
       
-      // 创建简单网格
       const grid = document.createElement("div");
       grid.className = "emoji-grid";
-      
-      // 添加表情
       emojiList.forEach(emoji => {
         const item = document.createElement("div");
         item.className = "emoji-item";
@@ -951,7 +882,6 @@ function debugEmojiButton() {
         grid.appendChild(item);
       });
       
-      // 设置网格样式
       grid.style.display = "grid";
       grid.style.gridTemplateColumns = "repeat(4, 1fr)";
       grid.style.gap = "8px";
@@ -960,9 +890,8 @@ function debugEmojiButton() {
       pickerContainer.appendChild(fallbackPicker);
     }
     
-    // 使用fixed定位，相对于视口而非容器，确保在最上层显示
     fallbackPicker.style.position = "fixed";
-    fallbackPicker.style.zIndex = "10001"; // 确保高于所有元素
+    fallbackPicker.style.zIndex = "10001";
     fallbackPicker.style.width = "320px";
     fallbackPicker.style.maxHeight = "300px";
     fallbackPicker.style.overflowY = "auto";
@@ -972,17 +901,15 @@ function debugEmojiButton() {
     fallbackPicker.style.padding = "10px";
     fallbackPicker.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
     
-    // 获取按钮相对于视口的位置
-    const btnRect = emojiBtn.getBoundingClientRect();
-    
     // 设置选择器位置，使其显示在按钮下方
+    const btnRect = emojiBtn.getBoundingClientRect();
     fallbackPicker.style.top = (btnRect.bottom + 5) + "px";
     fallbackPicker.style.left = btnRect.left + "px";
     
     // 检查是否会超出右边界
     const viewportWidth = window.innerWidth;
     if (btnRect.left + 320 > viewportWidth) {
-      // 如果会超出右边界，则向左偏移
+      // 如果会超出右边界，则显示在左边
       const rightOverflow = (btnRect.left + 320) - viewportWidth;
       fallbackPicker.style.left = (btnRect.left - rightOverflow - 20) + "px";
     }
@@ -1001,12 +928,11 @@ function debugEmojiButton() {
         }
       };
       
-      // 延迟添加事件，避免与当前点击冲突
       setTimeout(() => {
         document.addEventListener("click", handleClickOutside);
       }, 50);
     }
-  }, true); // 使用捕获阶段
+  }, true);
 }
 
 // 添加示例评价数据
@@ -1025,7 +951,7 @@ function addSampleComments() {
     const sampleComments = [
       {
         id: "sample-001",
-        timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // 3天前
+        timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // 实际显示“3天前”
         course: "数据结构与算法",
         text: "老师讲解非常清晰，课堂示例贴近实际应用，特别是红黑树的实现部分讲得很透彻。课程难度适中，作业量刚好。",
         reactions: {
@@ -1038,7 +964,7 @@ function addSampleComments() {
       },
       {
         id: "sample-002",
-        timestamp: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(), // 7天前
+        timestamp: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
         course: "计算机网络",
         text: "这门课程深入浅出，从TCP/IP协议到网络安全都有涉及。老师经验丰富，能用生动的例子解释复杂概念。实验环节设计很棒，帮助加深了对理论的理解。",
         reactions: {
@@ -1050,7 +976,7 @@ function addSampleComments() {
       },
       {
         id: "sample-003",
-        timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1天前
+        timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
         course: "操作系统原理",
         text: "操作系统的课程内容很全面，但节奏有点快。进程管理和内存管理部分讲得非常好，但文件系统部分感觉有些赶。课堂练习很有挑战性，能够锻炼思维。",
         reactions: {
@@ -1063,7 +989,7 @@ function addSampleComments() {
       },
       {
         id: "sample-004",
-        timestamp: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString(), // 15天前
+        timestamp: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString(),
         course: "前端开发实践",
         text: "实用性很强的一门课，React和Vue的部分讲得很接地气。课堂项目设计巧妙，能学到很多工程实践经验。希望JavaScript高级特性能多讲一些。",
         reactions: {
@@ -1076,7 +1002,7 @@ function addSampleComments() {
       },
       {
         id: "sample-005",
-        timestamp: new Date().toISOString(), // 今天
+        timestamp: new Date().toISOString(),
         course: "机器学习基础",
         text: "理论与实践结合得很好，从基础算法到实际应用都有覆盖。Python代码示例清晰易懂，作业布置合理，能够检验学习效果。期待后续的深度学习课程。",
         reactions: {
@@ -1089,8 +1015,7 @@ function addSampleComments() {
       },
       {
         id: "sample-006",
-        timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(), // 5天前
-        course: "软件工程",
+        timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
         text: "敏捷开发和设计模式的部分讲得很好，团队项目也很锻炼人。不过感觉测试驱动开发部分讲得有点浅，希望能有更多实际案例。",
         reactions: {
           "👨‍🏫": 5,
@@ -1101,7 +1026,7 @@ function addSampleComments() {
       }
     ];
     
-    // 保存示例评价到localStorage
+    // 保存到localStorage
     localStorage.setItem(STORAGE_KEY, JSON.stringify(sampleComments));
     
   } catch (error) {
@@ -1112,22 +1037,18 @@ function addSampleComments() {
 // 处理页面可见性变化
 function handleVisibilityChange() {
   if (document.visibilityState === 'visible') {
-    // 当页面重新变为可见时重新加载课程数据
-    
-    // 如果使用了Select2，先销毁旧实例
+    // 当页面重新可见时，重载课程数据
     if (typeof $ !== 'undefined' && $.fn.select2 && courseSelect) {
       try {
-        // 先检查元素是否已经初始化了Select2
+        // 先检查是否已经初始化了Select2
         if ($(courseSelect).hasClass('select2-hidden-accessible')) {
           $(courseSelect).select2('destroy');
         } else {
         }
       } catch (e) {
-        // 忽略销毁错误
       }
-    }
-    
-    // 重新加载课程数据
+    } 
+    // 重载课程数据
     reloadCoursesData();
   }
 }
@@ -1138,12 +1059,8 @@ function reloadCoursesData() {
     // 从localStorage重新加载最新的课程数据
     const loaded = loadScheduleFromStorage();
     if (loaded) {
-
     } else {
-
     }
-    
-    // 如果使用了Select2，先销毁旧实例
     if (typeof $ !== 'undefined' && $.fn.select2 && courseSelect) {
       try {
         // 先检查元素是否已经初始化了Select2
@@ -1152,17 +1069,11 @@ function reloadCoursesData() {
         } else {
         }
       } catch (e) {
-        // 忽略销毁错误
       }
     }
-    
     // 不管是否成功加载，都尝试更新选择框
     renderOptionalCourses();
   } catch (error) {
 
   }
 }
-
-
-// --- Component Initialization (Moved from lesson.html) ---
-// --- End Component Initialization ---

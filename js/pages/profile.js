@@ -1,8 +1,5 @@
-// 导入认证检查函数
 import { checkFirstLoginExperience } from '/js/auth.js';
-// 导入滚动动画组件
 import { initScrollAnimation } from "/components/scrollAnimation/scrollAnimation.js";
-// 导入模态框组件
 import { showConfirmModal } from "/components/modals/modals.js";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -13,134 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
     threshold: 0.1,
     once: true,
   });
-
-  // --- 基本信息编辑 ---
-  const editBasicInfoBtn = document.getElementById("edit-basic-info");
-  const saveBasicInfoBtn = document.getElementById("save-basic-info");
-  const cancelBasicInfoBtn = document.getElementById("cancel-basic-info");
-  const saveBasicInfoBtnGroup = document.getElementById("save-basic-info-btn-group");
-  const basicInfoInputs = document.querySelectorAll("#basic-info-form input");
-
-  // 保存原始值，用于取消时恢复
-  const originalBasicInfoValues = {};
-
-  if (editBasicInfoBtn) {
-    editBasicInfoBtn.addEventListener("click", function () {
-      // 启用输入框
-      basicInfoInputs.forEach((input) => {
-        originalBasicInfoValues[input.id] = input.value;
-        input.disabled = false;
-      });
-
-      // 显示保存按钮
-      if (saveBasicInfoBtnGroup) saveBasicInfoBtnGroup.style.display = "block";
-      // 隐藏编辑按钮
-      if (editBasicInfoBtn) editBasicInfoBtn.style.display = "none";
-    });
-  }
-
-  if (cancelBasicInfoBtn) {
-    cancelBasicInfoBtn.addEventListener("click", function () {
-      // 恢复原始值并禁用输入框
-      basicInfoInputs.forEach((input) => {
-        input.value = originalBasicInfoValues[input.id] || "";
-        input.disabled = true;
-      });
-
-      // 隐藏保存按钮
-      if (saveBasicInfoBtnGroup) saveBasicInfoBtnGroup.style.display = "none";
-      // 显示编辑按钮
-      if (editBasicInfoBtn) editBasicInfoBtn.style.display = "block";
-    });
-  }
-
-  if (saveBasicInfoBtn) {
-    saveBasicInfoBtn.addEventListener("click", function () {
-      // 在实际应用中，这里会发送数据到服务器
-
-      // 禁用输入框
-      basicInfoInputs.forEach((input) => {
-        input.disabled = true;
-      });
-
-      // 隐藏保存按钮
-      if (saveBasicInfoBtnGroup) saveBasicInfoBtnGroup.style.display = "none";
-      // 显示编辑按钮
-      if (editBasicInfoBtn) editBasicInfoBtn.style.display = "block";
-
-      // 更新用户名显示
-      const userNameElement = document.querySelector(".user-name");
-      const fullNameInput = document.getElementById("full-name");
-      if (userNameElement && fullNameInput) {
-        userNameElement.textContent = fullNameInput.value;
-      }
-
-
-      // 显示成功消息
-      displaySaveMessage("基本信息已更新");
-    });
-  }
-
-  // 教育经历编辑
-  const editEducationBtn = document.getElementById("edit-education");
-  const saveEducationBtn = document.getElementById("save-education");
-  const cancelEducationBtn = document.getElementById("cancel-education");
-  const saveEducationBtnGroup = document.getElementById(
-    "save-education-btn-group"
-  );
-  const educationInputs = document.querySelectorAll("#education-form input");
-
-  // 保存原始值，用于取消时恢复
-  const originalEducationValues = {};
-
-  if (editEducationBtn) {
-    editEducationBtn.addEventListener("click", function () {
-      // 启用输入框
-      educationInputs.forEach((input) => {
-        originalEducationValues[input.id] = input.value;
-        input.disabled = false;
-      });
-
-      // 显示保存按钮
-      if (saveEducationBtnGroup) saveEducationBtnGroup.style.display = "block";
-      // 隐藏编辑按钮
-      if (editEducationBtn) editEducationBtn.style.display = "none";
-    });
-  }
-
-  if (cancelEducationBtn) {
-    cancelEducationBtn.addEventListener("click", function () {
-      // 恢复原始值并禁用输入框
-      educationInputs.forEach((input) => {
-        input.value = originalEducationValues[input.id] || "";
-        input.disabled = true;
-      });
-
-      // 隐藏保存按钮
-      if (saveEducationBtnGroup) saveEducationBtnGroup.style.display = "none";
-      // 显示编辑按钮
-      if (editEducationBtn) editEducationBtn.style.display = "block";
-    });
-  }
-
-  if (saveEducationBtn) {
-    saveEducationBtn.addEventListener("click", function () {
-      // 在实际应用中，这里会发送数据到服务器
-
-      // 禁用输入框
-      educationInputs.forEach((input) => {
-        input.disabled = true;
-      });
-
-      // 隐藏保存按钮
-      if (saveEducationBtnGroup) saveEducationBtnGroup.style.display = "none";
-      // 显示编辑按钮
-      if (editEducationBtn) editEducationBtn.style.display = "block";
-
-      // 显示成功消息
-      displaySaveMessage("教育经历已更新");
-    });
-  }
 
   // 创建自定义弹窗函数
   function createCustomConfirmDialog(title, imgSrc, message, confirmCallback, cancelCallback) {
@@ -197,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 创建确认按钮
     const confirmBtn = document.createElement('button');
     confirmBtn.textContent = '使用此头像';
-    confirmBtn.className = 'btn'; // 使用现有的按钮样式
+    confirmBtn.className = 'btn';
     confirmBtn.onclick = function() {
       document.body.removeChild(overlay);
       confirmCallback && confirmCallback();
@@ -223,28 +92,18 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // 添加到body
     document.body.appendChild(overlay);
-    
-    // 添加ESC键关闭功能
-    const escHandler = function(e) {
-      if (e.key === 'Escape') {
-        document.body.removeChild(overlay);
-        document.removeEventListener('keydown', escHandler);
-        cancelCallback && cancelCallback();
-      }
-    };
-    document.addEventListener('keydown', escHandler);
   }
 
   // 头像上传
   const avatarInput = document.getElementById("avatar-input");
   const userAvatar = document.getElementById("user-avatar");
 
-  // 页面加载时从localStorage加载头像
+  // 从localStorage加载头像
   if (userAvatar) {
     const savedAvatar = localStorage.getItem('userAvatar');
     if (savedAvatar) {
       userAvatar.src = savedAvatar;
-      // 触发一个自定义事件，通知其他组件更新头像
+      // ！！通知其他组件（如侧栏）更新头像
       const avatarUpdateEvent = new CustomEvent('user-avatar-updated', {
         detail: { avatarSrc: savedAvatar }
       });
@@ -256,11 +115,11 @@ document.addEventListener("DOMContentLoaded", function () {
     avatarInput.addEventListener("change", function () {
       const file = this.files[0];
       if (file) {
-        // 检查文件大小 (限制为2MB)
-        const maxSize = 2 * 1024 * 1024; // 2MB
+        // 检查文件大小限制为2MB
+        const maxSize = 2 * 1024 * 1024;
         if (file.size > maxSize) {
           displaySaveMessage("图片大小不能超过2MB", "error");
-          this.value = ""; // 清空文件选择
+          this.value = "";
           return;
         }
         
@@ -268,12 +127,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];
         if (!validTypes.includes(file.type)) {
           displaySaveMessage("请选择图片文件 (JPG, PNG, GIF)", "error");
-          this.value = ""; // 清空文件选择
+          this.value = "";
           return;
         }
         
         const reader = new FileReader();
-        const inputElement = this; // 保存input元素引用
+        const inputElement = this;
         
         reader.onload = function (e) {
           const avatarSrc = e.target.result;
@@ -288,10 +147,8 @@ document.addEventListener("DOMContentLoaded", function () {
               // 更新头像
               userAvatar.src = avatarSrc;
               
-              // 保存头像到localStorage
+              // 保存头像
               localStorage.setItem('userAvatar', avatarSrc);
-              
-              // 触发一个自定义事件，通知其他组件更新头像
               const avatarUpdateEvent = new CustomEvent('user-avatar-updated', {
                 detail: { avatarSrc: avatarSrc }
               });
@@ -300,9 +157,8 @@ document.addEventListener("DOMContentLoaded", function () {
               // 显示成功消息
               displaySaveMessage("头像已更新");
             },
-            // 取消回调
+            // 取消操作
             function() {
-              // 用户取消，不做任何改变
               inputElement.value = "";
             }
           );
@@ -314,7 +170,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 修改密码
   const changePasswordBtn = document.getElementById("change-password-btn");
-  // 打开密码模态框
   if (changePasswordBtn) {
     changePasswordBtn.addEventListener("click", function () {
       window.showNotification("\"修改密码\"功能暂未实现", "info");
@@ -333,22 +188,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// --- Component Initialization (Moved from profile.html) ---
 import { Sidebar } from "/components/sidebar/sidebar.js";
 import { Header } from "/components/header/header.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   const sidebar = new Sidebar("sidebar-container");
-
-  // 初始化顶栏组件
   const header = new Header("header-container", {
-    // isHomePage: false, // 移除 isHomePage
-    title: "个人资料", // 保留标题
-    // subtitle: "管理你的个人信息和偏好设置", // 移除副标题
-    // buttons: [ ... ], // 移除按钮数组，根据计划此页面Header不需要按钮
-    // buttonPosition: "right", // 移除 buttonPosition
+    title: "个人资料",
+    subtitle: "管理你的个人信息和偏好设置",
   });
-
-  // Note: The save functionality is handled by buttons within the form sections.
 });
-// --- End Component Initialization ---

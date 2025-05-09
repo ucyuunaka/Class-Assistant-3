@@ -529,7 +529,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 初始化顶栏组件
   const header = new Header("header-container", {
-    // isHomePage: false, // 移除 isHomePage
     title: "设置", // 保留标题
     // subtitle: "自定义你的应用体验和偏好", // 移除副标题
     // buttons: [ ... ], // 移除按钮数组，根据计划此页面Header不需要按钮
